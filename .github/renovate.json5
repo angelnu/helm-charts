@@ -1,10 +1,10 @@
 {
   extends: [
-    "github>bjw-s/renovate-config",
-    "github>bjw-s/renovate-config:automerge-github-actions",
-  ],
-  platform: "github",
-  username: "bjw-s-bot[bot]",
-  gitAuthor: "bjw-s-bot <87358111+bjw-s-bot[bot]@users.noreply.github.com>",
-  repositories: ["bjw-s/helm-charts"],
+    "github>angelnu/renovate-config",
+    "github>angelnu/renovate-config:automerge-github-actions",
+  ],  
+  platform:     "github",
+  username:     "angelnu-bot[bot]",
+  gitAuthor:    "angelnu-bot <249196+angelnu-bot[bot]@users.noreply.github.com>",
+  repositories: ["angelnu/helm-charts"],
 }

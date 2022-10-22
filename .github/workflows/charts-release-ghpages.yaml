@@ -73,7 +73,7 @@ jobs:
         shell: bash
         working-directory: dest
         run: |
-          helm repo index . --url https://bjw-s.github.io/helm-charts/
+          helm repo index . --url https://angelnu.github.io/helm-charts/
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -81,9 +81,9 @@ jobs:
         with:
           repository: dest
           branch: gh-pages
-          commit_user_name: "bjw-s-bot[bot]"
-          commit_user_email: 87358111+bjw-s-bot[bot]@users.noreply.github.com
-          commit_author: bjw-s-bot[bot] <87358111+bjw-s-bot[bot]@users.noreply.github.com>
+          commit_user_name: "angelnu-bot[bot]"
+          commit_user_email: 87358111+angelnu-bot[bot]@users.noreply.github.com
+          commit_author: angelnu-bot[bot] <249196+angelnu-bot[bot]@users.noreply.github.com>
           file_pattern: 'index.yaml **/*.tgz'
           disable_globbing: true
 

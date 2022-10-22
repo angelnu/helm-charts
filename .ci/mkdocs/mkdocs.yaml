@@ -1,14 +1,14 @@
 ---
 
 # Project information
-site_name: bjw-s | Helm charts | Docs
-site_description: Docs for the bjw-s Helm charts repository
-site_author: bjw-s
-site_url: https://bjw-s.github.io/helm-charts/docs
+site_name: angelnu | Helm charts | Docs
+site_description: Docs for the angelnu Helm charts repository
+site_author: angelnu
+site_url: https://angelnu.github.io/helm-charts/docs
 
 # Repository
-repo_name: bjw-s/helm-charts
-repo_url: https://github.com/bjw-s/helm-charts
+repo_name: angelnu/helm-charts
+repo_url: https://github.com/angelnu/helm-charts
 edit_uri: ""
 
 # Configuration
@@ -55,7 +55,7 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/bjw-s
+      link: https://github.com/angelnu
     - icon: fontawesome/brands/discord
       link: https://discord.gg/sTMX7Vh
 
