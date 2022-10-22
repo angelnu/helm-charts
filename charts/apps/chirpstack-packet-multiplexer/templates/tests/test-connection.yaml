@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "chirpstack-packet-multiplexer.fullname" . }}-test-connection"
+  labels:
+{{ include "chirpstack-packet-multiplexer.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      #Dummy
+      command: ['echo']
+      args:  ['wget', '{{ include "chirpstack-packet-multiplexer.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
