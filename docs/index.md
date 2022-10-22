@@ -18,8 +18,8 @@ You can then run `helm search repo angelnu` to search the charts.
 
 ## Other usefull charts
 
-[app-template](https://bjw-s.github.io/helm-charts/docs/app-template/introduction/)
-[common-library](https://bjw-s.github.io/helm-charts/docs/common-library/introduction/)
+- [app-template](https://bjw-s.github.io/helm-charts/docs/app-template/introduction/)
+- [common-library](https://bjw-s.github.io/helm-charts/docs/common-library/introduction/)
 
 ## How do I find people running Kubernetes at home?
 
