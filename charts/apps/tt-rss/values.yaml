@@ -11,7 +11,7 @@ image:
   # -- image pull policy
   pullPolicy: IfNotPresent
   # -- image tag
-  tag: v1.8723.0
+  tag: v1.9112.0
 
 # -- See more environment variables in the tt-rss documentation
 # https://git.tt-rss.org/fox/tt-rss/src/branch/master/classes/config.php#L9
