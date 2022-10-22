@@ -82,7 +82,7 @@ jobs:
           repository: dest
           branch: gh-pages
           commit_user_name: "angelnu-bot[bot]"
-          commit_user_email: 87358111+angelnu-bot[bot]@users.noreply.github.com
+          commit_user_email: 249196+angelnu-bot[bot]@users.noreply.github.com
           commit_author: angelnu-bot[bot] <249196+angelnu-bot[bot]@users.noreply.github.com>
           file_pattern: 'index.yaml **/*.tgz'
           disable_globbing: true
