@@ -11,9 +11,9 @@ on:
         required: false
         type: string
     secrets:
-      BJWS_APP_ID:
+      ANGELNU_APP_ID:
         required: true
-      BJWS_APP_PRIVATE_KEY:
+      ANGELNU_APP_PRIVATE_KEY:
         required: true
 
 env:
@@ -28,8 +28,8 @@ jobs:
         id: get-app-token
         uses: getsentry/action-github-app-token@v1
         with:
-          app_id: ${{ secrets.BJWS_APP_ID }}
-          private_key: ${{ secrets.BJWS_APP_PRIVATE_KEY }}
+          app_id: ${{ secrets.ANGELNU_APP_ID }}
+          private_key: ${{ secrets.ANGELNU_APP_PRIVATE_KEY }}
 
       - name: Checkout charts branch
         uses: actions/checkout@v3
