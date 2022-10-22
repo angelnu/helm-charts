@@ -1,19 +1,20 @@
+---
 apiVersion: v2
-version: 2.0.1
+version: 2.5.0
 description: Creates ingress reverse-proxies for external hosts with minimum boilerplate
 name: reverse-proxy
-appVersion: 1.3.0
+appVersion: 1.2.0
 kubeVersion: ">=1.16.0-0"
 keywords:
-- reverse-proxy
-- ingress
+  - reverse-proxy
+  - ingress
 home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/reverse-proxy
 icon: https://kubernetes.io/images/wheel.svg
 sources:
-- https://kubernetes.io/docs/concepts/services-networking/ingress/
+  - https://kubernetes.io/docs/concepts/services-networking/ingress/
 maintainers:
-- name: angelnu
-  email: git@angelnu.com
+  - name: angelnu
+    email: git@angelnu.com
 dependencies:
   - name: common
     repository: https://bjw-s.github.io/helm-charts
