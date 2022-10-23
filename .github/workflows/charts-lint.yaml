@@ -43,6 +43,7 @@ jobs:
 
       - name: Verify chart version
         uses: bjw-s/helm-charts-actions/verify-chart-version@main
+        if: inputs.isRenovatePR != 'true' #TBD: auto-update version
         id: verify-chart-version
         with:
           chart: "charts/${{ matrix.chart }}"
