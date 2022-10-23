@@ -22,7 +22,7 @@ dependencies:
     version: 0.2.2
   - name: cert-manager
     repository: https://charts.jetstack.io
-    version: v1.8.0
+    version: v1.10.0
     condition: cert-manager.enabled
 annotations:
   artifacthub.io/changes: |-
