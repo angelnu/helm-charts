@@ -1,6 +1,8 @@
 # helm-charts
 A collection of Helm charts
 
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/angelnu)](https://artifacthub.io/packages/search?repo=angelnu)
+
 ## Goal
 
 This repo contains Helm charts that I have developed to run applications in my
