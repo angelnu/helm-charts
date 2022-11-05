@@ -4,12 +4,10 @@ Contributions are welcome via GitHub pull requests. This document outlines the p
 
 ## Dependencies
 
-1. [Install helm-docs](https://github.com/norwoodj/helm-docs#installation)
-2. [Install the pre-commit binary](https://pre-commit.com/#install)
-3. Run:
+1. [Install task](https://taskfile.dev/installation/)
+2. Run:
    ```bash
-   pre-commit install
-   pre-commit install-hooks
+   task precommit:init
    ```
 
 ## Sign off Your Work

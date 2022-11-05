@@ -5,19 +5,33 @@ tasks:
   init:
     desc: Install pre-commit hooks
     cmds:
+      - task: download-pre-commit
       - pre-commit install --install-hooks --config .ci/pre-commit/config.yaml
 
   update:
     desc: Update pre-commit hooks
     cmds:
+      - task: download-pre-commit
       - pre-commit autoupdate --config .ci/pre-commit/config.yaml
 
   run:
     desc: Run pre-commit
     cmds:
+      - task: download-pre-commit
       - pre-commit run --config .ci/pre-commit/config.yaml
 
   run-all:
     desc: Run pre-commit on all files
     cmds:
+      - task: download-pre-commit
       - pre-commit run --all-files --config .ci/pre-commit/config.yaml
+
+  download-pre-commit:
+    #silent: true
+    vars:
+      # renovate: datasource=pypi depName=pre-commit
+      PRE_COMMIT_VERSION: 2.20.0
+    cmds:
+      - pip install pre-commit=={{.PRE_COMMIT_VERSION}}
+    status:
+      - test "$(pre-commit -V)" = "pre-commit {{.PRE_COMMIT_VERSION}}"

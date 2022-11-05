@@ -6,7 +6,7 @@ exclude: |
 
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.0.1
+  rev: v4.3.0
   hooks:
   - id: trailing-whitespace
   - id: end-of-file-fixer
@@ -16,15 +16,16 @@ repos:
   - id: check-case-conflict
 
 - repo: https://github.com/Lucas-C/pre-commit-hooks
-  rev: v1.1.10
+  rev: v1.3.1
   hooks:
   - id: remove-crlf
   - id: remove-tabs
 
 - repo: https://github.com/norwoodj/helm-docs
-  rev: v1.2.0
+  rev: v1.11.0
   hooks:
-    - id: helm-docs
+    - id: helm-docs-built
+      #entry: ./.deps/helm-docs/helm-docs "${@}"
       args:
         # Make the tool search for charts only under the `example-charts` directory
         - --chart-search-root=charts
