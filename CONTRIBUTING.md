@@ -2,6 +2,16 @@
 
 Contributions are welcome via GitHub pull requests. This document outlines the process to help get your contribution accepted.
 
+## Dependencies
+
+1. [Install helm-docs](https://github.com/norwoodj/helm-docs#installation)
+2. [Install the pre-commit binary](https://pre-commit.com/#install)
+3. Run:
+   ```bash
+   pre-commit install
+   pre-commit install-hooks
+   ```
+
 ## Sign off Your Work
 
 The Developer Certificate of Origin (DCO) is a lightweight way for contributors to certify that they wrote or otherwise have the right to submit the code they are contributing to the project. Here is the full text of the [DCO](http://developercertificate.org/). Contributors must sign-off that they adhere to these requirements by adding a `Signed-off-by` line to commit messages.
