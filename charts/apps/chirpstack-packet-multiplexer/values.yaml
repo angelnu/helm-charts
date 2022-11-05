@@ -30,3 +30,20 @@ service:
         enabled: true
         protocol: UDP
         port: 1700
+
+# -- Dissable probes
+# @default -- See below
+probes:
+  liveness:
+    enabled: false
+  readiness:
+    enabled: false
+  startup:
+    enabled: false
+
+persistence:
+  config:
+    enabled: true
+    type: configMap
+    mountPath: /etc/chirpstack-packet-multiplexer
+    name: '{{ include "common.names.fullname" . }}'

@@ -3,7 +3,7 @@ apiVersion: v2
 appVersion: latest
 description: Multiplexer for lorawan gateway packages
 name: chirpstack-packet-multiplexer
-version: 2.0.0
+version: 2.1.0
 keywords:
   - lorawan
   - chirpstack
@@ -22,7 +22,5 @@ annotations:
   artifacthub.io/changes: |-
     - kind: changed
       description: |
-        Use common library
-      links:
-        - name: Common library chart definition
-          url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
+        Include persistency
+        Dissable probes
