@@ -72,3 +72,4 @@ Kubernetes: `>=1.19.0-0`
 | xorg.image.tag | string | `"1.0.0"` | xorg image tag |
 | xorg.refreshrate | int | `60` | xorg refresh rate |
 | xorg.resolution | string | `"1920x1080"` | xorg resolution |
+

@@ -1,9 +1,12 @@
+
+---
+{{- include "common.values.setup" . -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "chirpstack-packet-multiplexer.fullname" . }}
+  name: {{ include "common.names.fullname" . }}
   labels:
-    {{- include "chirpstack-packet-multiplexer.labels" . | nindent 4 }}
+    {{- include "common.labels" . | nindent 4 }}
 data:
   chirpstack-packet-multiplexer.toml: |
     [general]

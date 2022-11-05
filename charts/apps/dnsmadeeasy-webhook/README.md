@@ -37,3 +37,4 @@ Cert-Manager Webhook for DNSMadeEasy
 | image.repository | string | `"ghcr.io/angelnu/dnsmadeeasy-webhook"` | Image repository |
 | image.tag | string | `"v1.8.1"` | Image tag |
 | serviceAccount.create | bool | `true` | Create service account |
+

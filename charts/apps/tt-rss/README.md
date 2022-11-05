@@ -47,3 +47,4 @@ Kubernetes: `>=1.16.0-0`
 | postgresql.enabled | bool | `true` | By default uses an internal postgress. Dissable if you use your own Postgres. |
 | postgresql.persistence.enabled | bool | `false` | if database is stored to a PVC. Set to true when you are done testing. |
 | service | object | See below. | Configure the services for the chart here. |
+

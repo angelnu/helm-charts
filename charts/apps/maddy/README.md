@@ -65,3 +65,4 @@ Kubernetes: `>=1.16.0-0`
 | postgresql.postgresqlPassword | string | `"changeme"` | Postgres database password |
 | postgresql.postgresqlUsername | string | `"postgres"` | Postgres database user name |
 | service | object | See values.yaml | Configures service settings for the chart. |
+

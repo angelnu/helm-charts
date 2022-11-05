@@ -1,30 +1,28 @@
+---
 apiVersion: v2
-name: chirpstack-packet-multiplexer
-description: A Helm chart for Kubernetes
-
-# A chart can be either an 'application' or a 'library' chart.
-#
-# Application charts are a collection of templates that can be packaged into versioned archives
-# to be deployed.
-#
-# Library charts provide useful utilities or functions for the chart developer. They're included as
-# a dependency of application charts to inject those utilities and functions into the rendering
-# pipeline. Library charts do not define any templates and therefore cannot be deployed.
-type: application
-
-# This is the chart version. This version number should be incremented each time you make changes
-# to the chart and its templates, including the app version.
-version: 1.0.0
-
-# This is the version number of the application being deployed. This version number should be
-# incremented each time you make changes to the application.
 appVersion: latest
-
+description: Multiplexer for lorawan gateway packages
+name: chirpstack-packet-multiplexer
+version: 2.0.0
+keywords:
+  - lorawan
+  - chirpstack
+home: https://github.com/angelnu/helm-charts/tree/main/charts/apps/chirpstack-packet-multiplexer
+icon: https://www.chirpstack.io/static/logo.png
+sources:
+  - https://github.com/angelnu/chirpstack-packet-multiplexer
 maintainers:
   - name: angelnu
     email: git@angelnu.com
+dependencies:
+  - name: common
+    repository: https://bjw-s.github.io/helm-charts
+    version: 0.2.2
 annotations:
   artifacthub.io/changes: |-
     - kind: changed
       description: |
-        Moved to angelnu
+        Use common library
+      links:
+        - name: Common library chart definition
+          url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml

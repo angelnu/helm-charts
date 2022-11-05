@@ -37,3 +37,4 @@ Kubernetes: `>=1.16.0-0`
 | image.pullPolicy | string | `"IfNotPresent"` | multus installer pull policy |
 | image.repository | string | `"ghcr.io/k8snetworkplumbingwg/multus-cni"` | multus installer repostory |
 | image.tag | string | `"v3.9.2"` | multus installer tag |
+

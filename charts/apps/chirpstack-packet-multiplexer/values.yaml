@@ -1,55 +1,32 @@
-# Default values for chirpstack-packet-multiplexer.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+#
+# IMPORTANT NOTE
+#
+# This chart inherits from our common library chart. You can check the default values/options here:
+# https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/values.yaml
+#
 
-replicaCount: 1
-
+# -- log level
 log_level: 4
 
+# -- where to send the packages to
 backend_hosts:
-- "router.eu.thethings.network:1700"
+- "eu1.cloud.thethings.network:1700"
 
+# -- IDs of the gateways sending packages to this server
 gateway_ids: []
 
 image:
+  # -- image repository
   repository: ghcr.io/angelnu/chirpstack-packet-multiplexer
-  tag: d8b5ed08c5fff375cd60d7a1af302d0a4237237c
-  pullPolicy: IfNotPresent
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
+# -- Configure the services for the chart here.
+# @default -- See below.
 service:
-  type: ClusterIP
-  port: 1700
-  loadBalancerIP:
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+  main:
+    ports:
+      http:
+        enabled: false
+      lorawan:
+        enabled: true
+        protocol: UDP
+        port: 1700

@@ -63,3 +63,4 @@ Kubernetes: `>=1.16.0-0`
 | webhook.namespaceSelector | object | `{"custom":{},"label":"routed-gateway","type":"label"}` | Selector for namespace. All pods in this namespace will get evaluated by the webhook. **IMPORTANT**: Do not select the namespace where the webhook is deployed to or you will get locking issues. |
 | webhook.replicas | int | `1` | number of webhook instances to deploy |
 | webhook.strategy | object | `{"type":"RollingUpdate"}` | strategy for updates |
+
