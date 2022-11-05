@@ -8,10 +8,10 @@ keywords:
   - cert-manager
   - dnsmadeeasy
   - letsencrypt
-home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/dnsmadeeasy-webhook
-icon: https://pbs.twimg.com/profile_images/1759911243/dnsmeavatar_400x400.png
+home: https://github.com/angelnu/helm-charts/tree/main/charts/apps/dnsmadeeasy-webhook
+icon: https://raw.githubusercontent.com/angelnu/helm-charts/gh-pages/icons/dnsmadeeasy.png
 sources:
-  - https://github.com/k8s-at-home/dnsmadeeasy-webhook
+  - https://github.com/angelnu/dnsmadeeasy-webhook
   - https://cert-manager.io
 maintainers:
   - name: angelnu
