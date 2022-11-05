@@ -8,7 +8,7 @@ kubeVersion: ">=1.16.0-0"
 keywords:
   - tt-rss
 home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/tt-rss
-icon: https://git.tt-rss.org/fox/tt-rss.git/plain/images/favicon-72px.png
+icon: https://raw.githubusercontent.com/angelnu/helm-charts/gh-pages/icons/tt-rss-favicon-72px.png
 sources:
   - https://git.tt-rss.org/fox/tt-rss
 maintainers:
