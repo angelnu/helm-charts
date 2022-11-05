@@ -9,6 +9,10 @@ on:
         required: true
         type: string
 
+env:
+  # renovate: datasource=github-releases depName=norwoodj/helm-docs
+  HELM_DOCS_VERSION: "1.7.0"
+
 jobs:
   pre-commit-check:
     name: Run pre-commit checks
@@ -16,6 +20,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: install helm-docs
+        run: |
+          cd /tmp
+          wget https://github.com/norwoodj/helm-docs/releases/download/v${{env.HELM_DOCS_VERSION}}/helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          tar -xvf helm-docs_${{env.HELM_DOCS_VERSION}}_Linux_x86_64.tar.gz
+          sudo mv helm-docs /usr/local/sbin
 
       - name: Run against changes
         uses: pre-commit/action@v3.0.0

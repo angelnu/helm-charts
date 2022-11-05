@@ -23,6 +23,7 @@ on:
         default: '[]'
 
 env:
+  # renovate: datasource=github-releases depName=helm/helm
   HELM_VERSION: 3.9.2
 
 jobs:
