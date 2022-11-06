@@ -20,7 +20,7 @@ maintainers:
 dependencies:
   - name: common
     repository: https://bjw-s.github.io/helm-charts
-    version: 0.2.2
+    version: 1.0.1
   - name: postgresql
     version: 12.1.0
     repository: https://charts.bitnami.com/bitnami
