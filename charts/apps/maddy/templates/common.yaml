@@ -1,5 +1,5 @@
 {{/* Make sure all variables are set properly */}}
-{{- include "common.values.setup" . }}
+{{- include "bjw-s.common.loader.init" . }}
 
 {{/* if host is not set use internal postgres chart */}}
 {{- if eq .Values.maddy.sql.postgres_dsn.host "" -}}
@@ -42,7 +42,7 @@ persistence:
     enabled: true
     mountPath: /config
     type: configMap
-    name: {{ include "common.names.fullname" . }}-config
+    name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-config
   certificates:
     enabled: true
     mountPath: /certificates
@@ -57,4 +57,4 @@ command:
 {{- end -}}
 {{- $_ := mergeOverwrite .Values (include "maddy.harcodedValues" . | fromYaml) -}}
 
-{{ include "common.all" . }}
+{{ include "bjw-s.common.loader.all" . }}

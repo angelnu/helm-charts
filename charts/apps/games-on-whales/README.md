@@ -1,6 +1,6 @@
 # games-on-whales
 
-![Version: 1.9.0](https://img.shields.io/badge/Version-1.9.0-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 Streams graphic applications/games (retroarch, firefox, steam) runing on Kubernetes
 
@@ -23,7 +23,7 @@ Kubernetes: `>=1.19.0-0`
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://bjw-s.github.io/helm-charts | common | 0.2.2 |
+| https://bjw-s.github.io/helm-charts | common | 1.0.1 |
 
 ## Values
 

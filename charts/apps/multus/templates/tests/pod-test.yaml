@@ -1,16 +1,16 @@
-{{- include "common.values.setup" . -}}
+{{- include "bjw-s.common.loader.init" . -}}
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: {{ include "common.names.fullname" . }}-pod-test
+  name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-pod-test
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
   annotations:
     "helm.sh/hook": test-success
     k8s.v1.cni.cncf.io/networks: |
       [{
-        "name": "{{ include "common.names.fullname" . }}-test"
+        "name": "{{ include "bjw-s.common.lib.chart.names.fullname" . }}-test"
       }]
 spec:
   containers:

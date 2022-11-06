@@ -88,7 +88,7 @@ secret:
 
 
 maddy:
-  tls_secret_name: '{{ include "common.names.fullname" . }}'
+  tls_secret_name: '{{ include "bjw-s.common.lib.chart.names.fullname" . }}'
 
 service:
   main:

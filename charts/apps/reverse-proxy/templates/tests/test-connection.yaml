@@ -1,4 +1,4 @@
-{{- include "common.values.setup" . -}}
+{{- include "bjw-s.common.loader.init" . -}}
 {{- $wget_opts := printf "--spider -T %0.f" .Values.connectionTest.readtimeout }}
 {{- range $instance := .Values.instances }}
 {{- if or ( not ( hasKey $instance "enabled" ) ) $instance.enabled }}
@@ -7,9 +7,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "common.names.fullname" $ }}-{{ .name }}-test-connection"
+  name: "{{ include "bjw-s.common.lib.chart.names.fullname" $ }}-{{ .name }}-test-connection"
   labels:
-    {{- include "common.labels" $ | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" $ | nindent 4 }}
   annotations:
     "helm.sh/hook": test-success
 spec:

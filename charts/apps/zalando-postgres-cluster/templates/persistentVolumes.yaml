@@ -1,4 +1,4 @@
-{{- include "common.values.setup" . -}}
+{{- include "bjw-s.common.loader.init" . -}}
 {{- range $i:= untilStep 0 (len $.Values.persistentVolumes.replicaNodes) 1 -}}
 ---
 apiVersion: v1
@@ -6,7 +6,7 @@ kind: PersistentVolume
 metadata:
   name: {{ include "zalando-postgres-cluster.pvName" $ }}-{{ $i }}
   labels:
-    {{- include "common.labels" $ | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" $ | nindent 4 }}
     {{- if gt (len $.Values.persistentVolumes.labels) 0 }}
     {{- $.Values.persistentVolumes.labels | toYaml | nindent 4 }}
     {{- end }}

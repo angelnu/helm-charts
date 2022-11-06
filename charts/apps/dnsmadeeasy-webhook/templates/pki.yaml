@@ -1,5 +1,5 @@
 {{- if .Values.generateCerts }}
-{{- include "common.values.setup" . -}}
+{{- include "bjw-s.common.loader.init" . -}}
 ---
 # Create a selfsigned Issuer, in order to create a root CA certificate for
 # signing webhook serving certificates
@@ -9,7 +9,7 @@ metadata:
   name: {{ include "dnsmadeeasy-webhook.selfSignedIssuer" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 spec:
   selfSigned: {}
 
@@ -22,7 +22,7 @@ metadata:
   name: {{ include "dnsmadeeasy-webhook.rootCACertificate" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 spec:
   secretName: {{ include "dnsmadeeasy-webhook.rootCACertificate" . }}
   duration: 43800h # 5y
@@ -41,7 +41,7 @@ metadata:
   name: {{ include "dnsmadeeasy-webhook.rootCAIssuer" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 spec:
   ca:
     secretName: {{ include "dnsmadeeasy-webhook.rootCACertificate" . }}
@@ -55,7 +55,7 @@ metadata:
   name: {{ include "dnsmadeeasy-webhook.servingCertificate" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 spec:
   secretName: {{ include "dnsmadeeasy-webhook.servingCertificate" . }}
   duration: 8760h # 1y
@@ -63,7 +63,7 @@ spec:
     name: {{ include "dnsmadeeasy-webhook.rootCAIssuer" . }}
     kind: Issuer
   dnsNames:
-  - {{ include "common.names.fullname" . }}
-  - {{ include "common.names.fullname" . }}.{{ .Release.Namespace }}
-  - {{ include "common.names.fullname" . }}.{{ .Release.Namespace }}.svc
+  - {{ include "bjw-s.common.lib.chart.names.fullname" . }}
+  - {{ include "bjw-s.common.lib.chart.names.fullname" . }}.{{ .Release.Namespace }}
+  - {{ include "bjw-s.common.lib.chart.names.fullname" . }}.{{ .Release.Namespace }}.svc
 {{- end }}

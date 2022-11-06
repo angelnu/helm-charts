@@ -1,6 +1,6 @@
 # tt-rss
 
-![Version: 5.2.0](https://img.shields.io/badge/Version-5.2.0-informational?style=flat-square) ![AppVersion: v2.0.9200](https://img.shields.io/badge/AppVersion-v2.0.9200-informational?style=flat-square)
+![Version: 6.0.0](https://img.shields.io/badge/Version-6.0.0-informational?style=flat-square) ![AppVersion: v2.0.9200](https://img.shields.io/badge/AppVersion-v2.0.9200-informational?style=flat-square)
 
 Tiny Tiny RSS is a free and open source web-based news feed (RSS/Atom) reader and aggregator
 
@@ -22,7 +22,7 @@ Kubernetes: `>=1.16.0-0`
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://bjw-s.github.io/helm-charts | common | 0.2.2 |
+| https://bjw-s.github.io/helm-charts | common | 1.0.1 |
 | https://charts.bitnami.com/bitnami | postgresql | 12.1.0 |
 
 ## Values

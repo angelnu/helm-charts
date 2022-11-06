@@ -1,11 +1,11 @@
-{{- include "common.values.setup" . -}}
+{{- include "bjw-s.common.loader.init" . -}}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ include "common.names.fullname" . }}
+  name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 rules:
   - apiGroups:
       - ""
@@ -29,16 +29,16 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ include "common.names.fullname" . }}
+  name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include "common.names.fullname" . }}
+  name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}
 subjects:
   - kind: ServiceAccount
-    name: {{ include "common.names.serviceAccountName" . }}
+    name: {{ include "bjw-s.common.lib.chart.names.serviceAccountName" . }}
     namespace: {{ .Release.Namespace }}
 ---
 # Grant the webhook permission to read the ConfigMap containing the Kubernetes
@@ -47,10 +47,10 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ include "common.names.fullname" . }}-webhook-authentication-reader
+  name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-webhook-authentication-reader
   namespace: kube-system
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -58,7 +58,7 @@ roleRef:
 subjects:
   - apiGroup: ""
     kind: ServiceAccount
-    name: {{ include "common.names.serviceAccountName" . }}
+    name: {{ include "bjw-s.common.lib.chart.names.serviceAccountName" . }}
     namespace: {{ .Release.Namespace }}
 ---
 # apiserver gets the auth-delegator role to delegate auth decisions to
@@ -66,9 +66,9 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ include "common.names.fullname" . }}-auth-delegator
+  name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-auth-delegator
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -76,16 +76,16 @@ roleRef:
 subjects:
   - apiGroup: ""
     kind: ServiceAccount
-    name: {{ include "common.names.serviceAccountName" . }}
+    name: {{ include "bjw-s.common.lib.chart.names.serviceAccountName" . }}
     namespace: {{ .Release.Namespace }}
 ---
 # Grant cert-manager permission to validate using our apiserver
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ include "common.names.fullname" . }}-domain-solver
+  name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-domain-solver
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 rules:
   - apiGroups:
       - {{ .Values.groupName }}
@@ -97,13 +97,13 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ include "common.names.fullname" . }}-domain-solver
+  name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-domain-solver
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include "common.names.fullname" . }}-domain-solver
+  name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-domain-solver
 subjects:
   - apiGroup: ""
     kind: ServiceAccount

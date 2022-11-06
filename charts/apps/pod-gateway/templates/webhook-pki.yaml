@@ -1,4 +1,4 @@
-{{- include "common.values.setup" . -}}
+{{- include "bjw-s.common.loader.init" . -}}
 ---
 # Create a selfsigned Issuer, in order to create a root CA certificate for
 # signing webhook serving certificates
@@ -8,7 +8,7 @@ metadata:
   name: {{ include "pod-gateway.selfSignedIssuer" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 spec:
   selfSigned: {}
 
@@ -21,7 +21,7 @@ metadata:
   name: {{ include "pod-gateway.rootCACertificate" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 spec:
   secretName: {{ include "pod-gateway.rootCACertificate" . }}
   duration: 43800h # 5y
@@ -40,7 +40,7 @@ metadata:
   name: {{ include "pod-gateway.rootCAIssuer" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 spec:
   ca:
     secretName: {{ include "pod-gateway.rootCACertificate" . }}
@@ -54,7 +54,7 @@ metadata:
   name: {{ include "pod-gateway.servingCertificate" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 spec:
   secretName: {{ include "pod-gateway.servingCertificate" . }}
   duration: 8760h # 1y
@@ -62,6 +62,6 @@ spec:
     name: {{ include "pod-gateway.rootCAIssuer" . }}
     kind: Issuer
   dnsNames:
-  - {{ include "common.names.fullname" . }}-webhook
-  - {{ include "common.names.fullname" . }}-webhook.{{ .Release.Namespace }}
-  - {{ include "common.names.fullname" . }}-webhook.{{ .Release.Namespace }}.svc
+  - {{ include "bjw-s.common.lib.chart.names.fullname" . }}-webhook
+  - {{ include "bjw-s.common.lib.chart.names.fullname" . }}-webhook.{{ .Release.Namespace }}
+  - {{ include "bjw-s.common.lib.chart.names.fullname" . }}-webhook.{{ .Release.Namespace }}.svc

@@ -3,7 +3,7 @@ apiVersion: v2
 appVersion: v1.8.1
 description: Cert-Manager Webhook for DNSMadeEasy
 name: dnsmadeeasy-webhook
-version: 4.9.0
+version: 5.0.0
 keywords:
   - cert-manager
   - dnsmadeeasy
@@ -17,19 +17,19 @@ maintainers:
   - name: angelnu
     email: git@angelnu.com
 dependencies:
-  - name: common
-    repository: https://bjw-s.github.io/helm-charts
-    version: 0.2.2
   - name: cert-manager
     repository: https://charts.jetstack.io
     version: v1.10.0
     condition: cert-manager.enabled
+  - name: common
+    repository: https://bjw-s.github.io/helm-charts
+    version: 1.0.1
+
 annotations:
   artifacthub.io/changes: |-
     - kind: changed
       description: |
-        Moved to angelnu
-        Updated library version to 0.2.2
+        **BREAKING**: Updated library version to 1.0.1.
       links:
         - name: Common library chart definition
           url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml

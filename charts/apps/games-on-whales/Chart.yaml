@@ -3,7 +3,7 @@ apiVersion: v2
 appVersion: 1.0.0
 description: Streams graphic applications/games (retroarch, firefox, steam) runing on Kubernetes
 name: games-on-whales
-version: 1.9.0
+version: 2.0.0
 kubeVersion: ">=1.19.0-0"
 keywords:
   - games-on-whales
@@ -24,13 +24,13 @@ maintainers:
 dependencies:
   - name: common
     repository: https://bjw-s.github.io/helm-charts
-    version: 0.2.2
+    version: 1.0.1
+
 annotations:
   artifacthub.io/changes: |-
     - kind: changed
       description: |
-        Moved to angelnu
-        Updated library version to 0.2.2.
+        **BREAKING**: Updated library version to 1.0.1.
       links:
         - name: Common library chart definition
           url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml

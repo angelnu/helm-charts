@@ -1,5 +1,5 @@
 {{/* Make sure all variables are set properly */}}
-{{- include "common.values.setup" . }}
+{{- include "bjw-s.common.loader.init" . }}
 
 {{/* Append the hardcoded settings */}}
 {{- define "games-on-whales.harcodedValues" -}}
@@ -315,7 +315,7 @@ persistence:
     type: custom
     volumeSpec:
       configMap:
-        name: {{ include "common.names.fullname" . }}-pulse
+        name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-pulse
         items:
         - key: default.pa
           path: default.pa
@@ -329,4 +329,4 @@ persistence:
 {{- $_ := mergeOverwrite .Values (include "games-on-whales.harcodedValues" . | fromYaml) -}}
 
 {{/* Render the templates */}}
-{{ include "common.all" . }}
+{{ include "bjw-s.common.loader.all" . }}

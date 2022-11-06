@@ -1,11 +1,11 @@
-{{- include "common.values.setup" . -}}
+{{- include "bjw-s.common.loader.init" . -}}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "common.names.fullname" . }}-webhook
+  name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-webhook
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
     {{- with .Values.webhook.controllerLabels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}

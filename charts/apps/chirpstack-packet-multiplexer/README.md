@@ -1,6 +1,6 @@
 # chirpstack-packet-multiplexer
 
-![Version: 2.1.0](https://img.shields.io/badge/Version-2.1.0-informational?style=flat-square) ![AppVersion: latest](https://img.shields.io/badge/AppVersion-latest-informational?style=flat-square)
+![Version: 3.0.0](https://img.shields.io/badge/Version-3.0.0-informational?style=flat-square) ![AppVersion: latest](https://img.shields.io/badge/AppVersion-latest-informational?style=flat-square)
 
 Multiplexer for lorawan gateway packages
 
@@ -20,7 +20,7 @@ Multiplexer for lorawan gateway packages
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://bjw-s.github.io/helm-charts | common | 0.2.2 |
+| https://bjw-s.github.io/helm-charts | common | 1.0.1 |
 
 ## Values
 
@@ -32,7 +32,7 @@ Multiplexer for lorawan gateway packages
 | log_level | int | `4` | log level |
 | persistence.config.enabled | bool | `true` |  |
 | persistence.config.mountPath | string | `"/etc/chirpstack-packet-multiplexer"` |  |
-| persistence.config.name | string | `"{{ include \"common.names.fullname\" . }}"` |  |
+| persistence.config.name | string | `"{{ include \"bjw-s.common.lib.chart.names.fullname\" . }}"` |  |
 | persistence.config.type | string | `"configMap"` |  |
 | probes | object | See below | Dissable probes |
 | service | object | See below. | Configure the services for the chart here. |

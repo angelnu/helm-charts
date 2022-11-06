@@ -1,6 +1,6 @@
 # zalando-postgres-cluster
 
-![Version: 3.5.0](https://img.shields.io/badge/Version-3.5.0-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 4.0.0](https://img.shields.io/badge/Version-4.0.0-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 Creates a postgres cluster using the Zalando Postgres operator and local storage
 
@@ -20,7 +20,7 @@ Creates a postgres cluster using the Zalando Postgres operator and local storage
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://bjw-s.github.io/helm-charts | common | 0.2.2 |
+| https://bjw-s.github.io/helm-charts | common | 1.0.1 |
 
 ## Values
 

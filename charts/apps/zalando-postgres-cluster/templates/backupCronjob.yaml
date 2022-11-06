@@ -1,13 +1,13 @@
-{{- include "common.values.setup" . -}}
+{{- include "bjw-s.common.loader.init" . -}}
 {{- if or .Values.dumpBackup.enabled .Values.dumpBackup.existingClaim -}}
 ---
 # ------------------- CronJob ------------------- #
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ include "common.names.fullname" . }}-backup
+  name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-backup
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
 spec:
   schedule: {{ .Values.dumpBackup.schedule | quote }}
   concurrencyPolicy: Replace
@@ -15,9 +15,9 @@ spec:
     spec:
       template:
         metadata:
-          name: {{ include "common.names.fullname" . }}-backup
+          name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-backup
           labels:
-            {{- include "common.labels.selectorLabels" . | nindent 12 }}
+            {{- include "bjw-s.common.lib.metadata.selectorLabels" . | nindent 12 }}
         spec:
           containers:
             - name: backup
@@ -54,5 +54,7 @@ spec:
           volumes:
             {{- $valuesCopy := deepCopy . -}}
             {{- $_ := set $valuesCopy.Values "persistence" (dict "backup-volume" .Values.dumpBackup ) -}}
-            {{- include "common.controller.volumes" $valuesCopy | nindent 12 }}
+            {{- with (include "bjw-s.common.lib.controller.volumes" . | trim) }}
+            {{- nindent 12 . }}
+            {{- end }}
 {{- end -}}

@@ -1,6 +1,6 @@
 # dnsmadeeasy-webhook
 
-![Version: 4.9.0](https://img.shields.io/badge/Version-4.9.0-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
+![Version: 5.0.0](https://img.shields.io/badge/Version-5.0.0-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
 
 Cert-Manager Webhook for DNSMadeEasy
 
@@ -21,7 +21,7 @@ Cert-Manager Webhook for DNSMadeEasy
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://bjw-s.github.io/helm-charts | common | 0.2.2 |
+| https://bjw-s.github.io/helm-charts | common | 1.0.1 |
 | https://charts.jetstack.io | cert-manager | v1.10.0 |
 
 ## Values

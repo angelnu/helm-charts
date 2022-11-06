@@ -1,8 +1,8 @@
 {{/* Make sure all variables are set properly */}}
-{{- include "common.values.setup" . }}
+{{- include "bjw-s.common.loader.init" . }}
 
 {{- define "zalando-postgres-cluster.db" -}}
-{{- include "common.names.fullname" .|lower -}}-postgres
+{{- include "bjw-s.common.lib.chart.names.fullname" .|lower -}}-postgres
 {{- end -}}
 
 {{- define "zalando-postgres-cluster.superuser" -}}
@@ -18,19 +18,19 @@
 {{- end -}}
 
 {{- define "zalando-postgres-cluster.storageClass" -}}
-{{- default (include "common.names.fullname" .|lower ) .Values.postgresql.volume.storageClass -}}
+{{- default (include "bjw-s.common.lib.chart.names.fullname" .|lower ) .Values.postgresql.volume.storageClass -}}
 {{- end -}}
 
 {{- define "zalando-postgres-cluster.pvName" -}}
-{{- include "common.names.fullname" .|lower -}}
+{{- include "bjw-s.common.lib.chart.names.fullname" .|lower -}}
 {{- end -}}
 
 {{- define "zalando-postgres-cluster.localPath" -}}
-{{- default (printf "%s/%s" .Values.persistentVolumes.hostPathPrefix (include "common.names.fullname" .)) .Values.persistentVolumes.hostPath -}}
+{{- default (printf "%s/%s" .Values.persistentVolumes.hostPathPrefix (include "bjw-s.common.lib.chart.names.fullname" .)) .Values.persistentVolumes.hostPath -}}
 {{- end -}}
 
 {{- define "zalando-postgres-cluster.backupPVCSubpath" -}}
-{{- default (printf "%s/%s" .Values.dumpBackup.subpathPrefix (include "common.names.fullname" .)) .Values.dumpBackup.subpath -}}
+{{- default (printf "%s/%s" .Values.dumpBackup.subpathPrefix (include "bjw-s.common.lib.chart.names.fullname" .)) .Values.dumpBackup.subpath -}}
 {{- end -}}
 
 {{/* Append the hardcoded settings */}}
@@ -49,4 +49,4 @@ service:
 {{- $_ := mergeOverwrite .Values (include "zalando-postgres-cluster.harcodedValues" . | fromYaml) -}}
 
 {{/* Render the templates */}}
-{{ include "common.all" . }}
+{{ include "bjw-s.common.loader.all" . }}

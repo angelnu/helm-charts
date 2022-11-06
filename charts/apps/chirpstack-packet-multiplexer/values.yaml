@@ -46,4 +46,4 @@ persistence:
     enabled: true
     type: configMap
     mountPath: /etc/chirpstack-packet-multiplexer
-    name: '{{ include "common.names.fullname" . }}'
+    name: '{{ include "bjw-s.common.lib.chart.names.fullname" . }}'

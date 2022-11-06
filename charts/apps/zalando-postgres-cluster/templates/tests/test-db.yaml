@@ -1,19 +1,19 @@
-{{- include "common.values.setup" . -}}
+{{- include "bjw-s.common.loader.init" . -}}
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: "{{ include "common.names.fullname" .|lower }}-test-db"
+  name: "{{ include "bjw-s.common.lib.chart.names.fullname" .|lower }}-test-db"
   labels:
-{{ include "common.labels" . | nindent 4 }}
+{{ include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
   annotations:
     "helm.sh/hook": test-success
 spec:
   template:
     metadata:
-      name: "{{ include "common.names.fullname" .|lower }}-test-db"
+      name: "{{ include "bjw-s.common.lib.chart.names.fullname" .|lower }}-test-db"
       labels:
-        {{ include "common.labels" . | nindent 8 }}
+        {{ include "bjw-s.common.lib.metadata.allLabels" . | nindent 8 }}
     spec:
       containers:
       - name: psql

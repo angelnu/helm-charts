@@ -1,15 +1,15 @@
-{{- include "common.values.setup" . -}}
+{{- include "bjw-s.common.loader.init" . -}}
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
-  name: {{ include "common.names.fullname" . | quote }}
+  name: {{ include "bjw-s.common.lib.chart.names.fullname" . | quote }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 4 }}
   annotations:
     cert-manager.io/inject-ca-from: "{{ .Release.Namespace }}/{{ include "pod-gateway.servingCertificate" . }}"
 webhooks:
-- name: "{{ include "common.names.fullname" . }}.svc.cluster.local"
+- name: "{{ include "bjw-s.common.lib.chart.names.fullname" . }}.svc.cluster.local"
   namespaceSelector:
   {{- with .Values.webhook.namespaceSelector }}
   {{- if eq .type "label" }}
@@ -28,7 +28,7 @@ webhooks:
   clientConfig:
     service:
       namespace: {{ .Release.Namespace | quote }}
-      name: {{ include "common.names.fullname" . }}-webhook
+      name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-webhook
       path: /wh/mutating/setgateway
       port: {{ include "pod-gateway.webhookPort" . }}
   admissionReviewVersions: ["v1", "v1beta1"]

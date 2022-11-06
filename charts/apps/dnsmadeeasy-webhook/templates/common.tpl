@@ -1,23 +1,23 @@
 {{/* Make sure all variables are set properly */}}
-{{- include "common.values.setup" . }}
+{{- include "bjw-s.common.loader.init" . -}}
 
 {{- define "dnsmadeeasy-webhook.selfSignedIssuer" -}}
-{{ printf "%s-selfsign" (include "common.names.fullname" .) }}
+{{ printf "%s-selfsign" (include "bjw-s.common.lib.chart.names.fullname" .) }}
 {{- end -}}
 
 {{- define "dnsmadeeasy-webhook.rootCAIssuer" -}}
-{{ printf "%s-ca" (include "common.names.fullname" .) }}
+{{ printf "%s-ca" (include "bjw-s.common.lib.chart.names.fullname" .) }}
 {{- end -}}
 
 {{- define "dnsmadeeasy-webhook.rootCACertificate" -}}
-{{ printf "%s-ca" (include "common.names.fullname" .) }}
+{{ printf "%s-ca" (include "bjw-s.common.lib.chart.names.fullname" .) }}
 {{- end -}}
 
 {{- define "dnsmadeeasy-webhook.servingCertificate" -}}
 {{- if .Values.generateCerts }}
-{{- printf "%s-webhook-tls" (include "common.names.fullname" .) }}
+{{- printf "%s-webhook-tls" (include "bjw-s.common.lib.chart.names.fullname" .) }}
 {{- else -}}
-{{- printf "%s-cert-manager-webhook-ca" (include "common.names.fullname" .) }}
+{{- printf "%s-cert-manager-webhook-ca" (include "bjw-s.common.lib.chart.names.fullname" .) }}
 {{- end -}}
 {{- end -}}
 
@@ -85,4 +85,4 @@ env:
 
 
 {{/* Render the templates */}}
-{{ include "common.all" . }}
+{{- include "bjw-s.common.loader.generate" . -}}
