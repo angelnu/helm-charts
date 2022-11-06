@@ -18,6 +18,7 @@ dependencies:
   - name: common
     repository: https://bjw-s.github.io/helm-charts
     version: 0.2.2
+
 annotations:
   artifacthub.io/changes: |-
     - kind: changed

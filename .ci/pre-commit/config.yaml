@@ -22,18 +22,20 @@ repos:
   - id: remove-tabs
 
 - repo: https://github.com/norwoodj/helm-docs
-  rev: v1.11.0
+  rev: v1.10.0
   hooks:
-    - id: helm-docs
-      # id: helm-docs-built TBD: it always fails
+    - id: helm-docs-built
       #entry: ./.deps/helm-docs/helm-docs "${@}"
       args:
+        # Set log level
+        - --log-level=info
+
         # Make the tool search for charts only under the `example-charts` directory
         - --chart-search-root=charts
 
         # The `./` makes it relative to the chart-search-root set above
-        - --template-files=./_templates.gotmpl
+        - --template-files=./../.ci/helm-docs/README.md.gotmpl
 
-        # Repeating the flag adds this to the list, now [./_templates.gotmpl, README.md.gotmpl]
+        # Repeating the flag adds this to the list
         # A base filename makes it relative to each chart directory found
-        - --template-files=README.md.gotmpl
+        - --template-files=README_CONFIG.md.gotmpl
