@@ -1,6 +1,6 @@
 
 ---
-{{- include "bjw-s.common.loader.init" . -}}
+{{- include "bjw-s.common.loader.init" . }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
