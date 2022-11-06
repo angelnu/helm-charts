@@ -11,6 +11,7 @@ home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/pod-gatewa
 sources:
   - https://github.com/k8s-at-home/gateway-admision-controller
   - https://github.com/k8s-at-home/pod-gateway
+icon: https://kubernetes.io/images/wheel.svg
 maintainers:
   - name: angelnu
     email: git@angelnu.com
