@@ -13,7 +13,7 @@ keywords:
   - stream
   - retroarch
 home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/games-on-whales
-icon: https://github.com/games-on-whales/gow/raw/master/docs/assets/img/gow-logo.png
+icon: https://raw.githubusercontent.com/angelnu/helm-charts/gh-pages/icons/gow-logo.png
 sources:
   - https://github.com/games-on-whales/gow
 maintainers:

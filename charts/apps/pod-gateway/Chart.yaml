@@ -8,7 +8,6 @@ kubeVersion: ">=1.16.0-0"
 keywords:
   - pod-gateway
 home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/pod-gateway
-icon: https://pod-gateway.org/icon
 sources:
   - https://github.com/k8s-at-home/gateway-admision-controller
   - https://github.com/k8s-at-home/pod-gateway
