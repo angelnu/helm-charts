@@ -54,7 +54,7 @@ spec:
           volumes:
             {{- $valuesCopy := deepCopy . -}}
             {{- $_ := set $valuesCopy.Values "persistence" (dict "backup-volume" .Values.dumpBackup ) -}}
-            {{- with (include "bjw-s.common.lib.controller.volumes" . | trim) }}
+            {{- with (include "bjw-s.common.lib.controller.volumes" $valuesCopy | trim) }}
             {{- nindent 12 . }}
             {{- end }}
 {{- end -}}
