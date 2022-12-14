@@ -24,7 +24,7 @@ on:
 
 env:
   # renovate: datasource=github-releases depName=helm/helm
-  HELM_VERSION: v3.10.2
+  HELM_VERSION: v3.10.3
 
 jobs:
   lint-chart:
