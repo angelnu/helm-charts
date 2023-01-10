@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Get GitHub API token
         id: get-app-token
-        uses: getsentry/action-github-app-token@v1
+        uses: getsentry/action-github-app-token@v2
         with:
           app_id: ${{ secrets.ANGELNU_APP_ID }}
           private_key: ${{ secrets.ANGELNU_APP_PRIVATE_KEY }}
