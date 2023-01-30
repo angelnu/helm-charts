@@ -140,6 +140,16 @@ webhook:
   # will get the gateway. If not set setGatewayDefault will apply.
   gatewayLabel: setGateway
 
+  # -- label value to check when evaluating POD. If set, the POD
+  # with the gatewayLabel's value that matches, will get the
+  # gateway. If not set gatewayLabel boolean value will apply.
+  gatewayLabelValue:
+
   # -- annotation name to check when evaluating POD. If true the POD
   # will get the gateway. If not set setGatewayDefault will apply.
   gatewayAnnotation: setGateway
+
+  # -- annotation value to check when evaluating POD. If set, the POD
+  # with gatewayAnnotation'value that matches, will get the gateway.
+  # If not set gatewayAnnotation boolean value will apply.
+  gatewayAnnotationValue:
