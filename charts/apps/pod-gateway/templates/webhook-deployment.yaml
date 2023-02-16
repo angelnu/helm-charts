@@ -45,10 +45,16 @@ spec:
             - --DNS={{ .Values.DNS }}
             - --configmapName={{ include "pod-gateway.configmap" . }}
             - --setGatewayLabel={{ .Values.webhook.gatewayLabel }}
+            {{- if .Values.webhook.gatewayLabelValue }}
+            - --setGatewayLabelValue={{ .Values.webhook.gatewayLabelValue }}
+            {{- end }}
             - --setGatewayAnnotation={{ .Values.webhook.gatewayAnnotation }}
-            {{ if .Values.webhook.gatewayDefault }}
+            {{- if .Values.webhook.gatewayAnnotationValue }}
+            - --setGatewayAnnotationValue={{ .Values.webhook.gatewayAnnotationValue }}
+            {{- end }}
+            {{- if .Values.webhook.gatewayDefault }}
             - --setGatewayDefault
-            {{ end }}
+            {{- end }}
             # Static
             - --tls-cert-file-path=/tls/tls.crt
             - --tls-key-file-path=/tls/tls.key
