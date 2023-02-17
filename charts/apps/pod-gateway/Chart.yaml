@@ -5,7 +5,7 @@ description: |
   Admision controller to change the default gateway and DNS server of PODs.
   It is typically used to route PODs through a VPN server.
 name: pod-gateway
-version: 6.1.0
+version: 6.1.1
 kubeVersion: ">=1.16.0-0"
 keywords:
   - pod-gateway
@@ -26,7 +26,7 @@ annotations:
   artifacthub.io/changes: |-
     - kind: changed
       description: |
-        Add additional labels
+        Add NET_RAW capabilities to pod-gateway for dnsmasq
       links:
         - name: Common library chart definition
           url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
