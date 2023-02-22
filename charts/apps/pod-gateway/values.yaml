@@ -107,11 +107,11 @@ addons:
 webhook:
   image:
     # -- image repository of the webhook
-    repository: ghcr.io/k8s-at-home/gateway-admision-controller
+    repository: ghcr.io/angelnu/gateway-admision-controller
     # -- image pullPolicy of the webhook
     pullPolicy: IfNotPresent
     # -- image tag of the webhook
-    tag: v3.6.0
+    tag: v3.8.0
 
   # -- number of webhook instances to deploy
   replicas: 1

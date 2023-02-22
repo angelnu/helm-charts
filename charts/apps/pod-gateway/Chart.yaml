@@ -5,7 +5,7 @@ description: |
   Admision controller to change the default gateway and DNS server of PODs.
   It is typically used to route PODs through a VPN server.
 name: pod-gateway
-version: 6.1.1
+version: 6.4.0
 kubeVersion: ">=1.16.0-0"
 keywords:
   - pod-gateway
