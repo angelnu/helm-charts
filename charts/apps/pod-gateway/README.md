@@ -1,10 +1,11 @@
 # pod-gateway
 
-![Version: 6.0.0](https://img.shields.io/badge/Version-6.0.0-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
+![Version: 6.5.0](https://img.shields.io/badge/Version-6.5.0-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
 
-Admision controller to change the default gateway and DNS server of PODs
+Admision controller to change the default gateway and DNS server of PODs.
+It is typically used to route PODs through a VPN server.
 
-**Homepage:** <https://github.com/k8s-at-home/charts/tree/master/charts/stable/pod-gateway>
+**Homepage:** <https://github.com/angelnu/charts/tree/master/charts/stable/pod-gateway>
 
 ## Maintainers
 
@@ -14,8 +15,8 @@ Admision controller to change the default gateway and DNS server of PODs
 
 ## Source Code
 
-* <https://github.com/k8s-at-home/gateway-admision-controller>
-* <https://github.com/k8s-at-home/pod-gateway>
+* <https://github.com/angelnu/gateway-admision-controller>
+* <https://github.com/angelnu/pod-gateway>
 
 ## Requirements
 
@@ -23,7 +24,7 @@ Kubernetes: `>=1.16.0-0`
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://bjw-s.github.io/helm-charts | common | 1.0.1 |
+| https://bjw-s.github.io/helm-charts | common | 1.3.2 |
 
 ## Values
 
@@ -43,6 +44,7 @@ Kubernetes: `>=1.16.0-0`
 | image.repository | string | `"ghcr.io/angelnu/pod-gateway"` | image repository of the gateway and inserted helper containers |
 | image.tag | string | chart.appVersion | image tag of the gateway and inserted helper containers |
 | publicPorts | string | `nil` | settings to expose ports, usually through a VPN provider. NOTE: if you change it you will need to manually restart the gateway POD |
+| publicPortsV6 | string | `nil` | settings to expose ports with IPv6, usually through a VPN provider. NOTE: if you change it you will need to manually restart the gateway POD |
 | routed_namespaces | list | `[]` | Namespaces that might contain routed PODs and therefore require a copy of the gneerated settings configmap. |
 | settings.DNS_LOCAL_CIDRS | string | `"local"` | DNS queries to these domains will be resolved by K8S DNS instead of the default (typcally the VPN client changes it) |
 | settings.NOT_ROUTED_TO_GATEWAY_CIDRS | string | `""` | IPs not sent to the POD gateway but to the default K8S. Multiple CIDRs can be specified using blanks as separator. Example for Calico: ""172.22.0.0/16 172.24.0.0/16"  This is needed, for example, in case your CNI does not add a non-default rule for the K8S addresses (Flannel does). |
@@ -55,11 +57,13 @@ Kubernetes: `>=1.16.0-0`
 | settings.VXLAN_IP_NETWORK | string | `"172.16.0"` | VXLAN needs an /24 IP range not conflicting with K8S and local IP ranges |
 | webhook | object | See below | The webhook is used to mutate the PODs matching the given namespace labels. It inserts an init and sidecard helper containers that connect to the gateway pod created by this chart. |
 | webhook.gatewayAnnotation | string | `"setGateway"` | annotation name to check when evaluating POD. If true the POD will get the gateway. If not set setGatewayDefault will apply. |
+| webhook.gatewayAnnotationValue | string | `nil` | annotation value to check when evaluating POD. If set, the POD with gatewayAnnotation'value that matches, will get the gateway. If not set gatewayAnnotation boolean value will apply. |
 | webhook.gatewayDefault | bool | `true` | default behviour for new PODs in the evaluated namespace |
 | webhook.gatewayLabel | string | `"setGateway"` | label name to check when evaluating POD. If true the POD will get the gateway. If not set setGatewayDefault will apply. |
+| webhook.gatewayLabelValue | string | `nil` | label value to check when evaluating POD. If set, the POD with the gatewayLabel's value that matches, will get the gateway. If not set gatewayLabel boolean value will apply. |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` | image pullPolicy of the webhook |
-| webhook.image.repository | string | `"ghcr.io/k8s-at-home/gateway-admision-controller"` | image repository of the webhook |
-| webhook.image.tag | string | `"v3.6.0"` | image tag of the webhook |
+| webhook.image.repository | string | `"ghcr.io/angelnu/gateway-admision-controller"` | image repository of the webhook |
+| webhook.image.tag | string | `"v3.8.0"` | image tag of the webhook |
 | webhook.namespaceSelector | object | `{"custom":{},"label":"routed-gateway","type":"label"}` | Selector for namespace. All pods in this namespace will get evaluated by the webhook. **IMPORTANT**: Do not select the namespace where the webhook is deployed to or you will get locking issues. |
 | webhook.replicas | int | `1` | number of webhook instances to deploy |
 | webhook.strategy | object | `{"type":"RollingUpdate"}` | strategy for updates |

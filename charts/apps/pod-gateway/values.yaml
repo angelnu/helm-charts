@@ -72,6 +72,17 @@ publicPorts:
 #   - type: tcp
 #     port: 18289
 
+# -- settings to expose ports with IPv6, usually through a VPN provider.
+# NOTE: if you change it you will need to manually restart the gateway POD
+publicPortsV6:
+# - hostname: qbittorrent
+#   IP: 10
+#   ports:
+#   - type: udp
+#     port: 18289
+#   - type: tcp
+#     port: 18289
+
 addons:
   vpn:
     # -- Enable the VPN if you want to route through a VPN.
