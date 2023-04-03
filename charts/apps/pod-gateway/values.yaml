@@ -122,7 +122,7 @@ webhook:
     # -- image pullPolicy of the webhook
     pullPolicy: IfNotPresent
     # -- image tag of the webhook
-    tag: v3.8.0
+    tag: v3.9.0
 
   # -- number of webhook instances to deploy
   replicas: 1
