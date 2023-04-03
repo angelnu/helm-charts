@@ -63,7 +63,7 @@ Kubernetes: `>=1.16.0-0`
 | webhook.gatewayLabelValue | string | `nil` | label value to check when evaluating POD. If set, the POD with the gatewayLabel's value that matches, will get the gateway. If not set gatewayLabel boolean value will apply. |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` | image pullPolicy of the webhook |
 | webhook.image.repository | string | `"ghcr.io/angelnu/gateway-admision-controller"` | image repository of the webhook |
-| webhook.image.tag | string | `"v3.8.0"` | image tag of the webhook |
+| webhook.image.tag | string | `"v3.9.0"` | image tag of the webhook |
 | webhook.namespaceSelector | object | `{"custom":{},"label":"routed-gateway","type":"label"}` | Selector for namespace. All pods in this namespace will get evaluated by the webhook. **IMPORTANT**: Do not select the namespace where the webhook is deployed to or you will get locking issues. |
 | webhook.replicas | int | `1` | number of webhook instances to deploy |
 | webhook.strategy | object | `{"type":"RollingUpdate"}` | strategy for updates |

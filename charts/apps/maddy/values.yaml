@@ -152,10 +152,11 @@ service:
         enabled: false
         port: 9749
   openmetrics:
+    enabled: false
     ports:
       # See https://maddy.email/openmetrics/
       openmetrics:
-        enabled: false
+        enabled: true
         port: 9749
 
 # -- Configure persistence settings for the chart under this key.
