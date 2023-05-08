@@ -2,7 +2,7 @@
 {{- if or .Values.dumpBackup.enabled .Values.dumpBackup.existingClaim -}}
 ---
 # ------------------- CronJob ------------------- #
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-backup
