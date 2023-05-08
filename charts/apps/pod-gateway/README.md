@@ -1,6 +1,6 @@
 # pod-gateway
 
-![Version: 6.5.0](https://img.shields.io/badge/Version-6.5.0-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
+![Version: 6.5.1](https://img.shields.io/badge/Version-6.5.1-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
 
 Admision controller to change the default gateway and DNS server of PODs.
 It is typically used to route PODs through a VPN server.

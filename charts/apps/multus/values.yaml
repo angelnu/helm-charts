@@ -9,9 +9,11 @@ image:
   # -- multus installer repostory
   repository: ghcr.io/k8snetworkplumbingwg/multus-cni
   # -- multus installer tag
-  tag: v3.9.2
+  tag: "{{ .Chart.AppVersion }}-thick"
   # -- multus installer pull policy
   pullPolicy: IfNotPresent
+
+hostPID: true
 
 cni:
   image:

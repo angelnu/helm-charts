@@ -1,6 +1,6 @@
 # multus
 
-![Version: 4.0.0](https://img.shields.io/badge/Version-4.0.0-informational?style=flat-square) ![AppVersion: v3.7.1](https://img.shields.io/badge/AppVersion-v3.7.1-informational?style=flat-square)
+![Version: 5.0.0](https://img.shields.io/badge/Version-5.0.0-informational?style=flat-square) ![AppVersion: v4.0.1](https://img.shields.io/badge/AppVersion-v4.0.1-informational?style=flat-square)
 
 multus CNI allows multiple NICs per pod
 
@@ -22,7 +22,7 @@ Kubernetes: `>=1.16.0-0`
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://bjw-s.github.io/helm-charts | common | 1.3.2 |
+| https://bjw-s.github.io/helm-charts | common | 1.5.0 |
 
 ## Values
 
@@ -34,8 +34,9 @@ Kubernetes: `>=1.16.0-0`
 | cni.paths.bin | string | `"/var/lib/rancher/k3s/data/current/bin"` | CNI plugin binaries folder for k3s. Change to `/opt/cni/bin` for non k3s |
 | cni.paths.config | string | `"/var/lib/rancher/k3s/agent/etc/cni/net.d"` | CNI config folder for k3s. Change to `/etc/cni/net.d` for non k3s |
 | cni.version | string | `"0.3.1"` | CNI interface version |
+| hostPID | bool | `true` |  |
 | image.pullPolicy | string | `"IfNotPresent"` | multus installer pull policy |
 | image.repository | string | `"ghcr.io/k8snetworkplumbingwg/multus-cni"` | multus installer repostory |
-| image.tag | string | `"v3.9.2"` | multus installer tag |
+| image.tag | string | `"{{ .Chart.AppVersion }}-thick"` | multus installer tag |
 
 ----------------------------------------------

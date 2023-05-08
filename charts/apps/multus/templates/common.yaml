@@ -10,6 +10,22 @@ controller:
 # -- force hostnetwork so upgrades can't fail
 hostNetwork: true
 
+configMaps:
+  config:
+    enabled: true
+    data:
+      daemon-config.json: |
+        {
+            "chrootDir": "/hostroot",
+            "confDir": "/host/etc/cni/net.d",
+            "logLevel": "verbose",
+            "socketDir": "/host/run/multus/",
+            "cniVersion": "{{ .Values.cni.version }}",
+            "cniConfigDir": "/host/etc/cni/net.d",
+            "multusConfigFile": "auto",
+            "multusAutoconfigDir": "/host/etc/cni/net.d"
+        }
+
 initContainers:
   # -- Init container that installs reference CNI plugins
   cni-installer:
@@ -21,19 +37,29 @@ initContainers:
     volumeMounts:
     - name: cnibin
       mountPath: /host/opt/cni/bin
+  # -- Init container that installs reference CNI plugins
+  multus-installer:
+    name: multus-installer
+    image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+    imagePullPolicy: {{ .Values.image.pullPolicy }}
+    command:
+      - "cp"
+      - "/usr/src/multus-cni/bin/multus-shim"
+      - "/host/opt/cni/bin/multus-shim"
+    resources:
+      requests:
+        cpu: "10m"
+        memory: "15Mi"
+    securityContext:
+      privileged: true
+    # -- Mounts host CNI binary folder
+    volumeMounts:
+    - name: cnibin
+      mountPath: /host/opt/cni/bin
 
 # -- Command used by the Multus installer
 command:
-- /entrypoint.sh
-
-# -- Arguments used by the Multus installer.
-# See https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/how-to-use.md
-# If you are not using k3s you will need to adjust the multus-kubeconfig.
-args:
-  - "--multus-conf-file=auto"
-  - "--cleanup-config-on-exit=true"
-  - "--cni-version={{ .Values.cni.version }}"
-  - "--multus-kubeconfig-file-host={{ .Values.cni.paths.config }}/multus.d/multus.kubeconfig"
+- /usr/src/multus-cni/bin/multus-daemon
 
 # -- Need to run as privileged to install
 securityContext:
@@ -53,6 +79,52 @@ persistence:
     hostPath: {{ .Values.cni.paths.bin }}
     hostPathType: Directory
     mountPath: /host/opt/cni/bin
+  config:
+    enabled: true
+    type: configMap
+    name: {{ printf "%s-config" (include "bjw-s.common.lib.chart.names.fullname" $) }}
+    mountPath: /etc/cni/net.d/multus.d
+    items:
+    - key: daemon-config.json
+      path: daemon-config.json
+  hostroot:
+    enabled: true
+    type: hostPath
+    hostPath: /
+    hostPathType: Directory
+    mountPath: /hostroot
+    mountPropagation: HostToContainer
+  host-run:
+    enabled: true
+    type: hostPath
+    hostPath: /run
+    #hostPathType: Directory
+    mountPath: /host/run
+  host-var-lib-cni-multus:
+    enabled: true
+    type: hostPath
+    hostPath: /var/lib/cni/multus
+    #hostPathType: Directory
+    mountPath: /var/lib/cni/multus
+  host-var-lib-kubelet:
+    enabled: true
+    type: hostPath
+    hostPath: /var/lib/kubelet
+    #hostPathType: Directory
+    mountPath: /var/lib/kubelet
+  host-run-k8s-cni-cncf-io:
+    enabled: true
+    type: hostPath
+    hostPath: /run/k8s.cni.cncf.io
+    #hostPathType: Directory
+    mountPath: /run/k8s.cni.cncf.io
+  host-run-netns:
+    enabled: true
+    type: hostPath
+    hostPath: /run/netns/
+    #hostPathType: Directory
+    mountPath: /run/netns/
+    mountPropagation: HostToContainer
 
 serviceAccount:
   # -- create needed service account
@@ -72,7 +144,11 @@ service:
   main:
     enabled: false
 {{- end -}}
+
+
 {{- $_ := mergeOverwrite .Values (include "multus.harcodedValues" . | fromYaml) -}}
+
+{{- $_ := set .Values.image "tag" (tpl .Values.image.tag .) -}}
 
 {{/* Render the templates */}}
 {{ include "bjw-s.common.loader.all" . }}
