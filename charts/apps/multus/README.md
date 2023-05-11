@@ -1,10 +1,10 @@
 # multus
 
-![Version: 5.0.0](https://img.shields.io/badge/Version-5.0.0-informational?style=flat-square) ![AppVersion: v4.0.1](https://img.shields.io/badge/AppVersion-v4.0.1-informational?style=flat-square)
+![Version: 5.0.2](https://img.shields.io/badge/Version-5.0.2-informational?style=flat-square) ![AppVersion: v4.0.1](https://img.shields.io/badge/AppVersion-v4.0.1-informational?style=flat-square)
 
 multus CNI allows multiple NICs per pod
 
-**Homepage:** <https://github.com/k8s-at-home/charts/tree/master/charts/stable/multus>
+**Homepage:** <https://github.com/angelnu/helm-charts/tree/master/charts/stable/multus>
 
 ## Maintainers
 
@@ -35,6 +35,7 @@ Kubernetes: `>=1.16.0-0`
 | cni.paths.config | string | `"/var/lib/rancher/k3s/agent/etc/cni/net.d"` | CNI config folder for k3s. Change to `/etc/cni/net.d` for non k3s |
 | cni.version | string | `"0.3.1"` | CNI interface version |
 | hostPID | bool | `true` |  |
+| hostPaths.netns | string | `"/run/netns/"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` | multus installer pull policy |
 | image.repository | string | `"ghcr.io/k8snetworkplumbingwg/multus-cni"` | multus installer repostory |
 | image.tag | string | `"{{ .Chart.AppVersion }}-thick"` | multus installer tag |

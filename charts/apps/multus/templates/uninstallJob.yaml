@@ -23,12 +23,24 @@ spec:
       containers:
       - name: remove-config
         image: "alpine"
-        command: ["/bin/sh","-c", "rm -rf  /host/etc/cni/net.d/*multus*"]
+        command:
+          - "/bin/sh"
+          - "-c"
+        args:
+          - |
+            rm -rf /host/etc/cni/net.d/*multus*
+            rm -rf /host/opt/cni/bin/*multus*
         volumeMounts:
         - name: cni
           mountPath: /host/etc/cni/net.d
+        - name: cnibin
+          mountPath: /host/opt/cni/bin
       volumes:
       - name: cni
         hostPath:
           path: {{ .Values.cni.paths.config }}
+          type: Directory
+      - name: cnibin
+        hostPath:
+          path: {{ .Values.cni.paths.bin }}
           type: Directory
