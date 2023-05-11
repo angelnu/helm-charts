@@ -121,7 +121,7 @@ persistence:
   host-run-netns:
     enabled: true
     type: hostPath
-    hostPath: /run/netns/
+    hostPath: {{ .Values.hostPaths.netns }}
     #hostPathType: Directory
     mountPath: /run/netns/
     mountPropagation: HostToContainer
