@@ -20,7 +20,7 @@ Multiplexer for lorawan gateway packages
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://bjw-s.github.io/helm-charts | common | 1.3.2 |
+| https://bjw-s.github.io/helm-charts | common | 1.5.1 |
 
 ## Values
 

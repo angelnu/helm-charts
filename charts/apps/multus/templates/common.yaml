@@ -20,6 +20,7 @@ configMaps:
             "confDir": "/host/etc/cni/net.d",
             "logLevel": "verbose",
             "socketDir": "/host/run/multus/",
+            "binDir": "{{ .Values.cni.paths.bin }}",
             "cniVersion": "{{ .Values.cni.version }}",
             "cniConfigDir": "/host/etc/cni/net.d",
             "multusConfigFile": "auto",

@@ -20,7 +20,7 @@ Creates a postgres cluster using the Zalando Postgres operator and local storage
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://bjw-s.github.io/helm-charts | common | 1.3.2 |
+| https://bjw-s.github.io/helm-charts | common | 1.5.1 |
 
 ## Values
 
