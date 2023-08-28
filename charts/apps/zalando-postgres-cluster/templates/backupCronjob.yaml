@@ -27,6 +27,7 @@ spec:
               - /bin/sh
               - -ce
               - |
+                sleep {{ .Values.dumpBackup.startDelay }}
                 echo "$(date) - Start dump"
                 pg_dumpall > /backup/new && mv /backup/new /backup/backup
                 echo "$(date) - End dump"

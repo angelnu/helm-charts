@@ -75,6 +75,8 @@ dumpBackup:
   # -- Persistent volume claim subpath for the backups
   # @default: <subpathPrefix/<release-name>
   subpath:
+  # -- Delay the start of the backup (address race condition)
+  startDelay: 2
   image:
     # -- image used for the backups
     repository: postgres
