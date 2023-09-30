@@ -109,7 +109,7 @@ firefox:
     # -- image repository
     repository: andrewmackrodt/firefox-x11
     # -- image tag
-    tag: 101.0.1-r1
+    tag: 118.0.1-r1
     # -- image pull policy
     pullPolicy: IfNotPresent
   # -- firefox log level
