@@ -18,7 +18,7 @@ configMaps:
         {
             "chrootDir": "/hostroot",
             "confDir": "/host/etc/cni/net.d",
-            "logLevel": "verbose",
+            "logLevel": "{{ .Values.cni.logLevel }}",
             "socketDir": "/host/run/multus/",
             "binDir": "{{ .Values.cni.paths.bin }}",
             "cniVersion": "{{ .Values.cni.version }}",
