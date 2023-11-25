@@ -1,6 +1,6 @@
 # multus
 
-![Version: 5.0.3](https://img.shields.io/badge/Version-5.0.3-informational?style=flat-square) ![AppVersion: v4.0.1](https://img.shields.io/badge/AppVersion-v4.0.1-informational?style=flat-square)
+![Version: 5.0.4](https://img.shields.io/badge/Version-5.0.3-informational?style=flat-square) ![AppVersion: v4.0.1](https://img.shields.io/badge/AppVersion-v4.0.1-informational?style=flat-square)
 
 multus CNI allows multiple NICs per pod
 
