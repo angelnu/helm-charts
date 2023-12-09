@@ -30,7 +30,7 @@ tasks:
     #silent: true
     vars:
       # renovate: datasource=pypi depName=pre-commit
-      PRE_COMMIT_VERSION: 3.5.0
+      PRE_COMMIT_VERSION: 3.6.0
     cmds:
       - pip install pre-commit=={{.PRE_COMMIT_VERSION}}
     status:
