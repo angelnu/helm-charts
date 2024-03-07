@@ -19,6 +19,7 @@ spec:
       labels:
         {{- include "bjw-s.common.lib.metadata.allLabels" . | nindent 8 }}
     spec:
+      hostNetwork: true
       restartPolicy: OnFailure
       containers:
       - name: remove-config
