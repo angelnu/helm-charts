@@ -17,7 +17,7 @@ configMaps:
       daemon-config.json: |
         {
             "chrootDir": "/hostroot",
-            "confDir": "{{ .Values.cni.paths.bin }}",
+            "confDir": "{{ .Values.cni.paths.config }}",
             "logLevel": "{{ .Values.cni.logLevel }}",
             "socketDir": "/host/run/multus/",
             "binDir": "{{ .Values.cni.paths.bin }}",
