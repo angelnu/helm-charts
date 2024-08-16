@@ -18,13 +18,13 @@ configMaps:
         {
             "chrootDir": "/hostroot",
             "multusConfigFile": "auto",
-            "multusAutoconfigDir": "{{ .Values.cni.paths.config }}"
+            "multusAutoconfigDir": "{{ .Values.cni.paths.config }}",
             "confDir": "{{ .Values.cni.paths.config }}",
             "cniConfigDir": "{{ .Values.cni.paths.config }}",
             "binDir": "{{ .Values.cni.paths.bin }}",
             "logLevel": "{{ .Values.cni.logLevel }}",
             "cniVersion": "{{ .Values.cni.version }}",
-            "socketDir": "/host/run/multus/",
+            "socketDir": "/host/run/multus/"
         }
 
 initContainers:
