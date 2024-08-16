@@ -17,12 +17,12 @@ configMaps:
       daemon-config.json: |
         {
             "chrootDir": "/hostroot",
-            "confDir": "/host/etc/cni/net.d",
+            "confDir": "{{ .Values.cni.paths.bin }}",
             "logLevel": "{{ .Values.cni.logLevel }}",
             "socketDir": "/host/run/multus/",
             "binDir": "{{ .Values.cni.paths.bin }}",
             "cniVersion": "{{ .Values.cni.version }}",
-            "cniConfigDir": "/host/etc/cni/net.d",
+            "cniConfigDir": "/host/etc/cni/net.",
             "multusConfigFile": "auto",
             "multusAutoconfigDir": "/host/etc/cni/net.d"
         }
@@ -73,13 +73,13 @@ persistence:
     type: hostPath
     hostPath: {{ .Values.cni.paths.config }}
     hostPathType: Directory
-    mountPath: /host/etc/cni/net.d
+    mountPath: {{ .Values.cni.paths.config }}
   cnibin:
     enabled: true
     type: hostPath
     hostPath: {{ .Values.cni.paths.bin }}
     hostPathType: Directory
-    mountPath: /host/opt/cni/bin
+    mountPath: {{ .Values.cni.paths.bin }}
   config:
     enabled: true
     type: configMap
