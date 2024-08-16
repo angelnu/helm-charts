@@ -17,14 +17,14 @@ configMaps:
       daemon-config.json: |
         {
             "chrootDir": "/hostroot",
-            "confDir": "{{ .Values.cni.paths.config }}",
-            "logLevel": "{{ .Values.cni.logLevel }}",
-            "socketDir": "/host/run/multus/",
-            "binDir": "{{ .Values.cni.paths.bin }}",
-            "cniVersion": "{{ .Values.cni.version }}",
-            "cniConfigDir": "/host/etc/cni/net.",
             "multusConfigFile": "auto",
-            "multusAutoconfigDir": "/host/etc/cni/net.d"
+            "multusAutoconfigDir": "{{ .Values.cni.paths.config }}"
+            "confDir": "{{ .Values.cni.paths.config }}",
+            "cniConfigDir": "{{ .Values.cni.paths.config }}",
+            "binDir": "{{ .Values.cni.paths.bin }}",
+            "logLevel": "{{ .Values.cni.logLevel }}",
+            "cniVersion": "{{ .Values.cni.version }}",
+            "socketDir": "/host/run/multus/",
         }
 
 initContainers:
