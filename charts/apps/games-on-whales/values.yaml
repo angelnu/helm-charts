@@ -121,7 +121,7 @@ mkhomeretrodirs:
     # -- image repository
     repository: busybox
     # -- image tag
-    tag: 1.36.1
+    tag: 1.37.0
     # -- image pull policy
     pullPolicy: IfNotPresent
 
