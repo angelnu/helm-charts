@@ -45,6 +45,7 @@ initContainers:
     imagePullPolicy: {{ .Values.image.pullPolicy }}
     command:
       - "cp"
+      - "-f"
       - "/usr/src/multus-cni/bin/multus-shim"
       - "/host/opt/cni/bin/multus-shim"
     resources:
