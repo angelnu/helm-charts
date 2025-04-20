@@ -22,7 +22,7 @@ Cert-Manager Webhook for DNSMadeEasy
 | Repository | Name | Version |
 |------------|------|---------|
 | https://bjw-s.github.io/helm-charts | common | 1.5.1 |
-| https://charts.jetstack.io | cert-manager | v1.10.0 |
+| https://charts.jetstack.io | cert-manager | v1.15.2 |
 
 ## Values
 

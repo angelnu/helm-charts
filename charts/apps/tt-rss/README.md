@@ -23,7 +23,7 @@ Kubernetes: `>=1.16.0-0`
 | Repository | Name | Version |
 |------------|------|---------|
 | https://bjw-s.github.io/helm-charts | common | 1.5.1 |
-| https://charts.bitnami.com/bitnami | postgresql | 12.1.0 |
+| https://charts.bitnami.com/bitnami | postgresql | 15.5.21 |
 
 ## Values
 
@@ -36,9 +36,9 @@ Kubernetes: `>=1.16.0-0`
 | env.TTRSS_DB_PORT | string | `"5432"` | Postgres database port. |
 | env.TTRSS_DB_USER | string | postgresql.auth.username value | Postgres database user name |
 | env.TTRSS_SELF_URL_PATH | string | `""` | External URL you use to connect to the RSS (the one you enter in your browser) |
-| image.pullPolicy | string | `"IfNotPresent"` | image pull policy |
-| image.repository | string | `"ghcr.io/k8s-at-home/tt-rss"` | image repository |
-| image.tag | string | `"v2.0.9113"` | image tag |
+| image.pullPolicy | string | `"Always"` | image pull policy |
+| image.repository | string | `"ghcr.io/angelnu/tt-rss"` | image repository |
+| image.tag | string | `"rolling"` | image tag |
 | ingress.main | object | See values.yaml | Enable and configure ingress settings for the chart under this key. |
 | postgresql | object | see bellow | Bitnami postgres chart. For more options see https://github.com/bitnami/charts/tree/master/bitnami/postgresql |
 | postgresql.auth.database | string | `"tt-rss"` | Postgres database |
