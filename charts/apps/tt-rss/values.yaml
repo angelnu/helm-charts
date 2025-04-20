@@ -11,7 +11,7 @@ image:
   # -- image pull policy
   pullPolicy: Always
   # -- image tag
-  tag: rolling
+  tag: 2.0.9486
 
 # -- See more environment variables in the tt-rss documentation
 # https://git.tt-rss.org/fox/tt-rss/src/branch/master/classes/config.php#L9
