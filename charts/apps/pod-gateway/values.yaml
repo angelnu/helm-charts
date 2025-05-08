@@ -165,5 +165,5 @@ webhook:
   # If not set gatewayAnnotation boolean value will apply.
   gatewayAnnotationValue:
 
-  # -- number of webhook instances to deploy
+  # -- determines how sidecar container is created
   sidecarAsInit: false
