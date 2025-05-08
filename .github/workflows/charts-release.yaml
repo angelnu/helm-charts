@@ -24,7 +24,7 @@ env:
 jobs:
   prepare:
     name: Prepare data required for release
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       libraryChartsToRelease: ${{ steps.collect-charts.outputs.chartsLibrary }}
       applicationChartsToRelease: ${{ steps.collect-charts.outputs.chartsApplication }}
