@@ -61,6 +61,7 @@ Kubernetes: `>=1.16.0-0`
 | webhook.gatewayDefault | bool | `true` | default behviour for new PODs in the evaluated namespace |
 | webhook.gatewayLabel | string | `"setGateway"` | label name to check when evaluating POD. If true the POD will get the gateway. If not set setGatewayDefault will apply. |
 | webhook.gatewayLabelValue | string | `nil` | label value to check when evaluating POD. If set, the POD with the gatewayLabel's value that matches, will get the gateway. If not set gatewayLabel boolean value will apply. |
+| webhook.sidecarAsInit | bool | `false` | determines if the gateway-sidecar container is created as a container or a sidecar container. Requires kubernetes v1.29 <https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/> |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` | image pullPolicy of the webhook |
 | webhook.image.repository | string | `"ghcr.io/angelnu/gateway-admision-controller"` | image repository of the webhook |
 | webhook.image.tag | string | `"v3.10.0"` | image tag of the webhook |
