@@ -164,3 +164,6 @@ webhook:
   # with gatewayAnnotation'value that matches, will get the gateway.
   # If not set gatewayAnnotation boolean value will apply.
   gatewayAnnotationValue:
+
+  # -- number of webhook instances to deploy
+  sidecarAsInit: false
