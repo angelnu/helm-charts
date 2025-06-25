@@ -22,7 +22,7 @@ env:
 jobs:
   release-charts:
     name: Release charts
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Get GitHub API token
         id: get-app-token
