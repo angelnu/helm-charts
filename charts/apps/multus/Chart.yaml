@@ -1,6 +1,6 @@
 ---
 apiVersion: v2
-appVersion: v4.0.1
+appVersion: v4.0.2
 description: multus CNI allows multiple NICs per pod
 name: multus
 version: 5.0.7
@@ -22,4 +22,4 @@ dependencies:
 annotations:
   artifacthub.io/changes: |-
     - kind: fixed
-      description: mount CNI host paths on the same location inside multus - fixes broken k3s current symlink
+      description: update k3s cniBin path
