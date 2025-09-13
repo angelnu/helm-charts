@@ -31,7 +31,7 @@ cni:
 
     # -- CNI plugin binaries folder for k3s.
     # Change to `/opt/cni/bin` for non k3s
-    bin: /var/lib/rancher/k3s/data/current/bin
+    bin: /var/lib/rancher/k3s/data/cni
 
   # -- CNI log level
   logLevel: verbose
