@@ -17,7 +17,7 @@ image:
 # -- Comma-separated IP addresses of the DNS servers within the vxlan tunnel.
 # All mutated PODs will get this as their DNS servers.
 # It must match VXLAN_GATEWAY_IP in settings.sh
-DNS: "172.16.0.1,172.16.0.2"
+DNS: 172.16.0.1
 
 # -- The DNSPolicy to apply to the POD. Only when set to "None" will the
 # DNS value above apply. To avoid altering POD DNS (i.e., to allow

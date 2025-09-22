@@ -30,7 +30,7 @@ Kubernetes: `>=1.16.0-0`
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| DNS | string | `"172.16.0.1,172.16.0.2"` | Comma-separated IP addresses of the DNS servers within the vxlan tunnel. All mutated PODs will get this as their DNS servers. It must match VXLAN_GATEWAY_IP in settings.sh |
+| DNS | string | `"172.16.0.1"` | Comma-separated IP addresses of the DNS servers within the vxlan tunnel. All mutated PODs will get this as their DNS servers. It must match VXLAN_GATEWAY_IP in settings.sh |
 | DNSPolicy | string | `"None"` | The DNSPolicy to apply to the POD. Only when set to "None" will the DNS value above apply. To avoid altering POD DNS (i.e., to allow initContainers to use DNS before the the VXLAN is up), set to "ClusterFirst" |
 | addons.vpn.enabled | bool | `false` | Enable the VPN if you want to route through a VPN. You might also want to set VPN_BLOCK_OTHER_TRAFFIC to true for extra safeness in case the VPN does connect |
 | addons.vpn.networkPolicy.egress[0].ports[0].port | int | `1194` |  |
