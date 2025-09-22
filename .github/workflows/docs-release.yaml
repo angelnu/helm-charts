@@ -13,7 +13,7 @@ on:
 jobs:
   release-docs:
     name: Release documentation
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Get GitHub API token
         id: get-app-token
