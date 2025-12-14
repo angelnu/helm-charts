@@ -24,19 +24,19 @@ dependencies:
 
 annotations:
   artifacthub.io/changes: |-
-    - kind: new
+    - kind: added
       description: |
         Add preliminary support for IPv6
       links:
         - name: Common library chart definition
           url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
-    - kind: new
+    - kind: added
       description: |
         Add support for multiple DNS servers
       links:
         - name: Gateway Admission Controller PR
           url: https://github.com/angelnu/gateway-admision-controller/pull/144
-    - kind: new
+    - kind: added
       description: |
         Add support for sidecar containers to be created as init container
       links:
