@@ -1,5 +1,37 @@
 apiVersion: v1
 entries:
+  chirpstack-packet-multiplexer:
+  - annotations:
+      artifacthub.io/changes: |-
+        - kind: changed
+          description: |
+            **BREAKING**: Updated library version to 1.0.1.
+          links:
+            - name: Common library chart definition
+              url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
+    apiVersion: v2
+    appVersion: latest
+    created: "2025-12-14T21:41:03.535240122Z"
+    dependencies:
+    - name: common
+      repository: https://bjw-s-labs.github.io/helm-charts
+      version: 1.5.1
+    description: Multiplexer for lorawan gateway packages
+    digest: 8be7cfb4a871f2eacf43c62bbff450aa1eafabb604edf768451100ccd35d426b
+    home: https://github.com/angelnu/helm-charts/tree/main/charts/apps/chirpstack-packet-multiplexer
+    icon: https://www.chirpstack.io/static/logo.png
+    keywords:
+    - lorawan
+    - chirpstack
+    maintainers:
+    - email: git@angelnu.com
+      name: angelnu
+    name: chirpstack-packet-multiplexer
+    sources:
+    - https://github.com/angelnu/chirpstack-packet-multiplexer
+    urls:
+    - https://bjw-s-labs.github.io/helm-charts/apps/chirpstack-packet-multiplexer-3.0.0.tgz
+    version: 3.0.0
   multus:
   - annotations:
       artifacthub.io/changes: |-
@@ -7,7 +39,7 @@ entries:
           description: update k3s cniBin path
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2025-12-14T21:34:35.98292828Z"
+    created: "2025-12-14T21:41:03.537293821Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -28,4 +60,4 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/multus-5.0.7.tgz
     version: 5.0.7
-generated: "2025-12-14T21:34:35.980539589Z"
+generated: "2025-12-14T21:41:03.533006096Z"
