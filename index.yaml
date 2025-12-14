@@ -11,7 +11,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: latest
-    created: "2025-12-14T21:45:12.220721558Z"
+    created: "2025-12-14T21:45:47.433155123Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -43,7 +43,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-14T21:45:12.227928774Z"
+    created: "2025-12-14T21:45:47.440076938Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -81,7 +81,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-14T21:45:12.230275137Z"
+    created: "2025-12-14T21:45:47.442270668Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -118,7 +118,7 @@ entries:
             Disable openMetrics service
     apiVersion: v2
     appVersion: 0.6.2
-    created: "2025-12-14T21:45:12.23836853Z"
+    created: "2025-12-14T21:45:47.449701141Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -151,7 +151,7 @@ entries:
           description: update k3s cniBin path
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2025-12-14T21:45:12.240392128Z"
+    created: "2025-12-14T21:45:47.451739692Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -183,7 +183,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.2.0
-    created: "2025-12-14T21:45:12.242478024Z"
+    created: "2025-12-14T21:45:47.453845258Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -216,7 +216,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v2.0.9200
-    created: "2025-12-14T21:45:12.250310977Z"
+    created: "2025-12-14T21:45:47.461036688Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -242,4 +242,34 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/tt-rss-6.0.0.tgz
     version: 6.0.0
-generated: "2025-12-14T21:45:12.217816659Z"
+  zalando-postgres-cluster:
+  - annotations:
+      artifacthub.io/changes: |-
+        - kind: fixed
+          description: race condition in backup script
+    apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-12-14T21:45:47.463838554Z"
+    dependencies:
+    - name: common
+      repository: https://bjw-s-labs.github.io/helm-charts
+      version: 1.5.1
+    description: Creates a postgres cluster using the Zalando Postgres operator and
+      local storage
+    digest: b392927e153e62698d7bdbbdebca34db34c35d959bd8c7e1266646c876fcc85a
+    home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/zalando-postgres-cluster
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png
+    keywords:
+    - postgres
+    - operator
+    - zalando
+    maintainers:
+    - email: git@angelnu.com
+      name: angelnu
+    name: zalando-postgres-cluster
+    sources:
+    - https://github.com/zalando/postgres-operator
+    urls:
+    - https://bjw-s-labs.github.io/helm-charts/apps/zalando-postgres-cluster-4.1.1.tgz
+    version: 4.1.1
+generated: "2025-12-14T21:45:47.430879661Z"
