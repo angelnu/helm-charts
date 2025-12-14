@@ -2,6 +2,8 @@
 
 Welcome to the documentation for the [angelnu Helm charts](https://github.com/angelnu/helm-charts) project.
 
+I publish here helm charts that I use for my kubernetes at home cluster.
+
 ## Getting started
 
 [Helm](https://helm.sh) must be installed to use the charts in this repository.
