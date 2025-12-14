@@ -7,13 +7,13 @@ entries:
           description: update k3s cniBin path
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2025-12-14T21:20:22.286456398Z"
+    created: "2025-12-14T21:22:41.989527183Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
       version: 1.5.1
     description: multus CNI allows multiple NICs per pod
-    digest: 39544523be451281de6c3be51863b840f39a5cf821bc7d8fb370b2fe9e01dada
+    digest: 76c81a387af6445cd4c64a10807e3176d914d30741b20cd05afe6c825875ce1d
     home: https://github.com/angelnu/helm-charts/tree/master/charts/stable/multus
     icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/docs/images/Multus.png
     keywords:
@@ -28,4 +28,4 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/multus-5.0.7.tgz
     version: 5.0.7
-generated: "2025-12-14T21:20:22.282871873Z"
+generated: "2025-12-14T21:22:41.986428772Z"
