@@ -11,7 +11,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: latest
-    created: "2025-12-14T21:41:03.535240122Z"
+    created: "2025-12-14T21:41:48.702938855Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -32,6 +32,44 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/chirpstack-packet-multiplexer-3.0.0.tgz
     version: 3.0.0
+  dnsmadeeasy-webhook:
+  - annotations:
+      artifacthub.io/changes: |-
+        - kind: changed
+          description: |
+            **BREAKING**: Updated library version to 1.0.1.
+          links:
+            - name: Common library chart definition
+              url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
+    apiVersion: v2
+    appVersion: v1.8.1
+    created: "2025-12-14T21:41:48.709868648Z"
+    dependencies:
+    - condition: cert-manager.enabled
+      name: cert-manager
+      repository: https://charts.jetstack.io
+      version: v1.18.2
+    - name: common
+      repository: https://bjw-s-labs.github.io/helm-charts
+      version: 1.5.1
+    description: Cert-Manager Webhook for DNSMadeEasy
+    digest: 238e802e72073fab349818fe394c554521d4fb357396993dfa2ef51d22326686
+    home: https://github.com/angelnu/helm-charts/tree/main/charts/apps/dnsmadeeasy-webhook
+    icon: https://raw.githubusercontent.com/angelnu/helm-charts/gh-pages/icons/dnsmadeeasy.png
+    keywords:
+    - cert-manager
+    - dnsmadeeasy
+    - letsencrypt
+    maintainers:
+    - email: git@angelnu.com
+      name: angelnu
+    name: dnsmadeeasy-webhook
+    sources:
+    - https://github.com/angelnu/dnsmadeeasy-webhook
+    - https://cert-manager.io
+    urls:
+    - https://bjw-s-labs.github.io/helm-charts/apps/dnsmadeeasy-webhook-5.0.0.tgz
+    version: 5.0.0
   multus:
   - annotations:
       artifacthub.io/changes: |-
@@ -39,7 +77,7 @@ entries:
           description: update k3s cniBin path
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2025-12-14T21:41:03.537293821Z"
+    created: "2025-12-14T21:41:48.711913912Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -60,4 +98,4 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/multus-5.0.7.tgz
     version: 5.0.7
-generated: "2025-12-14T21:41:03.533006096Z"
+generated: "2025-12-14T21:41:48.700668702Z"
