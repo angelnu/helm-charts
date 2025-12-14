@@ -11,7 +11,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: latest
-    created: "2025-12-14T21:43:34.475924786Z"
+    created: "2025-12-14T21:44:29.492532292Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -43,7 +43,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-14T21:43:34.482828262Z"
+    created: "2025-12-14T21:44:29.49969927Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -81,7 +81,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-14T21:43:34.484981399Z"
+    created: "2025-12-14T21:44:29.501841208Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -118,7 +118,7 @@ entries:
             Disable openMetrics service
     apiVersion: v2
     appVersion: 0.6.2
-    created: "2025-12-14T21:43:34.492414031Z"
+    created: "2025-12-14T21:44:29.509332382Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -151,7 +151,7 @@ entries:
           description: update k3s cniBin path
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2025-12-14T21:43:34.494472891Z"
+    created: "2025-12-14T21:44:29.51142097Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -172,4 +172,37 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/multus-5.0.7.tgz
     version: 5.0.7
-generated: "2025-12-14T21:43:34.472762386Z"
+  reverse-proxy:
+  - annotations:
+      artifacthub.io/changes: |-
+        - kind: changed
+          description: |
+            **BREAKING**: Updated library version to 1.0.1.
+          links:
+            - name: Common library chart definition
+              url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
+    apiVersion: v2
+    appVersion: 1.2.0
+    created: "2025-12-14T21:44:29.513533142Z"
+    dependencies:
+    - name: common
+      repository: https://bjw-s-labs.github.io/helm-charts
+      version: 2.3.0
+    description: Creates ingress reverse-proxies for external hosts with minimum boilerplate
+    digest: cb2c32a8ae45903109419ccbf8c3791854e9c601a74b2032fc9d46db01d52754
+    home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/reverse-proxy
+    icon: https://kubernetes.io/images/wheel.svg
+    keywords:
+    - reverse-proxy
+    - ingress
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: git@angelnu.com
+      name: angelnu
+    name: reverse-proxy
+    sources:
+    - https://kubernetes.io/docs/concepts/services-networking/ingress/
+    urls:
+    - https://bjw-s-labs.github.io/helm-charts/apps/reverse-proxy-3.0.0.tgz
+    version: 3.0.0
+generated: "2025-12-14T21:44:29.489503295Z"
