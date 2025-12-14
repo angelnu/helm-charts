@@ -1,8 +1,9 @@
+---
 #
 # IMPORTANT NOTE
 #
 # This chart inherits from our common library chart. You can check the default values/options here:
-# https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
+# https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/values.yaml
 #
 
 image:
@@ -99,17 +100,17 @@ addons:
       egress:
         # Allow only VPN traffic to Internet
         - to:
-          - ipBlock:
-              cidr: 0.0.0.0/0
+            - ipBlock:
+                cidr: 0.0.0.0/0
           ports:
-          # VPN traffic (default OpenVPN)
-          - port: 1194
-            protocol: UDP
+            # VPN traffic (default OpenVPN)
+            - port: 1194
+              protocol: UDP
         # Allow any traffic within k8s
         - to:
-          - ipBlock:
-              # Cluster IPs (default k3s)
-              cidr: 10.0.0.0/8
+            - ipBlock:
+                # Cluster IPs (default k3s)
+                cidr: 10.0.0.0/8
 
 # -- The webhook is used to mutate the PODs matching the given
 # namespace labels. It inserts an init and sidecard helper containers
@@ -139,10 +140,10 @@ webhook:
     type: label
     label: "routed-gateway"
     custom: {}
-      # matchExpressions:
-      # - key: notTouch
-      #   operator: NotIn
-      #   values: ["1"]
+    #   matchExpressions:
+    #     - key: notTouch
+    #       operator: NotIn
+    #       values: ["1"]
 
   # -- default behviour for new PODs in the evaluated namespace
   gatewayDefault: true
