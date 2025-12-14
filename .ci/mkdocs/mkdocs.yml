@@ -4,7 +4,7 @@
 site_name: angelnu | Helm charts | Docs
 site_description: Docs for the angelnu Helm charts repository
 site_author: angelnu
-site_url: https://angelnu.github.io/helm-charts/docs
+site_url: https://angelnu.github.io/helm-charts/
 
 # Repository
 repo_name: angelnu/helm-charts
