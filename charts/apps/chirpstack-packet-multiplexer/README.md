@@ -37,4 +37,3 @@ Multiplexer for lorawan gateway packages
 | probes | object | See below | Dissable probes |
 | service | object | See below. | Configure the services for the chart here. |
 
-----------------------------------------------

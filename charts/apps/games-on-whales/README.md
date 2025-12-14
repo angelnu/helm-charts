@@ -32,14 +32,14 @@ Kubernetes: `>=1.19.0-0`
 | firefox.enabled | bool | `true` | enable/disable firefox container |
 | firefox.image.pullPolicy | string | `"IfNotPresent"` | image pull policy |
 | firefox.image.repository | string | `"andrewmackrodt/firefox-x11"` | image repository |
-| firefox.image.tag | string | `"125.0.2-r1"` | image tag |
+| firefox.image.tag | string | `"142.0.1-r1"` | image tag |
 | firefox.logLevel | string | `"info"` | firefox log level |
 | firefox.volumeMounts | list | `[]` | firefox extra volume mounts |
 | graphic_resources | object | `nil` | Pass GPU resources to Xorg, steam and retroarch containers See Custom configuration section in the Readme |
 | ingress.main | object | See values.yaml | Enable and configure ingress settings for the chart under this key. |
 | mkhomeretrodirs.image.pullPolicy | string | `"IfNotPresent"` | image pull policy |
 | mkhomeretrodirs.image.repository | string | `"busybox"` | image repository |
-| mkhomeretrodirs.image.tag | string | `"1.36.1"` | image tag |
+| mkhomeretrodirs.image.tag | string | `"1.37.0"` | image tag |
 | persistence | object | See values.yaml | Configure persistence settings for the chart under this key. |
 | pulse | object | See values.yaml | Configure pulse audio settings |
 | pulseaudio.image.pullPolicy | string | `"IfNotPresent"` | pulseaudio image pull policy |
@@ -73,4 +73,3 @@ Kubernetes: `>=1.19.0-0`
 | xorg.refreshrate | int | `60` | xorg refresh rate |
 | xorg.resolution | string | `"1920x1080"` | xorg resolution |
 
-----------------------------------------------

@@ -1,6 +1,6 @@
 # pod-gateway
 
-![Version: 6.5.1](https://img.shields.io/badge/Version-6.5.1-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
+![Version: 6.6.1](https://img.shields.io/badge/Version-6.6.1-informational?style=flat-square) ![AppVersion: v1.8.1](https://img.shields.io/badge/AppVersion-v1.8.1-informational?style=flat-square)
 
 Admision controller to change the default gateway and DNS server of PODs.
 It is typically used to route PODs through a VPN server.
@@ -61,12 +61,11 @@ Kubernetes: `>=1.16.0-0`
 | webhook.gatewayDefault | bool | `true` | default behviour for new PODs in the evaluated namespace |
 | webhook.gatewayLabel | string | `"setGateway"` | label name to check when evaluating POD. If true the POD will get the gateway. If not set setGatewayDefault will apply. |
 | webhook.gatewayLabelValue | string | `nil` | label value to check when evaluating POD. If set, the POD with the gatewayLabel's value that matches, will get the gateway. If not set gatewayLabel boolean value will apply. |
-| webhook.sidecarAsInit | bool | `false` | determines if the gateway-sidecar container is created as a container or a sidecar container. Requires kubernetes v1.29 <https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/> |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` | image pullPolicy of the webhook |
 | webhook.image.repository | string | `"ghcr.io/angelnu/gateway-admision-controller"` | image repository of the webhook |
-| webhook.image.tag | string | `"v3.10.0"` | image tag of the webhook |
+| webhook.image.tag | string | `"v3.12.0"` | image tag of the webhook |
 | webhook.namespaceSelector | object | `{"custom":{},"label":"routed-gateway","type":"label"}` | Selector for namespace. All pods in this namespace will get evaluated by the webhook. **IMPORTANT**: Do not select the namespace where the webhook is deployed to or you will get locking issues. |
 | webhook.replicas | int | `1` | number of webhook instances to deploy |
+| webhook.sidecarAsInit | bool | `false` | determines how sidecar container is created |
 | webhook.strategy | object | `{"type":"RollingUpdate"}` | strategy for updates |
 
-----------------------------------------------

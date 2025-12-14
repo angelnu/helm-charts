@@ -23,7 +23,7 @@ Kubernetes: `>=1.16.0-0`
 | Repository | Name | Version |
 |------------|------|---------|
 | https://bjw-s.github.io/helm-charts | common | 1.5.1 |
-| https://charts.bitnami.com/bitnami | postgresql | 15.5.21 |
+| https://charts.bitnami.com/bitnami | postgresql | 18.1.7 |
 
 ## Values
 
@@ -66,4 +66,3 @@ Kubernetes: `>=1.16.0-0`
 | postgresql.postgresqlUsername | string | `"postgres"` | Postgres database user name |
 | service | object | See values.yaml | Configures service settings for the chart. |
 
-----------------------------------------------

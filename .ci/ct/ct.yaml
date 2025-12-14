@@ -1,5 +1,6 @@
+---
 chart-yaml-schema: .ci/ct/chart_schema.yaml
-lint-conf: .ci/ct/lintconf.yaml
+lint-conf: .yamllint.yml
 
 remote: origin
 target-branch: main
@@ -10,7 +11,7 @@ chart-dirs:
   - charts/apps
 
 chart-repos:
+  - bjw-s=https://bjw-s-labs.github.io/helm-charts
   - bitnami=https://charts.bitnami.com/bitnami
-  - bjw-s=https://bjw-s.github.io/helm-charts
   - angelnu=https://angelnu.github.io/helm-charts
   - jetstack=https://charts.jetstack.io

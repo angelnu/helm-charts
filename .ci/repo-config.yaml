@@ -3,3 +3,5 @@ excluded-charts-lint: []
 excluded-charts-install:
   - apps/multus
   - apps/pod-gateway
+
+excluded-charts-release: []

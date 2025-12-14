@@ -23,7 +23,7 @@ Kubernetes: `>=1.16.0-0`
 | Repository | Name | Version |
 |------------|------|---------|
 | https://bjw-s.github.io/helm-charts | common | 1.5.1 |
-| https://charts.bitnami.com/bitnami | postgresql | 15.5.21 |
+| https://charts.bitnami.com/bitnami | postgresql | 18.1.7 |
 
 ## Values
 
@@ -38,7 +38,7 @@ Kubernetes: `>=1.16.0-0`
 | env.TTRSS_SELF_URL_PATH | string | `""` | External URL you use to connect to the RSS (the one you enter in your browser) |
 | image.pullPolicy | string | `"Always"` | image pull policy |
 | image.repository | string | `"ghcr.io/angelnu/tt-rss"` | image repository |
-| image.tag | string | `"2.0.9486"` | image tag |
+| image.tag | string | `"2.0.9701"` | image tag |
 | ingress.main | object | See values.yaml | Enable and configure ingress settings for the chart under this key. |
 | postgresql | object | see bellow | Bitnami postgres chart. For more options see https://github.com/bitnami/charts/tree/master/bitnami/postgresql |
 | postgresql.auth.database | string | `"tt-rss"` | Postgres database |
@@ -48,4 +48,3 @@ Kubernetes: `>=1.16.0-0`
 | postgresql.persistence.enabled | bool | `false` | if database is stored to a PVC. Set to true when you are done testing. |
 | service | object | See below. | Configure the services for the chart here. |
 
-----------------------------------------------

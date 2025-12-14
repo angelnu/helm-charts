@@ -56,4 +56,3 @@ Creates a postgres cluster using the Zalando Postgres operator and local storage
 | superuser.secret | string | <user>.<db name>.credentials.postgresql.acid.zalan.do | Superuser k8s secret name. It must match the patter used by the operator |
 | superuser.user | string | first user in postgresql.users | Superuser user used for cronjobs |
 
-----------------------------------------------

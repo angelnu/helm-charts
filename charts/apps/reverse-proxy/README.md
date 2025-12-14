@@ -46,4 +46,3 @@ Kubernetes: `>=1.16.0-0`
 | instances[0].port | int | 80 | Port used by host behind this reverse proxy |
 | instances[0].test | bool | true | add a test for this reverse proxy. It can be tested with `helm test <chart_name>` |
 
-----------------------------------------------

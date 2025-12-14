@@ -22,7 +22,7 @@ Cert-Manager Webhook for DNSMadeEasy
 | Repository | Name | Version |
 |------------|------|---------|
 | https://bjw-s.github.io/helm-charts | common | 1.5.1 |
-| https://charts.jetstack.io | cert-manager | v1.15.2 |
+| https://charts.jetstack.io | cert-manager | v1.18.2 |
 
 ## Values
 
@@ -35,7 +35,6 @@ Cert-Manager Webhook for DNSMadeEasy
 | groupName | string | `"acme.mycompany.com"` | The GroupName here is used to identify your company or business unit that created this webhook. This name will need to be referenced in each Issuer's `webhook` stanza to inform cert-manager of where to send ChallengePayload resources in order to solve the DNS01 challenge. This group name should be **unique**, hence using your own company's domain here is recommended. |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.repository | string | `"ghcr.io/angelnu/dnsmadeeasy-webhook"` | Image repository |
-| image.tag | string | `"v1.8.1"` | Image tag |
+| image.tag | string | `"v1.9.0"` | Image tag |
 | serviceAccount.create | bool | `true` | Create service account |
 
-----------------------------------------------
