@@ -11,7 +11,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: latest
-    created: "2025-12-14T21:44:29.492532292Z"
+    created: "2025-12-14T21:45:12.220721558Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -43,7 +43,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-14T21:44:29.49969927Z"
+    created: "2025-12-14T21:45:12.227928774Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -81,7 +81,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-14T21:44:29.501841208Z"
+    created: "2025-12-14T21:45:12.230275137Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -118,7 +118,7 @@ entries:
             Disable openMetrics service
     apiVersion: v2
     appVersion: 0.6.2
-    created: "2025-12-14T21:44:29.509332382Z"
+    created: "2025-12-14T21:45:12.23836853Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -151,7 +151,7 @@ entries:
           description: update k3s cniBin path
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2025-12-14T21:44:29.51142097Z"
+    created: "2025-12-14T21:45:12.240392128Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -183,7 +183,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.2.0
-    created: "2025-12-14T21:44:29.513533142Z"
+    created: "2025-12-14T21:45:12.242478024Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -205,4 +205,41 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/reverse-proxy-3.0.0.tgz
     version: 3.0.0
-generated: "2025-12-14T21:44:29.489503295Z"
+  tt-rss:
+  - annotations:
+      artifacthub.io/changes: |-
+        - kind: changed
+          description: |
+            **BREAKING**: Updated library version to 1.0.1.
+          links:
+            - name: Common library chart definition
+              url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
+    apiVersion: v2
+    appVersion: v2.0.9200
+    created: "2025-12-14T21:45:12.250310977Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.1.7
+    - name: common
+      repository: https://bjw-s-labs.github.io/helm-charts
+      version: 1.5.1
+    description: Tiny Tiny RSS is a free and open source web-based news feed (RSS/Atom)
+      reader and aggregator
+    digest: cce1dec61688ed3fa12678e33dc46f6dd8d84fafd3a548c4fdd1b7539b8fe4f8
+    home: https://github.com/angelnu/helm-charts/tree/main/charts/apps/tt-rss
+    icon: https://raw.githubusercontent.com/angelnu/helm-charts/gh-pages/icons/tt-rss-favicon-72px.png
+    keywords:
+    - tt-rss
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: git@angelnu.com
+      name: angelnu
+    name: tt-rss
+    sources:
+    - https://git.tt-rss.org/fox/tt-rss
+    urls:
+    - https://bjw-s-labs.github.io/helm-charts/apps/tt-rss-6.0.0.tgz
+    version: 6.0.0
+generated: "2025-12-14T21:45:12.217816659Z"
