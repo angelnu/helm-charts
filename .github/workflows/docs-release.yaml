@@ -39,13 +39,6 @@ jobs:
           source .venv/bin/activate
           mkdocs build -f .ci/mkdocs/mkdocs.yml
 
-      - name: Generate Token
-        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
-        id: app-token
-        with:
-          app-id: ${{ secrets.LAB_ASSISTANT_APP_ID }}
-          private-key: ${{ secrets.LAB_ASSISTANT_APP_KEY }}
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
         if: ${{ github.ref == 'refs/heads/main' }}
