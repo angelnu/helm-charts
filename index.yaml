@@ -11,7 +11,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: latest
-    created: "2025-12-14T21:42:32.70960114Z"
+    created: "2025-12-14T21:43:34.475924786Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -43,7 +43,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-14T21:42:32.7165472Z"
+    created: "2025-12-14T21:43:34.482828262Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -81,7 +81,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-14T21:42:32.718715022Z"
+    created: "2025-12-14T21:43:34.484981399Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -110,6 +110,40 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/games-on-whales-2.0.0.tgz
     version: 2.0.0
+  maddy:
+  - annotations:
+      artifacthub.io/changes: |-
+        - kind: changed
+          description: |
+            Disable openMetrics service
+    apiVersion: v2
+    appVersion: 0.6.2
+    created: "2025-12-14T21:43:34.492414031Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.1.7
+    - name: common
+      repository: https://bjw-s-labs.github.io/helm-charts
+      version: 1.5.1
+    description: Maddy Mail Server
+    digest: d2b898f6eb055b058ea903e5e18e32269dba37a8b42be275dc4f8a16c3a5f251
+    home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/maddy
+    icon: https://upload.wikimedia.org/wikipedia/commons/b/b1/Email_Shiny_Icon.svg
+    keywords:
+    - maddy
+    - mail
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: git@angelnu.com
+      name: angelnu
+    name: maddy
+    sources:
+    - https://github.com/foxcpp/maddy
+    urls:
+    - https://bjw-s-labs.github.io/helm-charts/apps/maddy-4.1.1.tgz
+    version: 4.1.1
   multus:
   - annotations:
       artifacthub.io/changes: |-
@@ -117,7 +151,7 @@ entries:
           description: update k3s cniBin path
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2025-12-14T21:42:32.720730139Z"
+    created: "2025-12-14T21:43:34.494472891Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -138,4 +172,4 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/multus-5.0.7.tgz
     version: 5.0.7
-generated: "2025-12-14T21:42:32.706990981Z"
+generated: "2025-12-14T21:43:34.472762386Z"
