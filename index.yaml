@@ -11,7 +11,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: latest
-    created: "2025-12-14T21:41:48.702938855Z"
+    created: "2025-12-14T21:42:32.70960114Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -43,7 +43,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-14T21:41:48.709868648Z"
+    created: "2025-12-14T21:42:32.7165472Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -70,6 +70,46 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/dnsmadeeasy-webhook-5.0.0.tgz
     version: 5.0.0
+  games-on-whales:
+  - annotations:
+      artifacthub.io/changes: |-
+        - kind: changed
+          description: |
+            **BREAKING**: Updated library version to 1.0.1.
+          links:
+            - name: Common library chart definition
+              url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
+    apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-12-14T21:42:32.718715022Z"
+    dependencies:
+    - name: common
+      repository: https://bjw-s-labs.github.io/helm-charts
+      version: 1.5.1
+    description: Streams graphic applications/games (retroarch, firefox, steam) runing
+      on Kubernetes
+    digest: 0ee1a2e1803cca0652f3a57087397023e1eb2976eab9f1c5850c0c2cc980aab8
+    home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/games-on-whales
+    icon: https://raw.githubusercontent.com/angelnu/helm-charts/gh-pages/icons/gow-logo.png
+    keywords:
+    - games-on-whales
+    - steam
+    - X11
+    - pulse
+    - stream
+    - retroarch
+    kubeVersion: '>=1.19.0-0'
+    maintainers:
+    - email: gits@angelnu.com
+      name: angelnu
+    - email: beltramo.ale@gmail.com
+      name: ABeltramo
+    name: games-on-whales
+    sources:
+    - https://github.com/games-on-whales/gow
+    urls:
+    - https://bjw-s-labs.github.io/helm-charts/apps/games-on-whales-2.0.0.tgz
+    version: 2.0.0
   multus:
   - annotations:
       artifacthub.io/changes: |-
@@ -77,7 +117,7 @@ entries:
           description: update k3s cniBin path
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2025-12-14T21:41:48.711913912Z"
+    created: "2025-12-14T21:42:32.720730139Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -98,4 +138,4 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/multus-5.0.7.tgz
     version: 5.0.7
-generated: "2025-12-14T21:41:48.700668702Z"
+generated: "2025-12-14T21:42:32.706990981Z"
