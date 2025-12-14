@@ -21,21 +21,21 @@ repos:
   - id: remove-crlf
   - id: remove-tabs
 
-- repo: https://github.com/norwoodj/helm-docs
-  rev: v1.10.0
-  hooks:
-    - id: helm-docs-built
-      #entry: ./.deps/helm-docs/helm-docs "${@}"
-      args:
-        # Set log level
-        - --log-level=info
+# - repo: https://github.com/norwoodj/helm-docs
+#   rev: v1.10.0
+#   hooks:
+#     - id: helm-docs-built
+#       #entry: ./.deps/helm-docs/helm-docs "${@}"
+#       args:
+#         # Set log level
+#         - --log-level=info
 
-        # Make the tool search for charts only under the `example-charts` directory
-        - --chart-search-root=charts
+#         # Make the tool search for charts only under the `example-charts` directory
+#         - --chart-search-root=charts
 
-        # The `./` makes it relative to the chart-search-root set above
-        - --template-files=./../.ci/helm-docs/README.md.gotmpl
+#         # The `./` makes it relative to the chart-search-root set above
+#         - --template-files=./../.ci/helm-docs/README.md.gotmpl
 
-        # Repeating the flag adds this to the list
-        # A base filename makes it relative to each chart directory found
-        - --template-files=README_CONFIG.md.gotmpl
+#         # Repeating the flag adds this to the list
+#         # A base filename makes it relative to each chart directory found
+#         - --template-files=README_CONFIG.md.gotmpl
