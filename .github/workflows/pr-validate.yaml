@@ -1,13 +1,10 @@
+---
 name: "Pull Request: Validate"
 
 on:
   pull_request:
-    branches:
-      - main
-      - development
     types:
       - opened
-      - edited
       - reopened
       - ready_for_review
       - synchronize
@@ -16,35 +13,105 @@ concurrency:
   group: ${{ github.head_ref }}-pr-validate
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
-  pr-metadata:
-    uses: ./.github/workflows/pr-metadata.yaml
+  prepare:
+    name: Prepare data required for workflow
+    runs-on: ubuntu-24.04
+    outputs:
+      repoConfiguration: ${{ steps.repo-config.outputs.config }}
+      addedOrModifiedFiles: ${{ steps.added-modified-files.outputs.changed_files }}
+      chartsToLint: ${{ steps.charts-to-lint.outputs.filteredCharts }}
+      chartsToInstall: ${{ steps.charts-to-install.outputs.filteredCharts }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install Mise and set up tool cache
+        uses: jdx/mise-action@146a28175021df8ca24f8ee1828cc2a60f980bd5 # v3.5.1
+
+      - name: Grab repository configuration
+        id: repo-config
+        shell: bash
+        run: |
+          echo "config=$(yq '.' '.ci/repo-config.yaml' -o json -I=0)" >> "$GITHUB_OUTPUT"
+
+      - name: Get all added or modified files
+        id: added-modified-files
+        uses: bjw-s-labs/action-changed-files@1a5aeab1bfa64d0c4e786f501d5a3f1fad4a24da # v0.4.1
+
+      - name: Get all added or modified charts
+        id: changed-charts
+        uses: bjw-s-labs/action-changed-files@1a5aeab1bfa64d0c4e786f501d5a3f1fad4a24da # v0.4.1
+        with:
+          path: charts
+          include_only_directories: true
+          max_depth: 2
+
+      - name: Determine charts to lint
+        id: charts-to-lint
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+          CHANGED_CHARTS: ${{ steps.changed-charts.outputs.changed_files }}
+          REPO_SETTINGS: ${{ steps.repo-config.outputs.config }}
+        with:
+          script: |
+            const { CHANGED_CHARTS, REPO_SETTINGS } = process.env;
+            const changedCharts = JSON.parse(CHANGED_CHARTS);
+            const repoSettings = JSON.parse(REPO_SETTINGS);
+            const chartsToFilter = repoSettings['excluded-charts-lint'];
+            let filteredCharts = changedCharts.filter(item => chartsToFilter.indexOf(item) < 0);
+            core.setOutput("filteredCharts", filteredCharts);
+            console.log('charts to lint:', JSON.stringify(filteredCharts, null, 2));
+
+      - name: Determine charts to install
+        id: charts-to-install
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+          CHANGED_CHARTS: ${{ steps.changed-charts.outputs.changed_files }}
+          REPO_SETTINGS: ${{ steps.repo-config.outputs.config }}
+        with:
+          script: |
+            const { CHANGED_CHARTS, REPO_SETTINGS } = process.env;
+            const changedCharts = JSON.parse(CHANGED_CHARTS);
+            const repoSettings = JSON.parse(REPO_SETTINGS);
+            const chartsToFilter = repoSettings['excluded-charts-install'];
+            let filteredCharts = changedCharts.filter(item => chartsToFilter.indexOf(item) < 0);
+            core.setOutput("filteredCharts", filteredCharts);
+            console.log('charts to install:', JSON.stringify(filteredCharts, null, 2));
 
   pre-commit-check:
-    uses: ./.github/workflows/pre-commit-check.yaml
+    name: Perform Pre-Commit check
+    runs-on: ubuntu-24.04
     needs:
-      - pr-metadata
-    with:
-      modifiedFiles: ${{ needs.pr-metadata.outputs.addedOrModifiedFiles }}
+      - prepare
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+
+      - name: Run against changes
+        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
+        with:
+          extra_args: --files ${{ join(fromJSON(needs.prepare.outputs.addedOrModifiedFiles), ' ') }} --config .ci/pre-commit/config.yaml
 
   charts-lint:
+    name: Lint charts
     uses: ./.github/workflows/charts-lint.yaml
     needs:
-      - pr-metadata
+      - prepare
     with:
-      checkoutCommit: ${{ github.sha }}
-      chartsToLint: ${{ needs.pr-metadata.outputs.chartsToLint }}
-      isRenovatePR: ${{ needs.pr-metadata.outputs.isRenovatePR }}
-      overrideDeps: '[]'
+      charts: ${{ needs.prepare.outputs.chartsToLint }}
 
   charts-test:
+    name: Test charts
     uses: ./.github/workflows/charts-test.yaml
     needs:
-      - pr-metadata
+      - prepare
     with:
-      checkoutCommit: ${{ github.sha }}
-      chartsToTest: |-
-        ${{
-           needs.pr-metadata.outputs.chartsToInstall
-         }}
-      overrideDeps: '[]'
+      charts: ${{ needs.prepare.outputs.chartsToInstall }}

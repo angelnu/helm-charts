@@ -1,61 +1,63 @@
-name: "Charts: Test"
+---
+name: "Charts: Test (Reusable)"
 
 on:
   workflow_call:
     inputs:
-      checkoutCommit:
+      charts:
+        description: >
+          Json encoded list of Helm charts to release. Defaults to releasing everything.
+        default: "[]"
         required: true
         type: string
-      chartsToTest:
-        description: >
-          A JSON encoded array of charts to lint
-        type: string
-        required: true
-      overrideDeps:
-        description: >
-          A JSON encoded array of dependencies to override before testing
-        type: string
-        required: false
-        default: '[]'
 
-env:
-  HELM_VERSION: 3.9.2
+permissions:
+  contents: read
 
 jobs:
   install-chart:
     name: Install chart
     runs-on: ubuntu-24.04
-    if: ${{ inputs.chartsToTest != '[]' && inputs.chartsToTest != '' }}
+    if: ${{ inputs.charts != '[]' && inputs.charts != '' }}
     strategy:
       matrix:
-        chart: ${{ fromJSON(inputs.chartsToTest) }}
-        k8s_version: ["v1.27.7", "v1.28.3"]
+        chart: ${{ fromJSON(inputs.charts) }}
+        k8s_version:
+          - "v1.28.15"
+          - "v1.29.14"
+          - "v1.30.14"
+          - "v1.31.12"
+          - "v1.32.8"
+          - "v1.33.4"
+          # - "v1.34.0" TODO: Implement when k3d supports it
       fail-fast: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
-          fetch-depth: 0
-          ref: ${{ inputs.checkoutCommit }}
+          persist-credentials: false
 
-      - name: Install Kubernetes tools
-        uses: yokawasa/action-setup-kube-tools@v0.13.0
+      - name: Validate prerequisite folders
+        working-directory: "charts/${{ matrix.chart }}"
+        run: |
+          CHART_TYPE=$(yq '.type // "application"' Chart.yaml)
+          if [[ ("${CHART_TYPE}" == "library") && (! -d "test-chart") ]]; then
+            echo "Library charts require a \"test-chart\" directory to run tests"
+            exit 1
+          fi
+
+      - name: Install kubectl matching k8s version
+        uses: yokawasa/action-setup-kube-tools@3e3886c11bfa25fe33f8eb90f59542dd151da442 # v0.13.1
         with:
           setup-tools: |
-            helmv3
             kubectl
-          helm: "${{ env.HELM_VERSION }}"
           kubectl: "${{ matrix.k8s_version }}"
 
-      - uses: actions/setup-python@v6
-        with:
-          python-version: "3.13"
-
-      - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.8.0
+      - name: Install Mise and required tools
+        uses: jdx/mise-action@146a28175021df8ca24f8ee1828cc2a60f980bd5 # v3.5.1
 
       - name: Create k3d cluster
-        uses: nolar/setup-k3d-k3s@v1
+        uses: nolar/setup-k3d-k3s@293b8e5822a20bc0d5bcdd4826f1a665e72aba96 # v1.0.9
         with:
           version: ${{ matrix.k8s_version }}
 
@@ -63,73 +65,110 @@ jobs:
         run: |
           kubectl taint --all=true nodes node.cloudprovider.kubernetes.io/uninitialized- || true
 
-      - name: Override chart dependencies
-        uses: ./.github/actions/override-chart-deps
-        if: ${{ inputs.overrideDeps != '[]' }}
+      - name: Dereference JSON schema
+        uses: bjw-s-labs/helm-charts-actions/dereference-json-schema@e812af5a7c6bfcf0cf6a59f83e672237f4522afa
         with:
-          chart: ${{ matrix.chart }}
-          overrides: ${{ inputs.overrideDeps }}
+          schemaFile: "charts/${{ matrix.chart }}/values.schema.json"
+          outputFile: "charts/${{ matrix.chart }}/values.schema.json"
+          allowFileNotFound: true
+
+      - name: Always assume in-repo common library
+        env:
+          COMMON_LIBRARY_LOCATION: ${{ github.workspace }}/charts/library/common
+        working-directory: charts/${{ matrix.chart }}
+        run: |
+          yq -i '. |= .dependencies |= map(select(.name == "common" and .repository == "https://bjw-s-labs.github.io/helm-charts").version = ">0.0.0-0")' Chart.yaml
+          yq -i '. |= .dependencies |= map(select(.name == "common" and .repository == "https://bjw-s-labs.github.io/helm-charts").repository = "file://" + strenv(COMMON_LIBRARY_LOCATION))' Chart.yaml
+          echo "::group::Modified Chart.yaml"
+          cat Chart.yaml
+          echo "::endgroup::"
 
       - name: Run chart-testing (install)
-        run: ct install --config .ci/ct/ct.yaml --charts "charts/${{ matrix.chart }}"
+        working-directory: "charts/${{ matrix.chart }}"
+        run: |
+          if [ -d "test-chart" ]; then
+            cd "test-chart"
+          fi
 
-  # Summarize matrix https://github.community/t/status-check-for-a-matrix-jobs/127354/7
+          ct install --config "${GITHUB_WORKSPACE}/.ci/ct/ct.yaml" --charts .
+
   install_success:
     needs:
       - install-chart
-    if: |
-      always()
+    if: ${{ !cancelled() }}
     name: Install successful
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
-      - name: Check install matrix status
-        if: ${{ (inputs.chartsToTest != '[]' && inputs.chartsToTest != '') && needs.install-chart.result != 'success' }}
+      - name: Check matrix status
+        if: >-
+          ${{
+              (inputs.chartsToTest != '' && inputs.chartsToTest != '[]') &&
+              contains(needs.*.result, 'failure')
+          }}
         run: exit 1
 
   unittest-chart:
     name: Unit-test chart
     runs-on: ubuntu-24.04
-    if: ${{ inputs.chartsToTest != '[]' && inputs.chartsToTest != '' }}
+    if: ${{ inputs.charts != '[]' && inputs.charts != '' }}
     strategy:
       matrix:
-        chart: ${{ fromJSON(inputs.chartsToTest) }}
+        chart: ${{ fromJSON(inputs.charts) }}
       fail-fast: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
-          fetch-depth: 0
-          ref: ${{ inputs.checkoutCommit }}
+          persist-credentials: false
 
-      - name: Install Kubernetes tools
-        uses: yokawasa/action-setup-kube-tools@v0.13.0
-        with:
-          setup-tools: |
-            helmv3
-          helm: "${{ env.HELM_VERSION }}"
+      - name: Validate prerequisite folders
+        working-directory: "charts/${{ matrix.chart }}"
+        run: |
+          CHART_TYPE=$(yq '.type // "application"' Chart.yaml)
+          if [[ ("${CHART_TYPE}" == "library") && (! -d "test-chart") ]]; then
+            echo "Library charts require a \"test-chart\" directory to run tests"
+            exit 1
+          fi
 
-      - name: Override chart dependencies
-        uses: ./.github/actions/override-chart-deps
-        if: ${{ inputs.overrideDeps != '[]' }}
+      - name: Install Mise and required tools
+        uses: jdx/mise-action@146a28175021df8ca24f8ee1828cc2a60f980bd5 # v3.5.1
+
+      - name: Dereference JSON schema
+        uses: bjw-s-labs/helm-charts-actions/dereference-json-schema@e812af5a7c6bfcf0cf6a59f83e672237f4522afa
         with:
-          chart: ${{ matrix.chart }}
-          overrides: ${{ inputs.overrideDeps }}
+          schemaFile: "charts/${{ matrix.chart }}/values.schema.json"
+          outputFile: "charts/${{ matrix.chart }}/values.schema.json"
+          allowFileNotFound: true
 
       - name: Run tests
+        working-directory: "charts/${{ matrix.chart }}"
+        env:
+          MATRIX_CHART: ${{ matrix.chart }}
         run: |
-          helm plugin install https://github.com/vbehar/helm3-unittest --version v1.0.16
-          helm dep update "charts/${{ matrix.chart }}"
-          helm unittest -f "tests/**/*_test.yaml" "charts/${{ matrix.chart }}"
+          if [[ -d "test-chart" ]]; then
+            cd "test-chart"
+          fi
 
-  # Summarize matrix https://github.community/t/status-check-for-a-matrix-jobs/127354/7
+          if [[ ! -d "unittests" ]]; then
+            echo "No unit tests found for chart ${MATRIX_CHART}"
+            exit 0
+          fi
+
+          helm plugin install https://github.com/helm-unittest/helm-unittest.git
+          helm dep update
+          helm unittest -f "unittests/**/*_test.yaml" . 2> >(grep -v 'found symbolic link' >&2)
+
   unittest_success:
     needs:
       - unittest-chart
-    if: |
-      always()
+    if: ${{ !cancelled() }}
     name: Unittest successful
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
-      - name: Check unittest matrix status
-        if: ${{ (inputs.chartsToTest != '[]' && inputs.chartsToTest != '') && needs.unittest-chart.result != 'success' }}
+      - name: Check matrix status
+        if: >-
+          ${{
+              (inputs.chartsToTest != '' && inputs.chartsToTest != '[]') &&
+              contains(needs.*.result, 'failure')
+          }}
         run: exit 1
