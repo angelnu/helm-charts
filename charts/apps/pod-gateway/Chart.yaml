@@ -5,7 +5,7 @@ description: |
   Admision controller to change the default gateway and DNS server of PODs.
   It is typically used to route PODs through a VPN server.
 name: pod-gateway
-version: 6.6.1
+version: 7.0.0
 kubeVersion: ">=1.16.0-0"
 keywords:
   - pod-gateway
@@ -20,31 +20,13 @@ maintainers:
 dependencies:
   - name: common
     repository: https://bjw-s-labs.github.io/helm-charts
-    version: 1.5.1
+    version: 4.5.0
 
 annotations:
   artifacthub.io/changes: |-
-    - kind: added
+    - kind: changed
       description: |
-        Add preliminary support for IPv6
+        **BREAKING**: Updated library version to 4.5.0.
       links:
         - name: Common library chart definition
-          url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
-    - kind: added
-      description: |
-        Add support for multiple DNS servers
-      links:
-        - name: Gateway Admission Controller PR
-          url: https://github.com/angelnu/gateway-admision-controller/pull/144
-    - kind: added
-      description: |
-        Add support for sidecar containers to be created as init container
-      links:
-        - name: Gateway Admission Controller PR
-          url: https://github.com/angelnu/gateway-admision-controller/pull/296
-    - kind: fixed
-      description: |
-        Revert default values to one single DNS server
-      links:
-        - name: Values and Documentation Change PR
-          url: https://github.com/angelnu/helm-charts/pull/187
+          url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
