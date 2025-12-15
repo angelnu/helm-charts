@@ -61,19 +61,19 @@ networkpolicies:
       - Egress
     rules:
       egress:
-      # Allow only VPN traffic to Internet
-      - to:
-          - ipBlock:
-              cidr: 0.0.0.0/0
-        ports:
-          # VPN traffic (default OpenVPN)
-          - port: 1194
-            protocol: UDP
-      # Allow any traffic within k8s
-      - to:
-          - ipBlock:
-              # Cluster IPs (default k3s)
-              cidr: 10.0.0.0/8
+        # Allow only VPN traffic to Internet
+        - to:
+            - ipBlock:
+                cidr: 0.0.0.0/0
+          ports:
+            # VPN traffic (default OpenVPN)
+            - port: 1194
+              protocol: UDP
+        # Allow any traffic within k8s
+        - to:
+            - ipBlock:
+                # Cluster IPs (default k3s)
+                cidr: 10.0.0.0/8
 
 # -----------------------------------------------------------
 # After this point, these are settings specific to this chart
