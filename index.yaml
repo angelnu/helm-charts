@@ -11,7 +11,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: latest
-    created: "2025-12-15T01:49:44.961762105Z"
+    created: "2025-12-15T02:07:09.567531772Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -43,7 +43,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-15T01:49:44.968778864Z"
+    created: "2025-12-15T02:07:09.574613308Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -81,7 +81,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-15T01:49:44.970948566Z"
+    created: "2025-12-15T02:07:09.576803318Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -118,7 +118,7 @@ entries:
             Disable openMetrics service
     apiVersion: v2
     appVersion: 0.6.2
-    created: "2025-12-15T01:49:44.978381776Z"
+    created: "2025-12-15T02:07:09.583961203Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -151,13 +151,13 @@ entries:
           description: update k3s cniBin path
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2025-12-15T01:49:44.980445841Z"
+    created: "2025-12-15T02:07:09.58598339Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
       version: 1.5.1
     description: multus CNI allows multiple NICs per pod
-    digest: 45fe302e98d3992d1e1dc8d059843b48e60ca333e1678dbde061a2324c1b65a3
+    digest: cde4aa8c38035f53f90411dcdb975bb9e7c6a25d22425db35dbe3ce786e4a346
     home: https://github.com/angelnu/helm-charts/tree/master/charts/stable/multus
     icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/docs/images/Multus.png
     keywords:
@@ -189,7 +189,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-15T01:49:44.987264434Z"
+    created: "2025-12-15T02:07:09.592949839Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -240,7 +240,7 @@ entries:
               url: https://github.com/angelnu/helm-charts/pull/187
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-15T01:49:44.982628647Z"
+    created: "2025-12-15T02:07:09.588175674Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -274,7 +274,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.2.0
-    created: "2025-12-15T01:49:44.989347534Z"
+    created: "2025-12-15T02:07:09.59602899Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -307,7 +307,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v2.0.9200
-    created: "2025-12-15T01:49:44.996400864Z"
+    created: "2025-12-15T02:07:09.603555515Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -340,7 +340,7 @@ entries:
           description: race condition in backup script
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-15T01:49:44.999479801Z"
+    created: "2025-12-15T02:07:09.60577001Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -363,4 +363,4 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/zalando-postgres-cluster-4.1.1.tgz
     version: 4.1.1
-generated: "2025-12-15T01:49:44.958538799Z"
+generated: "2025-12-15T02:07:09.565177285Z"
