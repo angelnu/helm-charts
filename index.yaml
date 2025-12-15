@@ -11,7 +11,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: latest
-    created: "2025-12-15T02:07:09.567531772Z"
+    created: "2025-12-15T02:10:08.095004072Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -30,7 +30,7 @@ entries:
     sources:
     - https://github.com/angelnu/chirpstack-packet-multiplexer
     urls:
-    - https://bjw-s-labs.github.io/helm-charts/apps/chirpstack-packet-multiplexer-3.0.0.tgz
+    - https://angelnu.github.io/helm-charts/apps/chirpstack-packet-multiplexer-3.0.0.tgz
     version: 3.0.0
   dnsmadeeasy-webhook:
   - annotations:
@@ -43,7 +43,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-15T02:07:09.574613308Z"
+    created: "2025-12-15T02:10:08.102853947Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -68,7 +68,7 @@ entries:
     - https://github.com/angelnu/dnsmadeeasy-webhook
     - https://cert-manager.io
     urls:
-    - https://bjw-s-labs.github.io/helm-charts/apps/dnsmadeeasy-webhook-5.0.0.tgz
+    - https://angelnu.github.io/helm-charts/apps/dnsmadeeasy-webhook-5.0.0.tgz
     version: 5.0.0
   games-on-whales:
   - annotations:
@@ -81,7 +81,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-15T02:07:09.576803318Z"
+    created: "2025-12-15T02:10:08.1052049Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -108,7 +108,7 @@ entries:
     sources:
     - https://github.com/games-on-whales/gow
     urls:
-    - https://bjw-s-labs.github.io/helm-charts/apps/games-on-whales-2.0.0.tgz
+    - https://angelnu.github.io/helm-charts/apps/games-on-whales-2.0.0.tgz
     version: 2.0.0
   maddy:
   - annotations:
@@ -118,7 +118,7 @@ entries:
             Disable openMetrics service
     apiVersion: v2
     appVersion: 0.6.2
-    created: "2025-12-15T02:07:09.583961203Z"
+    created: "2025-12-15T02:10:08.113849241Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -142,7 +142,7 @@ entries:
     sources:
     - https://github.com/foxcpp/maddy
     urls:
-    - https://bjw-s-labs.github.io/helm-charts/apps/maddy-4.1.1.tgz
+    - https://angelnu.github.io/helm-charts/apps/maddy-4.1.1.tgz
     version: 4.1.1
   multus:
   - annotations:
@@ -151,13 +151,13 @@ entries:
           description: update k3s cniBin path
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2025-12-15T02:07:09.58598339Z"
+    created: "2025-12-15T02:10:08.116215963Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
       version: 1.5.1
     description: multus CNI allows multiple NICs per pod
-    digest: cde4aa8c38035f53f90411dcdb975bb9e7c6a25d22425db35dbe3ce786e4a346
+    digest: 8fc66327b117664921d36096929427a39b9c1f28a85a13c8d4136a9320a4d9ae
     home: https://github.com/angelnu/helm-charts/tree/master/charts/stable/multus
     icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/docs/images/Multus.png
     keywords:
@@ -170,7 +170,7 @@ entries:
     sources:
     - https://github.com/k8snetworkplumbingwg/multus-cni
     urls:
-    - https://bjw-s-labs.github.io/helm-charts/apps/multus-5.0.7.tgz
+    - https://angelnu.github.io/helm-charts/apps/multus-5.0.7.tgz
     version: 5.0.7
   pod-gateway:
   - annotations:
@@ -189,7 +189,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-15T02:07:09.592949839Z"
+    created: "2025-12-15T02:10:08.123474986Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -210,7 +210,7 @@ entries:
     - https://github.com/angelnu/gateway-admision-controller
     - https://github.com/angelnu/pod-gateway
     urls:
-    - https://bjw-s-labs.github.io/helm-charts/apps/pod-gateway-7.0.0.tgz
+    - https://angelnu.github.io/helm-charts/apps/pod-gateway-7.0.0.tgz
     version: 7.0.0
   - annotations:
       artifacthub.io/changes: |-
@@ -240,7 +240,7 @@ entries:
               url: https://github.com/angelnu/helm-charts/pull/187
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-15T02:07:09.588175674Z"
+    created: "2025-12-15T02:10:08.118559161Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -261,7 +261,7 @@ entries:
     - https://github.com/angelnu/gateway-admision-controller
     - https://github.com/angelnu/pod-gateway
     urls:
-    - https://bjw-s-labs.github.io/helm-charts/apps/pod-gateway-6.6.1.tgz
+    - https://angelnu.github.io/helm-charts/apps/pod-gateway-6.6.1.tgz
     version: 6.6.1
   reverse-proxy:
   - annotations:
@@ -274,7 +274,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.2.0
-    created: "2025-12-15T02:07:09.59602899Z"
+    created: "2025-12-15T02:10:08.126624814Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -294,7 +294,7 @@ entries:
     sources:
     - https://kubernetes.io/docs/concepts/services-networking/ingress/
     urls:
-    - https://bjw-s-labs.github.io/helm-charts/apps/reverse-proxy-3.0.0.tgz
+    - https://angelnu.github.io/helm-charts/apps/reverse-proxy-3.0.0.tgz
     version: 3.0.0
   tt-rss:
   - annotations:
@@ -307,7 +307,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v2.0.9200
-    created: "2025-12-15T02:07:09.603555515Z"
+    created: "2025-12-15T02:10:08.135009323Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -331,7 +331,7 @@ entries:
     sources:
     - https://git.tt-rss.org/fox/tt-rss
     urls:
-    - https://bjw-s-labs.github.io/helm-charts/apps/tt-rss-6.0.0.tgz
+    - https://angelnu.github.io/helm-charts/apps/tt-rss-6.0.0.tgz
     version: 6.0.0
   zalando-postgres-cluster:
   - annotations:
@@ -340,7 +340,7 @@ entries:
           description: race condition in backup script
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-15T02:07:09.60577001Z"
+    created: "2025-12-15T02:10:08.137225624Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -361,6 +361,6 @@ entries:
     sources:
     - https://github.com/zalando/postgres-operator
     urls:
-    - https://bjw-s-labs.github.io/helm-charts/apps/zalando-postgres-cluster-4.1.1.tgz
+    - https://angelnu.github.io/helm-charts/apps/zalando-postgres-cluster-4.1.1.tgz
     version: 4.1.1
-generated: "2025-12-15T02:07:09.565177285Z"
+generated: "2025-12-15T02:10:08.09252473Z"
