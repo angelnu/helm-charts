@@ -92,12 +92,12 @@ controllers:
           - --tls-key-file-path=/tls/tls.key
           - --DNSPolicy={{ .Values.DNSPolicy }}
           # Init container
-          - --initImage={{ .Values.controllers.main.containers.main.image.repository }}:{{ default .Chart.AppVersion .Values.controllers.main.containers.main.image.tag }}
+          - --initImage={{ .Values.controllers.main.containers.main.image.repository }}:{{ tpl .Values.controllers.main.containers.main.image.tag . }}
           - --initImagePullPol={{ .Values.controllers.main.containers.main.image.pullPolicy }}
           - --initCmd=/bin/client_init.sh
           - --initMountPoint=/config
           # Sidecar container
-          - --sidecarImage={{ .Values.controllers.main.containers.main.image.repository }}:{{ default .Chart.AppVersion .Values.controllers.main.containers.main.image.tag }}
+          - --sidecarImage={{ .Values.controllers.main.containers.main.image.repository }}:{{ tpl .Values.controllers.main.containers.main.image.tag . }}
           - --sidecarImagePullPol={{ .Values.controllers.main.containers.main.image.pullPolicy }}
           - --sidecarCmd=/bin/client_sidecar.sh
           - --sidecarMountPoint=/config
