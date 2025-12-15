@@ -37,7 +37,7 @@ controllers:
   main:
     annotations:
       reloader.stakater.com/auto: "true"
-    
+
     containers:
       main:
         # -- Command starting DHCP server in the gateway
@@ -75,7 +75,7 @@ controllers:
     enabled: true
     annotations:
       reloader.stakater.com/auto: "true"
-    
+
     containers:
       main:
         # -- Command starting DHCP server in the gateway
