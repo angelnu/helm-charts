@@ -175,7 +175,8 @@ jobs:
         shell: bash
         working-directory: gh-pages
         run: |
-          helm repo index . --url https://bjw-s-labs.github.io/helm-charts/
+          # TBD - hardcoded target repo
+          helm repo index . --url https://angelnu.github.io/helm-charts/
 
       - name: Commit Changes
         if: ${{ inputs.publishToGhPages }}
