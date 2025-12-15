@@ -11,7 +11,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: latest
-    created: "2025-12-14T22:05:30.516324662Z"
+    created: "2025-12-15T00:48:34.943521687Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -43,7 +43,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-14T22:05:30.523414522Z"
+    created: "2025-12-15T00:48:34.950985558Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -81,7 +81,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-14T22:05:30.525599184Z"
+    created: "2025-12-15T00:48:34.95319215Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -118,7 +118,7 @@ entries:
             Disable openMetrics service
     apiVersion: v2
     appVersion: 0.6.2
-    created: "2025-12-14T22:05:30.533987307Z"
+    created: "2025-12-15T00:48:34.960753966Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -151,7 +151,7 @@ entries:
           description: update k3s cniBin path
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2025-12-14T22:05:30.536616705Z"
+    created: "2025-12-15T00:48:34.962773589Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -173,6 +173,39 @@ entries:
     - https://bjw-s-labs.github.io/helm-charts/apps/multus-5.0.7.tgz
     version: 5.0.7
   pod-gateway:
+  - annotations:
+      artifacthub.io/changes: |-
+        - kind: changed
+          description: |
+            **BREAKING**: Updated library version to 4.5.0.
+          links:
+            - name: Common library chart definition
+              url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
+    apiVersion: v2
+    appVersion: v1.8.1
+    created: "2025-12-15T00:48:34.969791041Z"
+    dependencies:
+    - name: common
+      repository: https://bjw-s-labs.github.io/helm-charts
+      version: 4.5.0
+    description: 'Admision controller to change the default gateway and DNS server
+      of PODs. It is typically used to route PODs through a VPN server. '
+    digest: 2dbbdc6caef9b172a6efadf63d79cb52387fd07eb7ad4bb0615407d893378993
+    home: https://github.com/angelnu/charts/tree/master/charts/stable/pod-gateway
+    icon: https://kubernetes.io/images/wheel.svg
+    keywords:
+    - pod-gateway
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: git@angelnu.com
+      name: angelnu
+    name: pod-gateway
+    sources:
+    - https://github.com/angelnu/gateway-admision-controller
+    - https://github.com/angelnu/pod-gateway
+    urls:
+    - https://bjw-s-labs.github.io/helm-charts/apps/pod-gateway-7.0.0.tgz
+    version: 7.0.0
   - annotations:
       artifacthub.io/changes: |-
         - kind: added
@@ -201,7 +234,7 @@ entries:
               url: https://github.com/angelnu/helm-charts/pull/187
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-14T22:05:30.538832274Z"
+    created: "2025-12-15T00:48:34.965014806Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -235,7 +268,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.2.0
-    created: "2025-12-14T22:05:30.54180178Z"
+    created: "2025-12-15T00:48:34.971867931Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -268,7 +301,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v2.0.9200
-    created: "2025-12-14T22:05:30.549200583Z"
+    created: "2025-12-15T00:48:34.979042611Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -301,7 +334,7 @@ entries:
           description: race condition in backup script
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-14T22:05:30.551327579Z"
+    created: "2025-12-15T00:48:34.982049949Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -324,4 +357,4 @@ entries:
     urls:
     - https://bjw-s-labs.github.io/helm-charts/apps/zalando-postgres-cluster-4.1.1.tgz
     version: 4.1.1
-generated: "2025-12-14T22:05:30.513261824Z"
+generated: "2025-12-15T00:48:34.940400033Z"
