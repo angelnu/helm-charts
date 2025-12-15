@@ -1,68 +1,199 @@
 {{/* Make sure all variables are set properly */}}
 {{- include "bjw-s.common.loader.init" . }}
 
+{{- define "pod-gateway.gateway" -}}
+{{ printf "%s.%s.svc.%s" (include "bjw-s.common.lib.chart.names.fullname" .) .Release.Namespace .Values.clusterName }}
+{{- end -}}
+
+{{- define "pod-gateway.configmap" -}}
+{{ include "bjw-s.common.lib.chart.names.fullname" . }}
+{{- end -}}
+
+{{- define "pod-gateway.webhookPort" -}}
+{{ print "8080" }}
+{{- end -}}
+
+
+{{- define "pod-gateway.selfSignedIssuer" -}}
+{{ printf "%s-webhook-selfsign" (include "bjw-s.common.lib.chart.names.fullname" .) }}
+{{- end -}}
+
+{{- define "pod-gateway.rootCAIssuer" -}}
+{{ printf "%s-webhook-ca" (include "bjw-s.common.lib.chart.names.fullname" .) }}
+{{- end -}}
+
+{{- define "pod-gateway.rootCACertificate" -}}
+{{ printf "%s-webhook-ca" (include "bjw-s.common.lib.chart.names.fullname" .) }}
+{{- end -}}
+
+{{- define "pod-gateway.servingCertificate" -}}
+{{ printf "%s-webhook-tls" (include "bjw-s.common.lib.chart.names.fullname" .) }}
+{{- end -}}
+
 {{/* Append the hardcoded settings */}}
 {{- define "pod-gateway.harcodedValues" -}}
-# -- Command starting DHCP server in the gateway
-command:
-- /bin/gateway_sidecar.sh
+controllers:
+  # Configure the main controller
+  main:
+    annotations:
+      reloader.stakater.com/auto: "true"
 
-securityContext:
-  capabilities:
-    add:
-      - NET_RAW
-      - NET_ADMIN
+    containers:
+      main:
+        # -- Command starting DHCP server in the gateway
+        command:
+          - /bin/gateway_sidecar.sh
+
+        securityContext:
+          capabilities:
+            add:
+              - NET_RAW
+              - NET_ADMIN
+
+    initContainers:
+      # -- Configures an initContainer that creates a VXLAN
+      # In the gateway for client PODs to connect to.
+      # iptables migh be (see VPN_BLOCK_OTHER_TRAFFIC) setup
+      # to block traffic not going through the VPN
+      routes:
+        # -- Image for the init container
+        image: {{ .Values.controllers.main.containers.main.image | toJson }}
+        command:
+        - /bin/gateway_init.sh
+        securityContext:
+          privileged: true
+
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+
+  webhook:
+    enabled: true
+    annotations:
+      reloader.stakater.com/auto: "true"
+
+    containers:
+      main:
+        # -- Command starting DHCP server in the gateway
+        args:
+          - --webhook-listen-address=:{{ include "pod-gateway.webhookPort" . }}
+          - --gateway={{ include "pod-gateway.gateway" . }}
+          - --DNS={{ .Values.DNS }}
+          - --configmapName={{ include "pod-gateway.configmap" . }}
+          - --setGatewayLabel={{ .Values.webhook.gatewayLabel }}
+          {{- if .Values.webhook.gatewayLabelValue }}
+          - --setGatewayLabelValue={{ .Values.webhook.gatewayLabelValue }}
+          {{- end }}
+          - --setGatewayAnnotation={{ .Values.webhook.gatewayAnnotation }}
+          {{- if .Values.webhook.gatewayAnnotationValue }}
+          - --setGatewayAnnotationValue={{ .Values.webhook.gatewayAnnotationValue }}
+          {{- end }}
+          {{- if .Values.webhook.gatewayDefault }}
+          - --setGatewayDefault
+          {{- end }}
+          # Static
+          - --tls-cert-file-path=/tls/tls.crt
+          - --tls-key-file-path=/tls/tls.key
+          - --DNSPolicy={{ .Values.DNSPolicy }}
+          # Init container
+          - --initImage={{ .Values.controllers.main.containers.main.image.repository }}:{{ default .Chart.AppVersion .Values.controllers.main.containers.main.image.tag }}
+          - --initImagePullPol={{ .Values.controllers.main.containers.main.image.pullPolicy }}
+          - --initCmd=/bin/client_init.sh
+          - --initMountPoint=/config
+          # Sidecar container
+          - --sidecarImage={{ .Values.controllers.main.containers.main.image.repository }}:{{ default .Chart.AppVersion .Values.controllers.main.containers.main.image.tag }}
+          - --sidecarImagePullPol={{ .Values.controllers.main.containers.main.image.pullPolicy }}
+          - --sidecarCmd=/bin/client_sidecar.sh
+          - --sidecarMountPoint=/config
+          {{- if .Values.webhook.sidecarAsInit }}
+          - --sidecarAsInit
+          {{- end }}
+
+    probes:
+      liveness:
+        enabled: true
+        type: custom
+        spec:
+          httpGet:
+            path: /wh/health
+            port: {{ include "pod-gateway.webhookPort" . }}
+            scheme: HTTPS
+          initialDelaySeconds: 1
+          timeoutSeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 5
+      readiness:
+        enabled: true
+        type: custom
+        spec:
+          httpGet:
+            path: /wh/health
+            port: {{ include "pod-gateway.webhookPort" . }}
+            scheme: HTTPS
+          initialDelaySeconds: 1
+          timeoutSeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 5
+      startup:
+        enabled: true
+        type: custom
+        spec:
+          httpGet:
+            path: /wh/health
+            port: {{ include "pod-gateway.webhookPort" . }}
+            scheme: HTTPS
+          timeoutSeconds: 1
+          periodSeconds: 1
+          successThreshold: 1
+          failureThreshold: 30
 
 # -- Configure persistence settings for the chart under this key.
 persistence:
   config:
     enabled: true
-    type: custom
-    mountPath: /config
-    readOnly: true
-    volumeSpec:
-      configMap:
-        name: {{ include "pod-gateway.configmap" . }}
-        defaultMode: 0555
-
-initContainers:
-  # -- Configures an initContainer that creates a VXLAN
-  # In the gateway for client PODs to connect to.
-  # iptables migh be (see VPN_BLOCK_OTHER_TRAFFIC) setup
-  # to block traffic not going through the VPN
-  routes:
-    name: "routes"
-    # -- Image for the init container
-    image: {{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}
-    # -- Will be set automatically
-    # @default -- <image.pullPolicy>
-    imagePullPolicy: {{ .Values.image.pullPolicy }}
-    # -- Command starting DHCP server in the gateway
-    command:
-    - /bin/gateway_init.sh
-    securityContext:
-      privileged: true
-    volumeMounts:
-    - name: config
-      mountPath: /config
-      readOnly: true
-
-probes:
-  liveness:
-    enabled: false
-  readiness:
-    enabled: false
-  startup:
-    enabled: false
+    name: {{ include "pod-gateway.configmap" . }}  # The configMap is not generated with the common library
+                                                   # as it has to be installed to multiple namespaces
+    type: configMap
+    defaultMode: 0555
+    advancedMounts:
+      main:
+        main:
+          - path: /config
+        routes:
+          - path: /config
+  certs:
+    enabled: true
+    name: {{ include "pod-gateway.servingCertificate" . }}
+    type: secret
+    defaultMode: 420
+    advancedMounts:
+      webhook:
+        main:
+          - path: /tls
 
 service:
   main:
+    controller: main
     type: ClusterIP
     clusterIP: None
     ports:
       http:
         port: 4789
         protocol: UDP
+  webhook:
+    enabled: true
+    controller: webhook
+    type: ClusterIP
+    ports:
+      http:
+        port: {{ include "pod-gateway.webhookPort" . }}
+
 {{- end -}}
 {{- $_ := mergeOverwrite .Values (include "pod-gateway.harcodedValues" . | fromYaml) -}}
 

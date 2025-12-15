@@ -1,18 +1,37 @@
+---
 #
 # IMPORTANT NOTE
 #
 # This chart inherits from our common library chart. You can check the default values/options here:
-# https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
+# https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/values.yaml
 #
-
-image:
-  # -- image repository of the gateway and inserted helper containers
-  repository: ghcr.io/angelnu/pod-gateway
-  # -- image pull policy of the gateway and inserted helper cotainers
-  pullPolicy: IfNotPresent
-  # -- image tag of the gateway and inserted helper containers
-  # @default -- chart.appVersion
-  tag:
+controllers:
+  main:
+    # Configure the main controller - this runs the VPN server
+    containers:
+      main:
+        image:
+          # -- image repository of the gateway and inserted helper containers
+          repository: ghcr.io/angelnu/pod-gateway
+          # -- image pull policy of the gateway and inserted helper cotainers
+          pullPolicy: IfNotPresent
+          # -- image tag of the gateway and inserted helper containers
+          # @default -- chart.appVersion
+          tag: "{{ .Chart.AppVersion }}"
+  webhook:
+    # -- The webhook is used to mutate the PODs matching the given
+    # namespace labels. It inserts an init and sidecard helper containers
+    # that connect to the gateway pod created by this chart.
+    # @default -- See below
+    containers:
+      main:
+        image:
+          # -- image repository of the webhook
+          repository: ghcr.io/angelnu/gateway-admision-controller
+          # -- image pullPolicy of the webhook
+          pullPolicy: IfNotPresent
+          # -- image tag of the webhook
+          tag: v3.12.0
 
 # -- Comma-separated IP addresses of the DNS servers within the vxlan tunnel.
 # All mutated PODs will get this as their DNS servers.
@@ -99,38 +118,23 @@ addons:
       egress:
         # Allow only VPN traffic to Internet
         - to:
-          - ipBlock:
-              cidr: 0.0.0.0/0
+            - ipBlock:
+                cidr: 0.0.0.0/0
           ports:
-          # VPN traffic (default OpenVPN)
-          - port: 1194
-            protocol: UDP
+            # VPN traffic (default OpenVPN)
+            - port: 1194
+              protocol: UDP
         # Allow any traffic within k8s
         - to:
-          - ipBlock:
-              # Cluster IPs (default k3s)
-              cidr: 10.0.0.0/8
+            - ipBlock:
+                # Cluster IPs (default k3s)
+                cidr: 10.0.0.0/8
 
 # -- The webhook is used to mutate the PODs matching the given
 # namespace labels. It inserts an init and sidecard helper containers
 # that connect to the gateway pod created by this chart.
 # @default -- See below
 webhook:
-  image:
-    # -- image repository of the webhook
-    repository: ghcr.io/angelnu/gateway-admision-controller
-    # -- image pullPolicy of the webhook
-    pullPolicy: IfNotPresent
-    # -- image tag of the webhook
-    tag: v3.12.0
-
-  # -- number of webhook instances to deploy
-  replicas: 1
-
-  # -- strategy for updates
-  strategy:
-    type: RollingUpdate
-
   # -- Selector for namespace.
   # All pods in this namespace will get evaluated by the webhook.
   # **IMPORTANT**: Do not select the namespace where the webhook
@@ -139,10 +143,10 @@ webhook:
     type: label
     label: "routed-gateway"
     custom: {}
-      # matchExpressions:
-      # - key: notTouch
-      #   operator: NotIn
-      #   values: ["1"]
+    #   matchExpressions:
+    #     - key: notTouch
+    #       operator: NotIn
+    #       values: ["1"]
 
   # -- default behviour for new PODs in the evaluated namespace
   gatewayDefault: true
