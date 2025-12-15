@@ -2,7 +2,7 @@
 {{- include "bjw-s.common.loader.init" . }}
 
 {{- define "pod-gateway.gateway" -}}
-{{ printf "%s.%s.svc.%s" (include "bjw-s.common.lib.chart.names.fullname" .) .Release.Namespace .Values.clusterName }}
+{{ printf "%s-main.%s.svc.%s" (include "bjw-s.common.lib.chart.names.fullname" .) .Release.Namespace .Values.clusterName }}
 {{- end -}}
 
 {{- define "pod-gateway.configmap" -}}
