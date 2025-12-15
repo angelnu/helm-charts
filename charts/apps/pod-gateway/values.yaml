@@ -16,8 +16,7 @@ controllers:
           # -- image pull policy of the gateway and inserted helper cotainers
           pullPolicy: IfNotPresent
           # -- image tag of the gateway and inserted helper containers
-          # @default -- chart.appVersion
-          tag: "{{ .Chart.AppVersion }}"
+          tag: v1.13.0
       gluetun:
         enabled: false
         dependsOn: main
