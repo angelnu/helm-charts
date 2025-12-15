@@ -63,14 +63,6 @@ controllers:
         securityContext:
           privileged: true
 
-    probes:
-      liveness:
-        enabled: false
-      readiness:
-        enabled: false
-      startup:
-        enabled: false
-
   webhook:
     enabled: true
     annotations:
@@ -113,45 +105,45 @@ controllers:
           - --sidecarAsInit
           {{- end }}
 
-    probes:
-      liveness:
-        enabled: true
-        type: custom
-        spec:
-          httpGet:
-            path: /wh/health
-            port: {{ include "pod-gateway.webhookPort" . }}
-            scheme: HTTPS
-          initialDelaySeconds: 1
-          timeoutSeconds: 10
-          periodSeconds: 10
-          successThreshold: 1
-          failureThreshold: 5
-      readiness:
-        enabled: true
-        type: custom
-        spec:
-          httpGet:
-            path: /wh/health
-            port: {{ include "pod-gateway.webhookPort" . }}
-            scheme: HTTPS
-          initialDelaySeconds: 1
-          timeoutSeconds: 10
-          periodSeconds: 10
-          successThreshold: 1
-          failureThreshold: 5
-      startup:
-        enabled: true
-        type: custom
-        spec:
-          httpGet:
-            path: /wh/health
-            port: {{ include "pod-gateway.webhookPort" . }}
-            scheme: HTTPS
-          timeoutSeconds: 1
-          periodSeconds: 1
-          successThreshold: 1
-          failureThreshold: 30
+        probes:
+          liveness:
+            enabled: true
+            type: custom
+            spec:
+              httpGet:
+                path: /wh/health
+                port: {{ include "pod-gateway.webhookPort" . }}
+                scheme: HTTPS
+              initialDelaySeconds: 1
+              timeoutSeconds: 10
+              periodSeconds: 10
+              successThreshold: 1
+              failureThreshold: 5
+          readiness:
+            enabled: true
+            type: custom
+            spec:
+              httpGet:
+                path: /wh/health
+                port: {{ include "pod-gateway.webhookPort" . }}
+                scheme: HTTPS
+              initialDelaySeconds: 1
+              timeoutSeconds: 10
+              periodSeconds: 10
+              successThreshold: 1
+              failureThreshold: 5
+          startup:
+            enabled: true
+            type: custom
+            spec:
+              httpGet:
+                path: /wh/health
+                port: {{ include "pod-gateway.webhookPort" . }}
+                scheme: HTTPS
+              timeoutSeconds: 1
+              periodSeconds: 1
+              successThreshold: 1
+              failureThreshold: 30
 
 # -- Configure persistence settings for the chart under this key.
 persistence:
