@@ -18,6 +18,26 @@ controllers:
           # -- image tag of the gateway and inserted helper containers
           # @default -- chart.appVersion
           tag: "{{ .Chart.AppVersion }}"
+      gluetun:
+        enabled: false
+        dependsOn: main
+        image:
+          # -- image repository
+          repository: ghcr.io/qdm12/gluetun
+          # -- image tag
+          # this example is not automatically updated, so be sure to use the latest image
+          tag: v3.40.3@sha256:ef4a44819a60469682c7b5e69183e6401171891feaa60186652d292c59e41b30
+        # -- environment variables.
+        # See [image docs](https://github.com/qdm12/gluetun-wiki) for more details on how to configure
+        # your VPN and how to set up port-forwarding.
+        env:
+          VPN_TYPE: wireguard
+          VPN_INTERFACE: wg0
+        # Configure the container-specific securityContext
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
   webhook:
     # -- The webhook is used to mutate the PODs matching the given
     # namespace labels. It inserts an init and sidecard helper containers
@@ -32,6 +52,33 @@ controllers:
           pullPolicy: IfNotPresent
           # -- image tag of the webhook
           tag: v3.12.0
+
+networkpolicies:
+  main:
+    enabled: true
+    controller: main
+    policyTypes:
+      - Egress
+    rules:
+      egress:
+      # Allow only VPN traffic to Internet
+      - to:
+          - ipBlock:
+              cidr: 0.0.0.0/0
+        ports:
+          # VPN traffic (default OpenVPN)
+          - port: 1194
+            protocol: UDP
+      # Allow any traffic within k8s
+      - to:
+          - ipBlock:
+              # Cluster IPs (default k3s)
+              cidr: 10.0.0.0/8
+
+# -----------------------------------------------------------
+# After this point, these are settings specific to this chart
+# and not part of the common chart
+# -----------------------------------------------------------
 
 # -- Comma-separated IP addresses of the DNS servers within the vxlan tunnel.
 # All mutated PODs will get this as their DNS servers.
@@ -101,34 +148,6 @@ publicPortsV6:
 #     port: 18289
 #   - type: tcp
 #     port: 18289
-
-addons:
-  vpn:
-    # -- Enable the VPN if you want to route through a VPN.
-    # You might also want to set VPN_BLOCK_OTHER_TRAFFIC to true
-    # for extra safeness in case the VPN does connect
-    enabled: false
-    type: openvpn
-    # openvpn:
-    # wireguard:
-    # env:
-    # configFileSecret: openvpn
-    networkPolicy:
-      enabled: true
-      egress:
-        # Allow only VPN traffic to Internet
-        - to:
-            - ipBlock:
-                cidr: 0.0.0.0/0
-          ports:
-            # VPN traffic (default OpenVPN)
-            - port: 1194
-              protocol: UDP
-        # Allow any traffic within k8s
-        - to:
-            - ipBlock:
-                # Cluster IPs (default k3s)
-                cidr: 10.0.0.0/8
 
 # -- The webhook is used to mutate the PODs matching the given
 # namespace labels. It inserts an init and sidecard helper containers

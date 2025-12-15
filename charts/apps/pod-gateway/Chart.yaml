@@ -27,6 +27,12 @@ annotations:
     - kind: changed
       description: |
         **BREAKING**: Updated library version to 4.5.0.
+
+        If you have only changed the default values in this chart and not done any fine-tunning then
+        you only need to change:
+        - VPN settings - moved from Values.addons.vpn to Values.controllers.main.containers.gluetun
+        - networkPolicies - moved from Values.addons.vpn.networkPolicies to Values.networkPolicies
+        - image versions - moved to Values.controllers.main.containers.<container>.image
       links:
         - name: Common library chart definition
           url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
