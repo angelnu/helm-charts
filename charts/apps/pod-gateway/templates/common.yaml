@@ -108,7 +108,7 @@ controllers:
         probes:
           liveness:
             enabled: true
-            type: custom
+            custom: true
             spec:
               httpGet:
                 path: /wh/health
