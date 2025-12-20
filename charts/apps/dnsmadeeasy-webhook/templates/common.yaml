@@ -1,0 +1,196 @@
+{{/* Make sure all variables are set properly */}}
+{{- include "bjw-s.common.loader.init" . -}}
+
+{{- define "dnsmadeeasy-webhook.rootCACertificate" -}}
+{{ printf "%s-ca" (include "bjw-s.common.lib.chart.names.fullname" .) }}
+{{- end -}}
+
+{{- define "dnsmadeeasy-webhook.servingCertificate" -}}
+{{- if .Values.generateCerts }}
+{{- printf "%s-webhook-tls" (include "bjw-s.common.lib.chart.names.fullname" .) }}
+{{- else -}}
+{{- printf "%s-cert-manager-webhook-ca" (include "bjw-s.common.lib.chart.names.fullname" .) }}
+{{- end -}}
+{{- end -}}
+
+
+{{/* Append the hardcoded settings */}}
+{{- define "dnsmadeeasy-webhook.harcodedValues" -}}
+
+controllers:
+  main:
+    serviceAccount:
+      identifier: default
+    containers:
+      main:
+        # -- Configure persistence settings for the chart under this key.
+        args:
+        - --tls-cert-file=/certs/tls.crt
+        - --tls-private-key-file=/certs/tls.key
+        - --secure-port=4443
+
+        env:
+          GROUP_NAME: {{ .Values.groupName }}
+
+        probes:
+          liveness:
+            enabled: true
+            type: AUTO
+            path: /healthz
+          readiness:
+            enabled: true
+            type: AUTO
+            path: /healthz
+          startup:
+            enabled: true
+            type: AUTO
+            path: /healthz
+
+persistence:
+  certs:
+    type: custom
+    mountPath: /tls
+    readOnly: true
+    volumeSpec:
+      secret:
+        secretName: {{ include "dnsmadeeasy-webhook.servingCertificate" . }}
+
+service:
+  main:
+    ports:
+      https:
+        protocol: HTTPS
+        targetPort: 4443
+        port: 443
+
+rawResources:
+  api:
+    apiVersion: apiregistration.k8s.io/v1
+    kind: APIService
+    forceRename: v1alpha1.{{ .Values.groupName }}
+    annotations:
+      certmanager.k8s.io/inject-ca-from: "{{ .Release.Namespace }}/{{ include "dnsmadeeasy-webhook.servingCertificate" . }}"
+    spec:
+      spec:
+        group: {{ .Values.groupName }}
+        groupPriorityMinimum: 1000
+        versionPriority: 15
+        #TBD : avoid insecureSkipTLSVerify
+        insecureSkipTLSVerify: true
+        service:
+          name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}
+          namespace: {{ .Release.Namespace }}
+        version: v1alpha1
+  {{- if .Values.generateCerts }}
+  selfSignedIssuer:
+    # Create a selfsigned Issuer, in order to create a root CA certificate for
+    # signing webhook serving certificates
+    apiVersion: cert-manager.io/v1
+    kind: Issuer
+    spec:
+      spec:
+        selfSigned: {}
+  rootCACertificate:
+    # Generate a CA Certificate used to sign certificates for the webhook
+    apiVersion: cert-manager.io/v1
+    kind: Certificate
+    spec:
+      spec:
+        secretName: {{ include "dnsmadeeasy-webhook.rootCACertificate" . }}
+        duration: 43800h # 5y
+        issuerRef:
+          name: {{ printf "%s-selfSignedIssuer" (include "bjw-s.common.lib.chart.names.fullname" .) }}
+          kind: Issuer
+        commonName: "ca.dnsmadeeasy-webhook.cert-manager"
+        isCA: true
+  rootCAIssuer:
+    # Create an Issuer that uses the above generated CA certificate to issue certs
+    apiVersion: cert-manager.io/v1
+    kind: Issuer
+    spec:
+      spec:
+        ca:
+          secretName: {{ include "dnsmadeeasy-webhook.rootCACertificate" . }}
+  servingCertificate:
+    # Finally, generate a serving certificate for the webhook to use
+    apiVersion: cert-manager.io/v1
+    kind: Certificate
+    spec:
+      spec:
+        secretName: {{ include "dnsmadeeasy-webhook.servingCertificate" . }}
+        duration: 8760h # 1y
+        issuerRef:
+          name: {{ printf "%s-rootCAIssuer" (include "bjw-s.common.lib.chart.names.fullname" .) }}
+          kind: Issuer
+        dnsNames:
+        - {{ include "bjw-s.common.lib.chart.names.fullname" . }}
+        - {{ include "bjw-s.common.lib.chart.names.fullname" . }}.{{ .Release.Namespace }}
+        - {{ include "bjw-s.common.lib.chart.names.fullname" . }}.{{ .Release.Namespace }}.svc
+  {{- end }}
+
+rbac:
+  roles:
+    default:
+      type: ClusterRole
+      rules:
+        - apiGroups:
+            - ""
+          resources:
+            - "secrets"
+            - "configmaps"
+          verbs:
+            - "get"
+            - "list"
+            - "watch"
+        # Required since k8s v1.20
+        - apiGroups:
+            - "flowcontrol.apiserver.k8s.io"
+          resources:
+            - 'prioritylevelconfigurations'
+            - 'flowschemas'
+          verbs:
+            - 'list'
+            - 'watch'
+    domain-solver:
+      # Grant cert-manager permission to validate using our apiserver
+      type: ClusterRole
+      rules:
+        - apiGroups:
+            - {{ .Values.groupName }}
+          resources:
+            - '*'
+          verbs:
+            - 'create'
+  bindings:
+    default:
+      type: ClusterRoleBinding
+      roleRef:
+        kind: ClusterRole
+        identifier: default
+      subjects:
+        - identifier: default
+    auth-delegator:
+      # apiserver gets the auth-delegator role to delegate auth decisions to
+      # the core apiserver
+      type: ClusterRoleBinding
+      roleRef:
+        kind: ClusterRole
+        name: system:auth-delegator
+      subjects:
+        - identifier: default
+    domain-solver:
+      type: ClusterRoleBinding
+      roleRef:
+        kind: ClusterRole
+        identifier: domain-solver
+      subjects:
+        - kind: ServiceAccount
+          name: {{ .Values.certManager.serviceAccountName }}
+          namespace: {{ .Values.certManager.namespace }}
+
+{{- end -}}
+{{- $_ := mergeOverwrite .Values (include "dnsmadeeasy-webhook.harcodedValues" . | fromYaml) -}}
+
+
+{{/* Render the templates */}}
+{{- include "bjw-s.common.loader.generate" . -}}
