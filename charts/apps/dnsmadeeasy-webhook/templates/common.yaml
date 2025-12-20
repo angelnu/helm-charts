@@ -19,63 +19,49 @@
 
 controllers:
   main:
-    # Configure the main controller - this runs the VPN server
+    serviceAccount:
+      identifier: default
     containers:
       main:
         # -- Configure persistence settings for the chart under this key.
-        persistence:
-          certs:
-            enabled: true
-            type: custom
-            mountPath: /tls
-            readOnly: true
-            volumeSpec:
-              secret:
-                secretName: {{ include "dnsmadeeasy-webhook.servingCertificate" . }}
-
-        probes:
-          liveness:
-            enabled: true
-            custom: true
-            spec:
-              httpGet:
-                scheme: HTTPS
-                path: /healthz
-                port: https
-          readiness:
-            enabled: true
-            custom: true
-            spec:
-              httpGet:
-                scheme: HTTPS
-                path: /healthz
-                port: https
-          startup:
-            enabled: true
-            custom: true
-            spec:
-              httpGet:
-                scheme: HTTPS
-                path: /healthz
-                port: https
-
-        service:
-          main:
-            ports:
-              http:
-                enabled: false
-              https:
-                enabled: true
-                targetPort: 4443
-                port: 443
-
         args:
-        - --tls-cert-file=/tls/tls.crt
-        - --tls-private-key-file=/tls/tls.key
+        - --tls-cert-file=/certs/tls.crt
+        - --tls-private-key-file=/certs/tls.key
         - --secure-port=4443
 
         env:
           GROUP_NAME: {{ .Values.groupName }}
+
+        probes:
+          liveness:
+            enabled: true
+            type: AUTO
+            path: /healthz
+          readiness:
+            enabled: true
+            type: AUTO
+            path: /healthz
+          startup:
+            enabled: true
+            type: AUTO
+            path: /healthz
+
+persistence:
+  certs:
+    type: custom
+    mountPath: /tls
+    readOnly: true
+    volumeSpec:
+      secret:
+        secretName: {{ include "dnsmadeeasy-webhook.servingCertificate" . }}
+
+service:
+  main:
+    ports:
+      https:
+        protocol: HTTPS
+        targetPort: 4443
+        port: 443
 
 rawResources:
   api:
@@ -191,17 +177,14 @@ rbac:
         kind: ClusterRole
         name: system:auth-delegator
       subjects:
-        - apiGroup: ""
-          kind: ServiceAccount
-          identifier: default
+        - identifier: default
     domain-solver:
       type: ClusterRoleBinding
       roleRef:
         kind: ClusterRole
         identifier: domain-solver
       subjects:
-        - apiGroup: ""
-          kind: ServiceAccount
+        - kind: ServiceAccount
           name: {{ .Values.certManager.serviceAccountName }}
           namespace: {{ .Values.certManager.namespace }}
 
