@@ -15,18 +15,22 @@ certManager:
 
 
 # Default values for dnsmadeeasy-webhook.
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          # -- Image repository
+          repository: ghcr.io/angelnu/dnsmadeeasy-webhook
+          # -- Image pull policy
+          pullPolicy: IfNotPresent
+          # -- Image tag
+          tag: v1.9.0
 
 serviceAccount:
-  # -- Create service account
-  create: true
-
-image:
-  # -- Image repository
-  repository: ghcr.io/angelnu/dnsmadeeasy-webhook
-  # -- Image pull policy
-  pullPolicy: IfNotPresent
-  # -- Image tag
-  tag: v1.9.0
+  default:
+    # -- Create service account
+    enable: true
 
 # -- Generate dedicated certs instead of re-using the cert-manager
 # webhook certificate.
