@@ -28,4 +28,4 @@ postgres: {}
 
 persistentVolumes:
   replicaNodes:
-  - kind-cluster-control-plane
+  - dummy
