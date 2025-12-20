@@ -3,7 +3,7 @@ apiVersion: v2
 appVersion: v2.0.9200
 description: Tiny Tiny RSS is a free and open source web-based news feed (RSS/Atom) reader and aggregator
 name: tt-rss
-version: 6.0.0
+version: 7.0.0
 kubeVersion: ">=1.16.0-0"
 keywords:
   - tt-rss
