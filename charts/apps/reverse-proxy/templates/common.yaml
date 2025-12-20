@@ -4,14 +4,6 @@
 {{/* Append the hardcoded settings */}}
 {{- define "reverse-proxy.harcodedValues" -}}
 
-# Disable Deployment
-controller:
-  enabled: false
-
-# Disable Service
-service:
-  main:
-    enabled: false
 
 {{- end -}}
 {{- $_ := mergeOverwrite .Values (include "reverse-proxy.harcodedValues" . | fromYaml) -}}
