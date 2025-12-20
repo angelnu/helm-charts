@@ -1,3 +1,4 @@
+---
 # See all operator values at https://github.com/zalando/postgres-operator/blob/master/docs/reference/cluster_manifest.md
 postgresql:
   # -- team Id for the DB cluster
