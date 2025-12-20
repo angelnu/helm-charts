@@ -36,6 +36,86 @@
 {{/* Append the hardcoded settings */}}
 {{- define "zalando-postgres-cluster.harcodedValues" -}}
 
+controllers:
+  {{- if or .Values.dumpBackup.enabled .Values.dumpBackup.existingClaim }}
+  backup:
+    type: cronjob
+    cronjob:
+        schedule: {{ .Values.dumpBackup.schedule | quote }}
+    containers:
+      main:
+        image:
+            repository: {{ .Values.dumpBackup.image.repository}}
+            tag: {{ .Values.dumpBackup.image.tag}}
+            imagePullPolicy: {{ .Values.dumpBackup.image.imagePullPolicy}}
+        command:
+            - /bin/sh
+            - -ce
+            - |
+                sleep {{ .Values.dumpBackup.startDelay }}
+                echo "$(date) - Start dump"
+                pg_dumpall > /backup/new && mv /backup/new /backup/backup
+                echo "$(date) - End dump"
+                ls -lh /backup
+        resources:
+        {{- .Values.dumpBackup.resources | toYaml | nindent 16 }}
+        env:
+          PGHOST: {{ include "zalando-postgres-cluster.db" . }}
+          PGUSER:
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "zalando-postgres-cluster.superuser_secret" . }}
+                key: username
+          PGPASSWORD:
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "zalando-postgres-cluster.superuser_secret" . }}
+                key: password
+        restartPolicy: OnFailure
+  {{- end }}
+  test:
+    type: job
+    annotations:
+        "helm.sh/hook": test-success
+        "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+    containers:
+      main:
+        image:
+            repository: {{ .Values.dumpBackup.image.repository}}
+            tag: {{ .Values.dumpBackup.image.tag}}
+            imagePullPolicy: {{ .Values.dumpBackup.image.imagePullPolicy}}
+        command: ['sh']
+        args:
+        - "-ecx"
+        - |
+          echo ";"|psql
+
+        env:
+        - name: PGHOST
+          value: {{ include "zalando-postgres-cluster.db" . | quote }}
+        - name: PGSSLMODE
+          value: require
+        - name: PGUSER
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "zalando-postgres-cluster.superuser_secret" . }}
+              key: username
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "zalando-postgres-cluster.superuser_secret" . }}
+              key: password
+        restartPolicy: Never
+
+persistence:
+  backup:
+    enabled: {{ .Values.dumpBackup.existingClaim }}
+    {{ .Values.dumpBackup | toYaml| nindent 4 }}
+    advancedMounts:
+      backup:
+        main:
+          - path: /config
+            subPath: {{ include "zalando-postgres-cluster.backupPVCSubpath" . }}
 {{- end -}}
 {{- $_ := mergeOverwrite .Values (include "zalando-postgres-cluster.harcodedValues" . | fromYaml) -}}
 

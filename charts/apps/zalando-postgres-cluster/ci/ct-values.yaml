@@ -11,11 +11,12 @@ postgres-operator:
     watched_namespace: "*"
     # list of labels that can be inherited from the cluster manifest
     inherited_labels:
-    - application
-    - environment
+      - application
+      - environment
     # Disable PDB since they prevent the drain
     # https://github.com/zalando/postgres-operator/issues/547
     enable_pod_disruption_budget: false
+    enable_owner_references: true
   # configure resource requests for the Postgres pods
   configPostgresPodResources:
     # CPU limits for the postgres containers
@@ -23,9 +24,14 @@ postgres-operator:
     # memory limits for the postgres containers
     default_memory_limit: 2000Mi
 
-
 postgres: {}
 
 persistentVolumes:
   replicaNodes:
-  - dummy
+    - dummy
+
+dumpBackup:
+  enabled: true
+  type: emptyDir
+  subpath: "."
+  schedule: "@daily"
