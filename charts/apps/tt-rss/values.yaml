@@ -15,7 +15,7 @@ controllers:
           # -- image pull policy
           pullPolicy: Always
           # -- image tag
-          tag: 2.0.9701
+          tag: 2.0.9703
 
         # -- See more environment variables in the tt-rss documentation
         # https://git.tt-rss.org/fox/tt-rss/src/branch/master/classes/config.php#L9
