@@ -3,7 +3,7 @@ apiVersion: v2
 appVersion: v2.0.9200
 description: Tiny Tiny RSS is a free and open source web-based news feed (RSS/Atom) reader and aggregator
 name: tt-rss
-version: 6.0.0
+version: .0.0
 kubeVersion: ">=1.16.0-0"
 keywords:
   - tt-rss
@@ -21,13 +21,13 @@ dependencies:
     condition: postgresql.enabled
   - name: common
     repository: https://bjw-s-labs.github.io/helm-charts
-    version: 1.5.1
+    version: 4.5.0
 
 annotations:
   artifacthub.io/changes: |-
     - kind: changed
       description: |
-        **BREAKING**: Updated library version to 1.0.1.
+        **BREAKING**: Updated library version to 4.5.0.
       links:
         - name: Common library chart definition
-          url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
+          url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml

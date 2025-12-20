@@ -1,38 +1,42 @@
+---
 #
 # IMPORTANT NOTE
 #
 # This chart inherits from our common library chart. You can check the default values/options here:
-# https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
+# https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/values.yaml
 #
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          # -- image repository
+          repository: ghcr.io/angelnu/tt-rss
+          # -- image pull policy
+          pullPolicy: Always
+          # -- image tag
+          tag: 2.0.9701
 
-image:
-  # -- image repository
-  repository: ghcr.io/angelnu/tt-rss
-  # -- image pull policy
-  pullPolicy: Always
-  # -- image tag
-  tag: 2.0.9701
-
-# -- See more environment variables in the tt-rss documentation
-# https://git.tt-rss.org/fox/tt-rss/src/branch/master/classes/config.php#L9
-# @default -- See below.
-env:
-  # -- External URL you use to connect to the RSS (the one you enter in your browser)
-  TTRSS_SELF_URL_PATH: ""
-  # -- Postgres database hostname
-  # @default -- internal postgresql URL
-  TTRSS_DB_HOST: "{{ printf \"%s-postgresql\" .Release.Name }}"
-  # -- Postgres database port.
-  TTRSS_DB_PORT: "5432"
-  # -- Postgres database user name
-  # @default -- postgresql.auth.username value
-  TTRSS_DB_USER: "{{ .Values.postgresql.auth.username }}"
-  # -- Postgres database password
-  # @default -- postgresql.auth.password value
-  TTRSS_DB_PASS: "{{ .Values.postgresql.auth.password }}"
-  # -- Postgres database password
-  # @default -- postgresql.auth.database value
-  TTRSS_DB_NAME: "{{ .Values.postgresql.auth.database }}"
+        # -- See more environment variables in the tt-rss documentation
+        # https://git.tt-rss.org/fox/tt-rss/src/branch/master/classes/config.php#L9
+        # @default -- See below.
+        env:
+          # -- External URL you use to connect to the RSS (the one you enter in your browser)
+          TTRSS_SELF_URL_PATH: ""
+          # -- Postgres database hostname
+          # @default -- internal postgresql URL
+          TTRSS_DB_HOST: "{{ printf \"%s-postgresql\" .Release.Name }}"
+          # -- Postgres database port.
+          TTRSS_DB_PORT: "5432"
+          # -- Postgres database user name
+          # @default -- postgresql.auth.username value
+          TTRSS_DB_USER: "{{ .Values.postgresql.auth.username }}"
+          # -- Postgres database password
+          # @default -- postgresql.auth.password value
+          TTRSS_DB_PASS: "{{ .Values.postgresql.auth.password }}"
+          # -- Postgres database password
+          # @default -- postgresql.auth.database value
+          TTRSS_DB_NAME: "{{ .Values.postgresql.auth.database }}"
 
 # -- Configure the services for the chart here.
 # @default -- See below.
