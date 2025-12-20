@@ -71,7 +71,6 @@ controllers:
               secretKeyRef:
                 name: {{ include "zalando-postgres-cluster.superuser_secret" . }}
                 key: password
-        restartPolicy: OnFailure
   {{- end }}
   test:
     type: job
