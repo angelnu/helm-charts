@@ -1,3 +1,4 @@
+---
 # -- The GroupName here is used to identify your company or business unit that
 # created this webhook.
 # This name will need to be referenced in each Issuer's `webhook` stanza to
