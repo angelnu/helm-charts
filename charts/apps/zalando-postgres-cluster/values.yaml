@@ -1,3 +1,4 @@
+---
 # See all operator values at https://github.com/zalando/postgres-operator/blob/master/docs/reference/cluster_manifest.md
 postgresql:
   # -- team Id for the DB cluster
@@ -22,7 +23,7 @@ postgresql:
     postgres: postgres
   postgresql:
     # -- Postgres version to deploy - see which versions are supported by the operator
-    version: "13"
+    version: "17"
 
 superuser:
   # -- Superuser user used for cronjobs
@@ -50,9 +51,9 @@ persistentVolumes:
   - ReadWriteOnce
   # -- Replica nodes
   # Must set with at least 2 nodes for the cluster to be highly available
-  replicaNodes:
-  - node1.example.com
-  - node2.example.com
+  replicaNodes: []
+  # - node1.example.com
+  # - node2.example.com
   labels: {}
   #  foo: a
   annotations: {}
@@ -90,3 +91,6 @@ dumpBackup:
       memory: "10Mi"
       # -- requested cpu for backup
       cpu: "5m"
+
+postgres-operator:
+  enabled: false

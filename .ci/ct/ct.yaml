@@ -15,3 +15,4 @@ chart-repos:
   - bitnami=https://charts.bitnami.com/bitnami
   - angelnu=https://angelnu.github.io/helm-charts
   - jetstack=https://charts.jetstack.io
+  - zalando=https://raw.githubusercontent.com/zalando/postgres-operator/master/charts/postgres-operator

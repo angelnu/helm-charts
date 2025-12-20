@@ -29,6 +29,7 @@ spec:
   persistentVolumeReclaimPolicy: "{{ $.Values.persistentVolumes.reclaimPolicy }}"
 
   {{- $e := index $.Values.persistentVolumes.replicaNodes $i }}
+  {{- if ne $e "dummy" }}
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -37,5 +38,6 @@ spec:
           operator: In
           values:
           - {{ $e }}
+  {{- end }}
 
 {{ end }}

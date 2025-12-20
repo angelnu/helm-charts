@@ -3,5 +3,6 @@ excluded-charts-lint: []
 excluded-charts-install:
   - apps/multus
   - apps/pod-gateway
+  - zalando-postgres-cluster
 
 excluded-charts-release: []

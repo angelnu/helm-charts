@@ -1,6 +1,6 @@
 ---
 apiVersion: v2
-version: 4.1.1
+version: 5.0.0
 description: Creates a postgres cluster using the Zalando Postgres operator and local storage
 name: zalando-postgres-cluster
 appVersion: 1.0.0
@@ -16,11 +16,16 @@ maintainers:
   - name: angelnu
     email: git@angelnu.com
 dependencies:
+  - name: postgres-operator
+    repository: https://raw.githubusercontent.com/zalando/postgres-operator/master/charts/postgres-operator
+    version: 1.15.1
+    condition: postgres-operator.enabled
   - name: common
     repository: https://bjw-s-labs.github.io/helm-charts
-    version: 1.5.1
+    version: 4.5.0
 
 annotations:
   artifacthub.io/changes: |-
-    - kind: fixed
-      description: race condition in backup script
+    - kind: changed
+      description: |
+        **BREAKING**: Updated library version to 4.5.0.
