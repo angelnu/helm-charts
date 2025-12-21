@@ -3,16 +3,83 @@
 
 {{/* Append the hardcoded settings */}}
 {{- define "multus.harcodedValues" -}}
-controller:
-  # -- deploy to all nodes
-  type: daemonset
 
-# -- force hostnetwork so upgrades can't fail
-hostNetwork: true
+controllers:
+  main:
+    # -- deploy to all nodes
+    type: daemonset
+    serviceAccount:
+      identifier: default
+    pod:
+      # -- force hostnetwork so upgrades can't fail
+      hostNetwork: true
+      # -- Need to run as privileged to install
+      securityContext:
+        privileged: true
+      hostPID: true
+    containers:
+      main:
+        # -- Command used by the Multus installer
+        command:
+        - /usr/src/multus-cni/bin/multus-daemon
+    initContainers:
+      # -- Init container that installs reference CNI plugins
+      cni-installer: {}
+      # -- Init container that installs reference CNI plugins
+      multus-installer:
+        image:
+          # -- multus installer repostory
+          repository: "{{ .Values.controllers.main.containers.main.image.repository }}"
+          # -- multus installer tag
+          tag: "{{ .Values.controllers.main.containers.main.image.tag }}"
+          # -- multus installer pull policy
+          pullPolicy: "{{ .Values.controllers.main.containers.main.image.pullPolicy }}"
+        command:
+          - "cp"
+          - "-f"
+          - "/usr/src/multus-cni/bin/multus-shim"
+          - "/host/opt/cni/bin/multus-shim"
+        resources:
+          requests:
+            cpu: "10m"
+            memory: "15Mi"
+  test:
+    type: job
+    annotations:
+      "helm.sh/hook": test-success
+      k8s.v1.cni.cncf.io/networks: |
+        [{
+          "name": "{{ include "bjw-s.common.lib.chart.names.fullname" . }}-test"
+        }]
+    containers:
+      main:
+        image:
+          repository: alpine
+          tag: latest
+        command: ["/bin/true"]
+  uninstall:
+    type: job
+    annotations:
+      # This is what defines this resource as a hook. Without this line, the
+      # job is considered part of the release.
+      "helm.sh/hook": pre-delete
+      "helm.sh/hook-weight": "-5"
+      "helm.sh/hook-delete-policy": hook-succeeded
+    containers:
+      main:
+        image:
+          repository: alpine
+          tag: latest
+        command:
+          - "/bin/sh"
+          - "-c"
+        args:
+          - |
+            rm -rf /host/etc/cni/net.d/*multus*
+            rm -rf /host/opt/cni/bin/*multus*
 
 configMaps:
   config:
-    enabled: true
     data:
       daemon-config.json: |
         {
@@ -27,130 +94,158 @@ configMaps:
             "socketDir": "/host/run/multus/"
         }
 
-initContainers:
-  # -- Init container that installs reference CNI plugins
-  cni-installer:
-    name: cni-installer
-    # -- CNI installer image
-    image: {{ .Values.cni.image.repository }}:{{ .Values.cni.image.tag }}
-    imagePullPolicy: {{ .Values.cni.image.pullPolicy }}
-    # -- Mounts host CNI binary folder
-    volumeMounts:
-    - name: cnibin
-      mountPath: /host/opt/cni/bin
-  # -- Init container that installs reference CNI plugins
-  multus-installer:
-    name: multus-installer
-    image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-    imagePullPolicy: {{ .Values.image.pullPolicy }}
-    command:
-      - "cp"
-      - "-f"
-      - "/usr/src/multus-cni/bin/multus-shim"
-      - "/host/opt/cni/bin/multus-shim"
-    resources:
-      requests:
-        cpu: "10m"
-        memory: "15Mi"
-    securityContext:
-      privileged: true
-    # -- Mounts host CNI binary folder
-    volumeMounts:
-    - name: cnibin
-      mountPath: /host/opt/cni/bin
-
-# -- Command used by the Multus installer
-command:
-- /usr/src/multus-cni/bin/multus-daemon
-
-# -- Need to run as privileged to install
-securityContext:
-  privileged: true
-
 # -- Configures volumes used by the multus installer.
 persistence:
   cni:
-    enabled: true
     type: hostPath
     hostPath: {{ .Values.cni.paths.config }}
     hostPathType: Directory
-    mountPath: {{ .Values.cni.paths.config }}
+    advancedMounts:
+      main:
+        main:
+          - path: {{ .Values.cni.paths.config }}
+      uninstall:
+        main:
+          - path: /host/etc/cni/net.d
   cnibin:
-    enabled: true
     type: hostPath
     hostPath: {{ .Values.cni.paths.bin }}
     hostPathType: Directory
-    mountPath: {{ .Values.cni.paths.bin }}
+    advancedMounts:
+      main:
+        main:
+          - path: {{ .Values.cni.paths.bin }}
+        cni-installer:
+          - path: /host/opt/cni/bin
+        multus-installer:
+          - path: /host/opt/cni/bin
+      uninstall:
+        main:
+          - path: /host/opt/cni/bin
   config:
-    enabled: true
     type: configMap
-    name: {{ printf "%s-config" (include "bjw-s.common.lib.chart.names.fullname" $) }}
-    mountPath: /etc/cni/net.d/multus.d
-    items:
-    - key: daemon-config.json
-      path: daemon-config.json
+    identifier: config
+    advancedMounts:
+      main:
+        main:
+          - path: /etc/cni/net.d/multus.d
   hostroot:
     enabled: true
     type: hostPath
     hostPath: /
     hostPathType: Directory
-    mountPath: /hostroot
-    mountPropagation: HostToContainer
+    advancedMounts:
+      main:
+        main:
+          - path: /hostroot
+            mountPropagation: HostToContainer
   host-run:
     enabled: true
     type: hostPath
     hostPath: /run
     #hostPathType: Directory
-    mountPath: /host/run
+    advancedMounts:
+      main:
+        main:
+          - path: /host/run
   host-var-lib-cni-multus:
     enabled: true
     type: hostPath
     hostPath: /var/lib/cni/multus
     #hostPathType: Directory
-    mountPath: /var/lib/cni/multus
+    advancedMounts:
+      main:
+        main:
+          - path: /var/lib/cni/multus
   host-var-lib-kubelet:
     enabled: true
     type: hostPath
     hostPath: /var/lib/kubelet
     #hostPathType: Directory
-    mountPath: /var/lib/kubelet
+    advancedMounts:
+      main:
+        main:
+          - path: /var/lib/kubelet
   host-run-k8s-cni-cncf-io:
     enabled: true
     type: hostPath
     hostPath: /run/k8s.cni.cncf.io
     #hostPathType: Directory
-    mountPath: /run/k8s.cni.cncf.io
+    advancedMounts:
+      main:
+        main:
+          - path: /run/k8s.cni.cncf.io
   host-run-netns:
     enabled: true
     type: hostPath
     hostPath: {{ .Values.hostPaths.netns }}
     #hostPathType: Directory
-    mountPath: /run/netns/
-    mountPropagation: HostToContainer
+    advancedMounts:
+      main:
+        main:
+          - path: /run/netns/
+            mountPropagation: HostToContainer
 
 serviceAccount:
   # -- create needed service account
-  create: true
+  default:
+    enabled: true
+rbac:
+  roles:
+    default:
+      type: Role
+      rules:
+      - apiGroups: ["k8s.cni.cncf.io"]
+        resources:
+          - '*'
+        verbs:
+          - '*'
+      - apiGroups:
+          - ""
+        resources:
+          - pods
+          - pods/status
+        verbs:
+          - get
+          - list
+          - update
+          - watch
+      - apiGroups:
+          - ""
+          - events.k8s.io
+        resources:
+          - events
+        verbs:
+          - create
+          - patch
+          - update
+  bindings:
+    default:
+      type: RoleBinding
+      roleRef:
+        kind: Role
+        identifier: default
+      subjects:
+        - identifier: default
 
-# -- Disable probes as installer completes after installing
-probes:
-  liveness:
-    enabled: false
-  readiness:
-    enabled: false
-  startup:
-    enabled: false
+rawResources:
+  test:
+    apiVersion: "k8s.cni.cncf.io/v1"
+    kind: NetworkAttachmentDefinition
+    annotations:
+      "helm.sh/hook": test-success
+    spec:
+      spec:
+        config: '{
+            "cniVersion": "0.3.1",
+            "name": "{{ include "bjw-s.common.lib.chart.names.fullname" . }}-test",
+            "type": "macvlan",
+            "capabilities": { "ips": true }
+          }'
 
-# -- Disable probes as installer completes after installing
-service:
-  main:
-    enabled: false
-{{- end -}}
+{{- end }}
 
-
-{{- $_ := mergeOverwrite .Values (include "multus.harcodedValues" . | fromYaml) -}}
-
-{{- $_ := set .Values.image "tag" (tpl .Values.image.tag .) -}}
+{{- $_ := mergeOverwrite .Values (include "multus.harcodedValues" . | fromYaml) }}
 
 {{/* Render the templates */}}
 {{ include "bjw-s.common.loader.all" . }}
