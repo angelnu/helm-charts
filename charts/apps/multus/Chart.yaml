@@ -1,9 +1,9 @@
 ---
 apiVersion: v2
-appVersion: v4.0.2
+appVersion: v4.0.2 # renovate: depName=ghcr.io/k8snetworkplumbingwg/multus-cni datasource=docker
 description: multus CNI allows multiple NICs per pod
 name: multus
-version: 6.0.2
+version: 6.0.3
 kubeVersion: ">=1.16.0-0"
 keywords:
   - multus

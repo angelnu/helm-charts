@@ -1,6 +1,6 @@
 ---
 apiVersion: v2
-appVersion: 1.0.0
+appVersion: 1.0.0 # renovate: depName=ghcr.io/games-on-whales/sunshine datasource=docker
 description: Streams graphic applications/games (retroarch, firefox, steam) runing on Kubernetes
 name: games-on-whales
 version: 2.0.0

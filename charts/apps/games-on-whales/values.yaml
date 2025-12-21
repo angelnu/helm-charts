@@ -41,7 +41,7 @@ sunshine:
     # -- sunshine image repository
     repository: ghcr.io/games-on-whales/sunshine
     # -- sunshine image tag
-    tag: 1.0.0
+    tag: "{{ .Chart.AppVersion }}"
     # -- sunshine image pull policy
     pullPolicy: IfNotPresent
   # -- sunshine web interface user

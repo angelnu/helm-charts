@@ -4,6 +4,7 @@ description: |
   Admision controller to change the default gateway and DNS server of PODs.
   It is typically used to route PODs through a VPN server.
 name: pod-gateway
+appVersion: v1.13.0 # renovate: depName=ghcr.io/angelnu/pod-gateway datasource=docker
 version: 7.0.4
 kubeVersion: ">=1.16.0-0"
 keywords:

@@ -15,7 +15,7 @@ controllers:
           # -- image pull policy
           pullPolicy: Always
           # -- image tag
-          tag: 2.0.9703
+          tag: "{{ .Chart.AppVersion }}"
 
         # -- See more environment variables in the tt-rss documentation
         # https://git.tt-rss.org/fox/tt-rss/src/branch/master/classes/config.php#L9
@@ -25,7 +25,7 @@ controllers:
           TTRSS_SELF_URL_PATH: ""
           # -- Postgres database hostname
           # @default -- internal postgresql URL
-          TTRSS_DB_HOST: "{{ printf \"%s-postgresql\" .Release.Name }}"
+          TTRSS_DB_HOST: '{{ printf "%s-postgresql" .Release.Name }}'
           # -- Postgres database port.
           TTRSS_DB_PORT: "5432"
           # -- Postgres database user name

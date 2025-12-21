@@ -14,7 +14,6 @@ certManager:
   # -- Service account used by the cert-manager
   serviceAccountName: cert-manager
 
-
 # Default values for dnsmadeeasy-webhook.
 controllers:
   main:
@@ -26,7 +25,7 @@ controllers:
           # -- Image pull policy
           pullPolicy: IfNotPresent
           # -- Image tag
-          tag: v1.9.0
+          tag: "{{ .Chart.AppVersion }}"
 
 serviceAccount:
   default:
