@@ -13,15 +13,25 @@ controllers:
     pod:
       # -- force hostnetwork so upgrades can't fail
       hostNetwork: true
-      # -- Need to run as privileged to install
-      securityContext:
-        privileged: true
       hostPID: true
+      priorityClassName: system-node-critical
+      tolerations:
+        - key: CriticalAddonsOnly
+          operator: Exists
     containers:
       main:
         # -- Command used by the Multus installer
         command:
         - /usr/src/multus-cni/bin/multus-daemon
+        # -- Need to run as privileged to install
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            add:
+              - NET_ADMIN
+            drop:
+              - ALL
     initContainers:
       # -- Init container that installs reference CNI plugins
       cni-installer: {}
