@@ -1,5 +1,6 @@
 ---
 apiVersion: v2
+# renovate: datasource=helm depName=docker lookupName=ghcr.io/foxcpp/maddy
 appVersion: 0.8.1
 description: Maddy Mail Server
 name: maddy
