@@ -193,7 +193,7 @@ serviceAccount:
 rbac:
   roles:
     default:
-      type: Role
+      type: ClusterRole
       rules:
       - apiGroups: ["k8s.cni.cncf.io"]
         resources:
@@ -221,9 +221,9 @@ rbac:
           - update
   bindings:
     default:
-      type: RoleBinding
+      type: ClusterRoleBinding
       roleRef:
-        kind: Role
+        kind: ClusterRole
         identifier: default
       subjects:
         - identifier: default
