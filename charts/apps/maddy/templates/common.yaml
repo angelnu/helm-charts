@@ -24,11 +24,28 @@
 {{- $_ := set .Values.maddy.sql "postgres_dsn_line" (include "maddy.postgresDsn" . | trim | quote) -}}
 
 {{/* Append the hardcoded settings */}}
-{{- define "maddy.harcodedValues" -}}
+{{- define "maddy.harcodedValues" }}
+controllers:
+  main:
+    containers:
+      main:
+        probes:
+          liveness:
+            enabled: true
+    initContainers:
+      linkconfig:
+        image:
+          repository: "{{ .Values.controllers.main.containers.main.image.repository }}"
+          tag: "{{ .Values.controllers.main.containers.main.image.tag }}"
+          imagePullPolicy: "{{ .Values.controllers.main.containers.main.image.imagePullPolicy }}"
+        command:
+        - ln
+        - -sfv
+        - /config/maddy.conf
+        - /data/
 
 configMaps:
   config:
-    enabled: true
     data:
       maddy.conf: |
         {{ tpl (.Files.Get "files/maddy.conf") . | nindent 8 }}
@@ -39,42 +56,13 @@ configMaps:
 
 persistence:
   config:
-    enabled: true
-    mountPath: /config
     type: configMap
-    name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}-config
+    identifier: config
   certificates:
-    enabled: true
-    mountPath: /certificates
     type: secret
     name: {{ tpl (.Values.maddy.tls_secret_name) .}}
 
-initContainers:
-  # -- Configures an initContainer that creates a VXLAN
-  # In the gateway for client PODs to connect to.
-  # iptables migh be (see VPN_BLOCK_OTHER_TRAFFIC) setup
-  # to block traffic not going through the VPN
-  routes:
-    name: "linkconfig"
-    # -- Image for the init container
-    image: {{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}
-    # -- Will be set automatically
-    # @default -- <image.pullPolicy>
-    imagePullPolicy: {{ .Values.image.pullPolicy }}
-    # -- Command starting DHCP server in the gateway
-    command:
-    - ln
-    - -sfv
-    - /config/maddy.conf
-    - /data/
-    volumeMounts:
-    - name: config
-      mountPath: /config
-      readOnly: true
-    - name: data
-      mountPath: /data
-
-{{- end -}}
+{{- end }}
 {{- $_ := mergeOverwrite .Values (include "maddy.harcodedValues" . | fromYaml) -}}
 
 {{ include "bjw-s.common.loader.all" . }}
