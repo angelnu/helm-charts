@@ -17,9 +17,10 @@ maintainers:
 dependencies:
   - name: common
     repository: https://bjw-s-labs.github.io/helm-charts
-    version: 1.5.1
+    version: 4.5.0
 
 annotations:
   artifacthub.io/changes: |-
-    - kind: fixed
-      description: update k3s cniBin path
+    - kind: changed
+      description: |
+        **BREAKING**: Updated library version to 4.5.0.

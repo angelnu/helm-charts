@@ -1,29 +1,33 @@
+---
 #
 # IMPORTANT NOTE
 #
 # This chart inherits from our common library chart. You can check the default values/options here:
-# https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
+# https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/values.yaml
 #
-
-image:
-  # -- multus installer repostory
-  repository: ghcr.io/k8snetworkplumbingwg/multus-cni
-  # -- multus installer tag
-  tag: "{{ .Chart.AppVersion }}-thick"
-  # -- multus installer pull policy
-  pullPolicy: IfNotPresent
-
-hostPID: true
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          # -- multus installer repostory
+          repository: ghcr.io/k8snetworkplumbingwg/multus-cni
+          # -- multus installer tag
+          tag: "{{ .Chart.AppVersion }}-thick"
+          # -- multus installer pull policy
+          pullPolicy: IfNotPresent
+    initContainers:
+      cni-installer:
+        image:
+          # -- CNI installer repostory
+          repository: ghcr.io/k8s-at-home/cni-plugins
+          # -- CNI installer tag
+          tag: v1.1.1
+          # -- CNI installer pull policy
+          pullPolicy: IfNotPresent
+      multus-installer: {}
 
 cni:
-  image:
-    # -- CNI installer repostory
-    repository: ghcr.io/k8s-at-home/cni-plugins
-    # -- CNI installer tag
-    tag: v1.1.1
-    # -- CNI installer pull policy
-    pullPolicy: IfNotPresent
-
   paths:
     # -- CNI config folder for k3s.
     # Change to `/etc/cni/net.d` for non k3s
