@@ -5,11 +5,11 @@ description: |
   It is typically used to route PODs through a VPN server.
 name: pod-gateway
 appVersion: v1.13.0 # renovate: depName=ghcr.io/angelnu/pod-gateway datasource=docker
-version: 7.0.4
+version: 7.0.5
 kubeVersion: ">=1.16.0-0"
 keywords:
   - pod-gateway
-home: https://github.com/angelnu/charts/tree/master/charts/stable/pod-gateway
+home: https://github.com/angelnu/helm-charts/tree/main/charts/apps/pod-gateway
 sources:
   - https://github.com/angelnu/gateway-admision-controller
   - https://github.com/angelnu/pod-gateway
