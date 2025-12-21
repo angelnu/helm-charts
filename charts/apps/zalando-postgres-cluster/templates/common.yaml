@@ -113,7 +113,7 @@ persistence:
     advancedMounts:
       backup:
         main:
-          - path: /config
+          - path: /backup
             subPath: {{ include "zalando-postgres-cluster.backupPVCSubpath" . }}
 {{- end -}}
 {{- $_ := mergeOverwrite .Values (include "zalando-postgres-cluster.harcodedValues" . | fromYaml) -}}
