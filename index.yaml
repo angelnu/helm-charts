@@ -11,7 +11,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: latest
-    created: "2025-12-21T00:58:27.980455078Z"
+    created: "2025-12-21T01:00:50.589076533Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -40,7 +40,7 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-21T00:58:27.995706456Z"
+    created: "2025-12-21T01:00:50.610958917Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -77,7 +77,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-21T00:58:27.987247858Z"
+    created: "2025-12-21T01:00:50.59641567Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -115,7 +115,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-21T00:58:27.99873722Z"
+    created: "2025-12-21T01:00:50.614935454Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -152,7 +152,7 @@ entries:
             Disable openMetrics service
     apiVersion: v2
     appVersion: 0.6.2
-    created: "2025-12-21T00:58:28.00650956Z"
+    created: "2025-12-21T01:00:50.622632955Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -186,7 +186,35 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2025-12-21T00:58:28.010204972Z"
+    created: "2025-12-21T01:00:50.631441298Z"
+    dependencies:
+    - name: common
+      repository: https://bjw-s-labs.github.io/helm-charts
+      version: 4.5.0
+    description: multus CNI allows multiple NICs per pod
+    digest: 680cf46d8e8df95db8b377f4e37fd0fe00e6e947fdcc76b682f8ea2b34e46272
+    home: https://github.com/angelnu/helm-charts/tree/master/charts/stable/multus
+    icon: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/docs/images/Multus.png
+    keywords:
+    - multus
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: git@angelnu.com
+      name: angelnu
+    name: multus
+    sources:
+    - https://github.com/k8snetworkplumbingwg/multus-cni
+    urls:
+    - https://angelnu.github.io/helm-charts/apps/multus-6.0.0.tgz
+    version: 6.0.0
+  - annotations:
+      artifacthub.io/changes: |-
+        - kind: changed
+          description: |
+            **BREAKING**: Updated library version to 4.5.0.
+    apiVersion: v2
+    appVersion: v4.0.2
+    created: "2025-12-21T01:00:50.626978682Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -223,7 +251,7 @@ entries:
             - name: Common library chart definition
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
-    created: "2025-12-21T00:58:28.035399321Z"
+    created: "2025-12-21T01:00:50.656240257Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -262,7 +290,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-21T00:58:28.031272184Z"
+    created: "2025-12-21T01:00:50.651771972Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -301,7 +329,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-21T00:58:28.027353527Z"
+    created: "2025-12-21T01:00:50.646821329Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -340,7 +368,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-21T00:58:28.022706749Z"
+    created: "2025-12-21T01:00:50.64226422Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -379,7 +407,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-21T00:58:28.018498683Z"
+    created: "2025-12-21T01:00:50.638522038Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -430,7 +458,7 @@ entries:
               url: https://github.com/angelnu/helm-charts/pull/187
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2025-12-21T00:58:28.013257992Z"
+    created: "2025-12-21T01:00:50.633672825Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -464,7 +492,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.2.0
-    created: "2025-12-21T00:58:28.042076197Z"
+    created: "2025-12-21T01:00:50.662701739Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -496,7 +524,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.2.0
-    created: "2025-12-21T00:58:28.03749849Z"
+    created: "2025-12-21T01:00:50.658366409Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -529,7 +557,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v2.0.9200
-    created: "2025-12-21T00:58:28.059584069Z"
+    created: "2025-12-21T01:00:50.681891138Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -565,7 +593,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v2.0.9200
-    created: "2025-12-21T00:58:28.050766838Z"
+    created: "2025-12-21T01:00:50.671601327Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -599,7 +627,7 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-21T00:58:28.072713954Z"
+    created: "2025-12-21T01:00:50.696527915Z"
     dependencies:
     - condition: postgres-operator.enabled
       name: postgres-operator
@@ -633,7 +661,7 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-21T00:58:28.067000116Z"
+    created: "2025-12-21T01:00:50.691242718Z"
     dependencies:
     - condition: postgres-operator.enabled
       name: postgres-operator
@@ -666,7 +694,7 @@ entries:
           description: race condition in backup script
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-12-21T00:58:28.061704237Z"
+    created: "2025-12-21T01:00:50.685275971Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -689,4 +717,4 @@ entries:
     urls:
     - https://angelnu.github.io/helm-charts/apps/zalando-postgres-cluster-4.1.1.tgz
     version: 4.1.1
-generated: "2025-12-21T00:58:27.97735714Z"
+generated: "2025-12-21T01:00:50.585547992Z"
