@@ -3,7 +3,7 @@ apiVersion: v2
 appVersion: v4.0.2
 description: multus CNI allows multiple NICs per pod
 name: multus
-version: 5.0.7
+version: 6.0.0
 kubeVersion: ">=1.16.0-0"
 keywords:
   - multus
