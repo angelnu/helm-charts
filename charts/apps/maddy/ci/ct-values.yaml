@@ -1,6 +1,6 @@
+---
 secrets:
-  secret:
-    enabled: true
+  main:
     stringData:
       # These are dummy keys not used outside test
       tls.crt: |
@@ -89,16 +89,10 @@ secrets:
         LlEj5P4CZ1a6mRjUphWK++ggYhqEtp4=
         -----END PRIVATE KEY-----
 
-
 maddy:
-  tls_secret_name: '{{ include "bjw-s.common.lib.chart.names.fullname" . }}-secret'
+  tls_secret_name: '{{ include "bjw-s.common.lib.chart.names.fullname" . }}'
 
 service:
   main:
-    type: ClusterIP   # LoadBalancer does not work in test env
+    type: ClusterIP # LoadBalancer does not work in test env
     externalTrafficPolicy: null
-
-persistence:
-  data:
-    enabled: true
-    type: emptyDir

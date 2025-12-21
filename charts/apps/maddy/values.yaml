@@ -1,18 +1,22 @@
+---
 #
 # IMPORTANT NOTE
 #
 # This chart inherits from our common library chart. You can check the default values/options here:
-# https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
+# https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/values.yaml
 #
-
-image:
-  # -- image repository
-  repository: ghcr.io/foxcpp/maddy
-  # -- image tag
-  # @default -- chart.appVersion
-  tag:
-  # -- image pull policy
-  pullPolicy: IfNotPresent
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          # -- image repository
+          repository: ghcr.io/foxcpp/maddy
+          # -- image tag
+          # @default -- chart.appVersion
+          tag: "{{ .Chart.AppVersion }}"
+          # -- image pull policy
+          pullPolicy: IfNotPresent
 
 maddy:
   # -- Hostname the service will listen to (incoming SMTP and IMAP)
@@ -79,10 +83,10 @@ maddy:
       filter: '"(&(objectClass=posixAccount)(uid={username}))"'
 
       # -- Whether to upgrade connection to TLS using STARTTLS.
-      starttls: 'off'
+      starttls: "off"
 
       # -- Enable verbose logging. You don't need that unless you are reporting a bug.
-      debug: 'off'
+      debug: "off"
 
       # -- Timeout for initial connection to the directory server.
       connect_timeout: 1m
@@ -115,14 +119,14 @@ maddy:
   extra_settings:
     # -- Additional settings for local_mailboxes storage
     local_mailboxes: {}
-      # imap_filter: |
-      #   {
-      #       command /etc/maddy/sieve.sh {account_name}
-      #   }
+    #   imap_filter: |
+    #     {
+    #         command /etc/maddy/sieve.sh {account_name}
+    #     }
     # -- Additional settings for imap backend
     imap: {}
-      # debug: yes
-      # io_debug: yes
+    #   debug: yes
+    #   io_debug: yes
 
 # -- Configures service settings for the chart.
 # @default -- See values.yaml
@@ -163,9 +167,7 @@ service:
 # @default -- See values.yaml
 persistence:
   data:
-    enabled: true
     type: emptyDir
-    mountPath: /data
 
 # -- Bitnami postgres chart. For more options see https://github.com/bitnami/charts/tree/master/bitnami/postgresql
 # @default -- see bellow

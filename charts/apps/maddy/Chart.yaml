@@ -1,9 +1,10 @@
 ---
 apiVersion: v2
-appVersion: 0.6.2
+# renovate: datasource=helm depName=docker lookupName=ghcr.io/foxcpp/maddy
+appVersion: 0.8.1
 description: Maddy Mail Server
 name: maddy
-version: 4.1.1
+version: 5.0.0
 kubeVersion: ">=1.16.0-0"
 keywords:
   - maddy
@@ -24,10 +25,10 @@ dependencies:
     condition: postgresql.enabled
   - name: common
     repository: https://bjw-s-labs.github.io/helm-charts
-    version: 1.5.1
+    version: 4.5.0
 
 annotations:
   artifacthub.io/changes: |-
     - kind: changed
       description: |
-        Disable openMetrics service
+        **BREAKING**: Updated library version to 4.5.0.
