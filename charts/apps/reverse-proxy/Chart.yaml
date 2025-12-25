@@ -8,7 +8,7 @@ kubeVersion: ">=1.16.0-0"
 keywords:
   - reverse-proxy
   - ingress
-home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/reverse-proxy
+home: https://github.com/angelnu/helm-charts/charts/tree/master/charts/stable/reverse-proxy
 icon: https://kubernetes.io/images/wheel.svg
 sources:
   - https://kubernetes.io/docs/concepts/services-networking/ingress/

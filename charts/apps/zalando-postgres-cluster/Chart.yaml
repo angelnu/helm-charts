@@ -8,7 +8,7 @@ keywords:
   - postgres
   - operator
   - zalando
-home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/zalando-postgres-cluster
+home: https://github.com/angelnu/helm-charts/charts/tree/master/charts/stable/zalando-postgres-cluster
 icon: https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png
 sources:
   - https://github.com/zalando/postgres-operator

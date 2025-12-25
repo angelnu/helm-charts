@@ -37,11 +37,6 @@ Have a look at people running Kubernetes at home
 <!-- markdown-link-check-disable-next-line -->
 [on GitLab](https://gitlab.com/search?search=k8s-at-home).
 
-### Awesome Home Kubernetes
-
-[Checkout](https://github.com/k8s-at-home/awesome-home-kubernetes) our curation
-of projects and resources involving running Kubernetes at home.
-
 ## License
 
 This project is licensed under the terms of the Apache 2.0 License license.
