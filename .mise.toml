@@ -21,4 +21,4 @@ rust = "1.92.0" # Required for schematools
 "pipx:yamale" = "6.1.0"
 
 [hooks]
-postinstall = "source .venv/bin/activate;uv pip install --upgrade -r {{config_root}}/docs/requirements.txt"
+postinstall = ".venv/bin/activate;uv pip install --upgrade -r {{config_root}}/docs/requirements.txt"
