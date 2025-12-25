@@ -25,7 +25,7 @@ controllers:
           repository: ghcr.io/qdm12/gluetun
           # -- image tag
           # this example is not automatically updated, so be sure to use the latest image
-          tag: v3.40.3@sha256:ef4a44819a60469682c7b5e69183e6401171891feaa60186652d292c59e41b30
+          tag: v3.41.0@sha256:6b54856716d0de56e5bb00a77029b0adea57284cf5a466f23aad5979257d3045
         # -- environment variables.
         # See [image docs](https://github.com/qdm12/gluetun-wiki) for more details on how to configure
         # your VPN and how to set up port-forwarding.
