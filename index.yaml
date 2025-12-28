@@ -791,7 +791,7 @@ entries:
       reader and aggregator
     digest: 8a7e0ffdfb359a8ca94195f5dac3556a666abb9203a24e0c73310ef3303ee173
     home: https://github.com/angelnu/helm-charts/tree/main/charts/apps/tt-rss
-    icon: https://raw.githubusercontent.com/angelnu/helm-charts/gh-pages/icons/tt-rss-favicon-72px.png
+    icon: https://raw.githubusercontent.com/tt-rss/tt-rss/refs/heads/main/images/favicon-72px.png
     keywords:
     - tt-rss
     kubeVersion: '>=1.16.0-0'
