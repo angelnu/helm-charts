@@ -8,9 +8,9 @@ kubeVersion: ">=1.16.0-0"
 keywords:
   - tt-rss
 home: https://github.com/angelnu/helm-charts/tree/main/charts/apps/tt-rss
-icon: https://raw.githubusercontent.com/angelnu/helm-charts/gh-pages/icons/tt-rss-favicon-72px.png
+icon: https://raw.githubusercontent.com/tt-rss/tt-rss/refs/heads/main/images/favicon-72px.png
 sources:
-  - https://git.tt-rss.org/fox/tt-rss
+  - https://github.com/tt-rss/tt-rss
 maintainers:
   - name: angelnu
     email: git@angelnu.com
