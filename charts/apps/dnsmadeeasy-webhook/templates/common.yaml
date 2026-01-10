@@ -1,11 +1,11 @@
 {{/* Make sure all variables are set properly */}}
 {{- include "bjw-s.common.loader.init" . -}}
 
-{{- define "dnsmadeeasy-webhook.rootCACertificate" -}}
+{{- define "dnsmadeeasy-webhook.rootcacertificate" -}}
 {{ printf "%s-ca" (include "bjw-s.common.lib.chart.names.fullname" .) }}
 {{- end -}}
 
-{{- define "dnsmadeeasy-webhook.servingCertificate" -}}
+{{- define "dnsmadeeasy-webhook.servingcertificate" -}}
 {{- if .Values.generateCerts }}
 {{- printf "%s-webhook-tls" (include "bjw-s.common.lib.chart.names.fullname" .) }}
 {{- else -}}
@@ -53,7 +53,7 @@ persistence:
     readOnly: true
     volumeSpec:
       secret:
-        secretName: {{ include "dnsmadeeasy-webhook.servingCertificate" . }}
+        secretName: {{ include "dnsmadeeasy-webhook.servingcertificate" . }}
 
 service:
   main:
@@ -69,7 +69,7 @@ rawResources:
     kind: APIService
     forceRename: v1alpha1.{{ .Values.groupName }}
     annotations:
-      certmanager.k8s.io/inject-ca-from: "{{ .Release.Namespace }}/{{ include "dnsmadeeasy-webhook.servingCertificate" . }}"
+      certmanager.k8s.io/inject-ca-from: "{{ .Release.Namespace }}/{{ include "dnsmadeeasy-webhook.servingcertificate" . }}"
     spec:
       spec:
         group: {{ .Values.groupName }}
@@ -82,7 +82,7 @@ rawResources:
           namespace: {{ .Release.Namespace }}
         version: v1alpha1
   {{- if .Values.generateCerts }}
-  selfSignedIssuer:
+  selfsignedissuer:
     # Create a selfsigned Issuer, in order to create a root CA certificate for
     # signing webhook serving certificates
     apiVersion: cert-manager.io/v1
@@ -90,37 +90,37 @@ rawResources:
     spec:
       spec:
         selfSigned: {}
-  rootCACertificate:
+  rootcacertificate:
     # Generate a CA Certificate used to sign certificates for the webhook
     apiVersion: cert-manager.io/v1
     kind: Certificate
     spec:
       spec:
-        secretName: {{ include "dnsmadeeasy-webhook.rootCACertificate" . }}
+        secretName: {{ include "dnsmadeeasy-webhook.rootcacertificate" . }}
         duration: 43800h # 5y
         issuerRef:
-          name: {{ printf "%s-selfSignedIssuer" (include "bjw-s.common.lib.chart.names.fullname" .) }}
+          name: {{ printf "%s-selfsignedissuer" (include "bjw-s.common.lib.chart.names.fullname" .) }}
           kind: Issuer
         commonName: "ca.dnsmadeeasy-webhook.cert-manager"
         isCA: true
-  rootCAIssuer:
+  rootcaissuer:
     # Create an Issuer that uses the above generated CA certificate to issue certs
     apiVersion: cert-manager.io/v1
     kind: Issuer
     spec:
       spec:
         ca:
-          secretName: {{ include "dnsmadeeasy-webhook.rootCACertificate" . }}
-  servingCertificate:
+          secretName: {{ include "dnsmadeeasy-webhook.rootcacertificate" . }}
+  servingcertificate:
     # Finally, generate a serving certificate for the webhook to use
     apiVersion: cert-manager.io/v1
     kind: Certificate
     spec:
       spec:
-        secretName: {{ include "dnsmadeeasy-webhook.servingCertificate" . }}
+        secretName: {{ include "dnsmadeeasy-webhook.servingcertificate" . }}
         duration: 8760h # 1y
         issuerRef:
-          name: {{ printf "%s-rootCAIssuer" (include "bjw-s.common.lib.chart.names.fullname" .) }}
+          name: {{ printf "%s-rootcaissuer" (include "bjw-s.common.lib.chart.names.fullname" .) }}
           kind: Issuer
         dnsNames:
         - {{ include "bjw-s.common.lib.chart.names.fullname" . }}
