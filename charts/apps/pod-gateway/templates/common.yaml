@@ -88,7 +88,8 @@ controllers:
           - --setGatewayDefault
           {{- end }}
           # Static
-          - --tls-cert-file-path=/tls/tls.crt
+          # - --tls-cert-file-path=/tls/tls.crt
+          - --tls-cert-file-path=/tls/tls-combined.pem # Use combined server and CA cert
           - --tls-key-file-path=/tls/tls.key
           - --DNSPolicy={{ .Values.DNSPolicy }}
           # Init container

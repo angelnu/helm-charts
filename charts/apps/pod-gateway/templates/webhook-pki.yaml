@@ -65,3 +65,6 @@ spec:
   - {{ include "bjw-s.common.lib.chart.names.fullname" . }}-webhook
   - {{ include "bjw-s.common.lib.chart.names.fullname" . }}-webhook.{{ .Release.Namespace }}
   - {{ include "bjw-s.common.lib.chart.names.fullname" . }}-webhook.{{ .Release.Namespace }}.svc
+  # This tells cert-manager to create 'tls-combined.pem' in the secret
+  additionalOutputFormats:
+    - type: CombinedPEM
