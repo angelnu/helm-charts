@@ -25,7 +25,7 @@ controllers:
         - /usr/src/multus-cni/bin/multus-daemon
         # -- Need to run as privileged to install
         securityContext:
-          allowPrivilegeEscalation: false
+          privileged: true
           readOnlyRootFilesystem: true
           capabilities:
             add:
@@ -49,6 +49,8 @@ controllers:
           - "-f"
           - "/usr/src/multus-cni/bin/multus-shim"
           - "/host/opt/cni/bin/multus-shim"
+        securityContext:
+          privileged: true
         resources:
           requests:
             cpu: "10m"
