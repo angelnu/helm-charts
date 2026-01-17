@@ -25,7 +25,7 @@ annotations:
       description: |
         **BREAKING**:
         Updated multus container and controller names from main.main to multus.multus so in the values file
-        controllers.main.containers.main.image needs to change to 
-        controllers.multus.containers.multus.image and 
-        controllers.main.initContainers.cni-installer.image needs to change to 
-        controllers.multus.initContainers.cni-installer.image 
+        controllers.main.containers.main.image needs to change to
+        controllers.multus.containers.multus.image and
+        controllers.main.initContainers.cni-installer.image needs to change to
+        controllers.multus.initContainers.cni-installer.image.
