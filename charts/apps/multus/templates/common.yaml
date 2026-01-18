@@ -5,7 +5,7 @@
 {{- define "multus.harcodedValues" -}}
 
 controllers:
-  main:
+  multus:
     # -- deploy to all nodes
     type: daemonset
     serviceAccount:
@@ -19,7 +19,7 @@ controllers:
         - key: CriticalAddonsOnly
           operator: Exists
     containers:
-      main:
+      multus:
         # -- Command used by the Multus installer
         command:
         - /usr/src/multus-cni/bin/multus-daemon
@@ -39,11 +39,11 @@ controllers:
       multus-installer:
         image:
           # -- multus installer repostory
-          repository: "{{ .Values.controllers.main.containers.main.image.repository }}"
+          repository: "{{ .Values.controllers.multus.containers.multus.image.repository }}"
           # -- multus installer tag
-          tag: "{{ .Values.controllers.main.containers.main.image.tag }}"
+          tag: "{{ .Values.controllers.multus.containers.multus.image.tag }}"
           # -- multus installer pull policy
-          pullPolicy: "{{ .Values.controllers.main.containers.main.image.pullPolicy }}"
+          pullPolicy: "{{ .Values.controllers.multus.containers.multus.image.pullPolicy }}"
         command:
           - "cp"
           - "-f"
@@ -113,8 +113,8 @@ persistence:
     hostPath: {{ .Values.cni.paths.config }}
     hostPathType: Directory
     advancedMounts:
-      main:
-        main:
+      multus:
+        multus:
           - path: {{ .Values.cni.paths.config }}
       uninstall:
         main:
@@ -124,8 +124,8 @@ persistence:
     hostPath: {{ .Values.cni.paths.bin }}
     hostPathType: Directory
     advancedMounts:
-      main:
-        main:
+      multus:
+        multus:
           - path: {{ .Values.cni.paths.bin }}
         cni-installer:
           - path: /host/opt/cni/bin
@@ -138,8 +138,8 @@ persistence:
     type: configMap
     identifier: config
     advancedMounts:
-      main:
-        main:
+      multus:
+        multus:
           - path: /etc/cni/net.d/multus.d
   hostroot:
     enabled: true
@@ -147,8 +147,8 @@ persistence:
     hostPath: /
     hostPathType: Directory
     advancedMounts:
-      main:
-        main:
+      multus:
+        multus:
           - path: /hostroot
             mountPropagation: HostToContainer
   host-run:
@@ -157,8 +157,8 @@ persistence:
     hostPath: /run
     #hostPathType: Directory
     advancedMounts:
-      main:
-        main:
+      multus:
+        multus:
           - path: /host/run
   host-var-lib-cni-multus:
     enabled: true
@@ -166,8 +166,8 @@ persistence:
     hostPath: /var/lib/cni/multus
     #hostPathType: Directory
     advancedMounts:
-      main:
-        main:
+      multus:
+        multus:
           - path: /var/lib/cni/multus
   host-var-lib-kubelet:
     enabled: true
@@ -175,8 +175,8 @@ persistence:
     hostPath: /var/lib/kubelet
     #hostPathType: Directory
     advancedMounts:
-      main:
-        main:
+      multus:
+        multus:
           - path: /var/lib/kubelet
   host-run-k8s-cni-cncf-io:
     enabled: true
@@ -184,8 +184,8 @@ persistence:
     hostPath: /run/k8s.cni.cncf.io
     #hostPathType: Directory
     advancedMounts:
-      main:
-        main:
+      multus:
+        multus:
           - path: /run/k8s.cni.cncf.io
   host-run-netns:
     enabled: true
@@ -193,8 +193,8 @@ persistence:
     hostPath: {{ .Values.hostPaths.netns }}
     #hostPathType: Directory
     advancedMounts:
-      main:
-        main:
+      multus:
+        multus:
           - path: /run/netns/
             mountPropagation: HostToContainer
 
