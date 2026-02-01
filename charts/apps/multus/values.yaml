@@ -6,9 +6,9 @@
 # https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/values.yaml
 #
 controllers:
-  main:
+  multus:
     containers:
-      main:
+      multus:
         image:
           # -- multus installer repostory
           repository: ghcr.io/k8snetworkplumbingwg/multus-cni

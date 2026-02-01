@@ -29,13 +29,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout pull request branch
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           path: pull
           persist-credentials: false
 
       - name: Checkout default branch
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: "${{ github.event.repository.default_branch }}"
           path: default
@@ -43,7 +43,7 @@ jobs:
 
       - name: Get chart details for PR
         id: chart-details-pr
-        uses: bjw-s-labs/helm-charts-actions/get-chart-details@44e5d3217ababd8b25009cac19a5b26454d176d2
+        uses: bjw-s-labs/helm-charts-actions/get-chart-details@c2910d708baaf9e28779bbb6ec93086904774609
         with:
           path: pull/charts/${{ matrix.chart }}
           validateChartYaml: true
@@ -51,7 +51,7 @@ jobs:
 
       - name: Get chart details for default branch
         id: chart-details-default
-        uses: bjw-s-labs/helm-charts-actions/get-chart-details@44e5d3217ababd8b25009cac19a5b26454d176d2
+        uses: bjw-s-labs/helm-charts-actions/get-chart-details@c2910d708baaf9e28779bbb6ec93086904774609
         with:
           path: default/charts/${{ matrix.chart }}
           allowChartToNotExist: true
@@ -98,15 +98,15 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
 
       - name: Install Mise and required tools
-        uses: jdx/mise-action@146a28175021df8ca24f8ee1828cc2a60f980bd5 # v3.5.1
+        uses: jdx/mise-action@6d1e696aa24c1aa1bcc1adea0212707c71ab78a8 # v3.6.1
 
       - name: Dereference JSON schema
-        uses: bjw-s-labs/helm-charts-actions/dereference-json-schema@44e5d3217ababd8b25009cac19a5b26454d176d2
+        uses: bjw-s-labs/helm-charts-actions/dereference-json-schema@c2910d708baaf9e28779bbb6ec93086904774609
         with:
           schemaFile: "charts/${{ matrix.chart }}/values.schema.json"
           outputFile: "charts/${{ matrix.chart }}/values.schema.json"

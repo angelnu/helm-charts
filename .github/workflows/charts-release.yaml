@@ -32,12 +32,12 @@ jobs:
       # Setup
       # ----------------------------
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
 
       - name: Install Mise and set up tool cache
-        uses: jdx/mise-action@146a28175021df8ca24f8ee1828cc2a60f980bd5 # v3.5.1
+        uses: jdx/mise-action@6d1e696aa24c1aa1bcc1adea0212707c71ab78a8 # v3.6.1
 
       - name: Grab repository configuration
         id: repo-config
@@ -48,7 +48,7 @@ jobs:
       - name: Get changed library charts
         id: changed-library-charts
         if: ${{ github.event_name != 'workflow_dispatch' }}
-        uses: bjw-s-labs/action-changed-files@1a5aeab1bfa64d0c4e786f501d5a3f1fad4a24da # v0.4.1
+        uses: bjw-s-labs/action-changed-files@015416e33c709af88f84a4496f4030c1f0ef212e # v0.5.0
         with:
           path: charts
           include_only_directories: true
@@ -59,7 +59,7 @@ jobs:
       - name: Get changed charts
         id: changed-charts
         if: ${{ github.event_name != 'workflow_dispatch' }}
-        uses: bjw-s-labs/action-changed-files@1a5aeab1bfa64d0c4e786f501d5a3f1fad4a24da # v0.4.1
+        uses: bjw-s-labs/action-changed-files@015416e33c709af88f84a4496f4030c1f0ef212e # v0.5.0
         with:
           path: charts
           include_only_directories: true
