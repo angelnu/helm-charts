@@ -109,12 +109,9 @@ controllers:
         probes:
           liveness:
             enabled: true
-            custom: true
+            type: HTTPS
+            path: /wh/health
             spec:
-              httpGet:
-                path: /wh/health
-                port: {{ include "pod-gateway.webhookPort" . }}
-                scheme: HTTPS
               initialDelaySeconds: 1
               timeoutSeconds: 10
               periodSeconds: 10
@@ -122,12 +119,9 @@ controllers:
               failureThreshold: 5
           readiness:
             enabled: true
-            type: custom
+            type: HTTPS
+            path: /wh/health
             spec:
-              httpGet:
-                path: /wh/health
-                port: {{ include "pod-gateway.webhookPort" . }}
-                scheme: HTTPS
               initialDelaySeconds: 1
               timeoutSeconds: 10
               periodSeconds: 10
@@ -135,12 +129,9 @@ controllers:
               failureThreshold: 5
           startup:
             enabled: true
-            type: custom
+            type: HTTPS
+            path: /wh/health
             spec:
-              httpGet:
-                path: /wh/health
-                port: {{ include "pod-gateway.webhookPort" . }}
-                scheme: HTTPS
               timeoutSeconds: 1
               periodSeconds: 1
               successThreshold: 1
