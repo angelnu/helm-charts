@@ -111,7 +111,7 @@ persistence:
   cni:
     type: hostPath
     hostPath: {{ .Values.cni.paths.config }}
-    hostPathType: Directory
+    hostPathType: DirectoryOrCreate
     advancedMounts:
       multus:
         multus:
@@ -122,7 +122,7 @@ persistence:
   cnibin:
     type: hostPath
     hostPath: {{ .Values.cni.paths.bin }}
-    hostPathType: Directory
+    hostPathType: DirectoryOrCreate
     advancedMounts:
       multus:
         multus:
