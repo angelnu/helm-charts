@@ -1,6 +1,6 @@
 ---
 apiVersion: v2
-appVersion: 2.0.9924 # renovate: depName=ghcr.io/angelnu/tt-rss datasource=docker
+appVersion: 2.0.9925 # renovate: depName=ghcr.io/angelnu/tt-rss datasource=docker
 description: Tiny Tiny RSS is a free and open source web-based news feed (RSS/Atom) reader and aggregator
 name: tt-rss
 version: 7.0.0
