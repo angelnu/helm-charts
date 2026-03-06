@@ -54,7 +54,7 @@ jobs:
           kubectl: "${{ matrix.k8s_version }}"
 
       - name: Install Mise and required tools
-        uses: jdx/mise-action@e79ddf65a11cec7b0e882bedced08d6e976efb2d # v3.6.2
+        uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3.6.3
 
       - name: Create k3d cluster
         uses: nolar/setup-k3d-k3s@293b8e5822a20bc0d5bcdd4826f1a665e72aba96 # v1.0.9
@@ -131,7 +131,7 @@ jobs:
           fi
 
       - name: Install Mise and required tools
-        uses: jdx/mise-action@e79ddf65a11cec7b0e882bedced08d6e976efb2d # v3.6.2
+        uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3.6.3
 
       - name: Dereference JSON schema
         uses: bjw-s-labs/helm-charts-actions/dereference-json-schema@fb65512d080593b10d652b52fc15a1f709561b52
