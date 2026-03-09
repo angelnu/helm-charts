@@ -57,7 +57,7 @@ jobs:
         uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3.6.3
 
       - name: Create k3d cluster
-        uses: nolar/setup-k3d-k3s@293b8e5822a20bc0d5bcdd4826f1a665e72aba96 # v1.0.9
+        uses: nolar/setup-k3d-k3s@8bf8d22160e8b1d184dcb780e390d6952a7eec65 # v1.0.10
         with:
           version: ${{ matrix.k8s_version }}
 
