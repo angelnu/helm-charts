@@ -19,7 +19,7 @@ maintainers:
 dependencies:
   - name: cert-manager
     repository: https://charts.jetstack.io
-    version: v1.20.1
+    version: v1.20.2
     condition: cert-manager.enabled
   - name: common
     repository: https://bjw-s-labs.github.io/helm-charts
