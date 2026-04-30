@@ -1,6 +1,6 @@
 ---
 apiVersion: v2
-appVersion: 0.9.3 # renovate: depName=ghcr.io/foxcpp/maddy datasource=docker
+appVersion: 0.9.4 # renovate: depName=ghcr.io/foxcpp/maddy datasource=docker
 description: Maddy Mail Server
 name: maddy
 version: 5.0.0
