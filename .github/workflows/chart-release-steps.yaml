@@ -73,7 +73,7 @@ jobs:
       # ----------------------------
       - name: Get chart details
         id: chart-details
-        uses: bjw-s-labs/helm-charts-actions/get-chart-details@e4d62192830c3198403659efbe91b3693c469c90
+        uses: bjw-s-labs/helm-charts-actions/get-chart-details@01fee208c45997465070d70cdc4a8ad8e00f5631
         with:
           path: src/charts/${{ inputs.chart }}
           validateChartYaml: true
@@ -124,7 +124,7 @@ jobs:
       # Package Helm chart
       # ----------------------------
       - name: Dereference JSON schema before packaging
-        uses: bjw-s-labs/helm-charts-actions/dereference-json-schema@e4d62192830c3198403659efbe91b3693c469c90
+        uses: bjw-s-labs/helm-charts-actions/dereference-json-schema@01fee208c45997465070d70cdc4a8ad8e00f5631
         with:
           schemaFile: "src/charts/${{ inputs.chart }}/values.schema.json"
           outputFile: "src/charts/${{ inputs.chart }}/values.schema.json"
