@@ -242,11 +242,11 @@ rbac:
 
 rawResources:
   test:
-    apiVersion: "k8s.cni.cncf.io/v1"
-    kind: NetworkAttachmentDefinition
-    annotations:
-      "helm.sh/hook": test-success
-    spec:
+    manifest:
+      apiVersion: "k8s.cni.cncf.io/v1"
+      kind: NetworkAttachmentDefinition
+      annotations:
+        "helm.sh/hook": test-success
       spec:
         config: '{
             "cniVersion": "0.3.1",

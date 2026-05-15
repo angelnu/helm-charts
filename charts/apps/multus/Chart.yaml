@@ -17,15 +17,11 @@ maintainers:
 dependencies:
   - name: common
     repository: https://bjw-s-labs.github.io/helm-charts
-    version: 4.6.2
+    version: 5.0.1
 
 annotations:
   artifacthub.io/changes: |-
     - kind: changed
       description: |
         **BREAKING**:
-        Updated multus container and controller names from main.main to multus.multus so in the values file
-        controllers.main.containers.main.image needs to change to
-        controllers.multus.containers.multus.image and
-        controllers.main.initContainers.cni-installer.image needs to change to
-        controllers.multus.initContainers.cni-installer.image.
+        Updated common library to 5.0.1, which includes a breaking change to the way rawResources are defined. Please see the [common library documentation](
