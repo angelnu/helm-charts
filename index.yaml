@@ -11,7 +11,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: latest
-    created: "2026-05-15T07:20:38.13126732Z"
+    created: "2026-05-15T07:30:34.650951715Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -39,7 +39,7 @@ entries:
           description: updqte common library to 5.0.1
     apiVersion: v2
     appVersion: v1.9.0
-    created: "2026-05-15T07:20:38.158995678Z"
+    created: "2026-05-15T07:30:34.679010146Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -73,7 +73,7 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: v1.9.0
-    created: "2026-05-15T07:20:38.14763376Z"
+    created: "2026-05-15T07:30:34.668024521Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -110,7 +110,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2026-05-15T07:20:38.138812625Z"
+    created: "2026-05-15T07:30:34.658030527Z"
     dependencies:
     - condition: cert-manager.enabled
       name: cert-manager
@@ -148,7 +148,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-05-15T07:20:38.161187152Z"
+    created: "2026-05-15T07:30:34.681949796Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -185,17 +185,17 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: 0.9.4
-    created: "2026-05-15T07:20:38.177345051Z"
+    created: "2026-05-15T07:30:34.700693384Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
       repository: https://charts.bitnami.com/bitnami
-      version: 18.6.2
+      version: 18.6.6
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
       version: 4.6.2
     description: Maddy Mail Server
-    digest: 0c88e1a397709e8aad6e58cd3c865a924fabcbba6255635d3a097edcd4dc6a0c
+    digest: 742599840132552f554c1f88355c56996d64f58d14d939f9428b21969db60e63
     home: https://github.com/angelnu/helm-charts/charts/tree/master/charts/stable/maddy
     icon: https://upload.wikimedia.org/wikipedia/commons/b/b1/Email_Shiny_Icon.svg
     keywords:
@@ -218,7 +218,7 @@ entries:
             Disable openMetrics service
     apiVersion: v2
     appVersion: 0.6.2
-    created: "2026-05-15T07:20:38.167955567Z"
+    created: "2026-05-15T07:30:34.690284676Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -253,7 +253,7 @@ entries:
             Updated common library to 5.0.1, which includes a breaking change to the way rawResources are defined. Please see the [common library documentation](
     apiVersion: v2
     appVersion: 4.2.4
-    created: "2026-05-15T07:20:38.208296546Z"
+    created: "2026-05-15T07:30:34.736747055Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -281,7 +281,7 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: v4.2.3
-    created: "2026-05-15T07:20:38.202125442Z"
+    created: "2026-05-15T07:30:34.730896499Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -309,7 +309,7 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2026-05-15T07:20:38.197606957Z"
+    created: "2026-05-15T07:30:34.725987239Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -337,7 +337,7 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2026-05-15T07:20:38.193467316Z"
+    created: "2026-05-15T07:30:34.72214324Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -365,7 +365,7 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2026-05-15T07:20:38.189766415Z"
+    created: "2026-05-15T07:30:34.717471988Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -393,7 +393,7 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2026-05-15T07:20:38.185423559Z"
+    created: "2026-05-15T07:30:34.711851799Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -421,7 +421,7 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: v4.0.2
-    created: "2026-05-15T07:20:38.181236271Z"
+    created: "2026-05-15T07:30:34.705515042Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -449,7 +449,7 @@ entries:
           description: fix probes definition for webhook container
     apiVersion: v2
     appVersion: v1.13.0
-    created: "2026-05-15T07:20:38.246965585Z"
+    created: "2026-05-15T07:30:34.777424897Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -478,7 +478,7 @@ entries:
           description: use combined PEM file for webhook TLS certificate
     apiVersion: v2
     appVersion: v1.13.0
-    created: "2026-05-15T07:20:38.243324172Z"
+    created: "2026-05-15T07:30:34.772709068Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -517,7 +517,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.13.0
-    created: "2026-05-15T07:20:38.238619166Z"
+    created: "2026-05-15T07:30:34.768790998Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -556,7 +556,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.13.0
-    created: "2026-05-15T07:20:38.232834967Z"
+    created: "2026-05-15T07:30:34.763585452Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -595,7 +595,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2026-05-15T07:20:38.22823217Z"
+    created: "2026-05-15T07:30:34.759002783Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -634,7 +634,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2026-05-15T07:20:38.223940828Z"
+    created: "2026-05-15T07:30:34.753946702Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -673,7 +673,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2026-05-15T07:20:38.220045391Z"
+    created: "2026-05-15T07:30:34.749609652Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -712,7 +712,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2026-05-15T07:20:38.215470898Z"
+    created: "2026-05-15T07:30:34.743893708Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -763,7 +763,7 @@ entries:
               url: https://github.com/angelnu/helm-charts/pull/187
     apiVersion: v2
     appVersion: v1.8.1
-    created: "2026-05-15T07:20:38.210488731Z"
+    created: "2026-05-15T07:30:34.739029797Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -797,7 +797,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.2.0
-    created: "2026-05-15T07:20:38.254983115Z"
+    created: "2026-05-15T07:30:34.784745643Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -829,7 +829,7 @@ entries:
               url: https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 1.2.0
-    created: "2026-05-15T07:20:38.250326914Z"
+    created: "2026-05-15T07:30:34.780318097Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -862,7 +862,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: 2.0.9956
-    created: "2026-05-15T07:20:38.272426048Z"
+    created: "2026-05-15T07:30:34.80386073Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -898,7 +898,7 @@ entries:
               url: https://github.com/bjw-s-labs/helm-charts/blob/main/charts/library/common/Chart.yaml
     apiVersion: v2
     appVersion: v2.0.9200
-    created: "2026-05-15T07:20:38.263823231Z"
+    created: "2026-05-15T07:30:34.794730363Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -932,7 +932,7 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-05-15T07:20:38.286250095Z"
+    created: "2026-05-15T07:30:34.817827847Z"
     dependencies:
     - condition: postgres-operator.enabled
       name: postgres-operator
@@ -966,7 +966,7 @@ entries:
             **BREAKING**: Updated library version to 4.5.0.
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-05-15T07:20:38.280855019Z"
+    created: "2026-05-15T07:30:34.811529488Z"
     dependencies:
     - condition: postgres-operator.enabled
       name: postgres-operator
@@ -999,7 +999,7 @@ entries:
           description: race condition in backup script
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-05-15T07:20:38.27450701Z"
+    created: "2026-05-15T07:30:34.805995278Z"
     dependencies:
     - name: common
       repository: https://bjw-s-labs.github.io/helm-charts
@@ -1022,4 +1022,4 @@ entries:
     urls:
     - https://angelnu.github.io/helm-charts/apps/zalando-postgres-cluster-4.1.1.tgz
     version: 4.1.1
-generated: "2026-05-15T07:20:38.128726648Z"
+generated: "2026-05-15T07:30:34.648583835Z"
