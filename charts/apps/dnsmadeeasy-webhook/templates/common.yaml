@@ -70,8 +70,8 @@ rawResources:
       kind: APIService
       metadata:
          name: v1alpha1.{{ .Values.groupName }}
-      annotations:
-        certmanager.k8s.io/inject-ca-from: "{{ .Release.Namespace }}/{{ include "dnsmadeeasy-webhook.servingcertificate" . }}"
+         annotations:
+            certmanager.k8s.io/inject-ca-from: "{{ .Release.Namespace }}/{{ include "dnsmadeeasy-webhook.servingcertificate" . }}"
       spec:
         group: {{ .Values.groupName }}
         groupPriorityMinimum: 1000
