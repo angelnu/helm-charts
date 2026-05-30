@@ -19,7 +19,7 @@ maintainers:
     email: git@angelnu.com
 dependencies:
   - name: postgresql
-    version: 18.6.8
+    version: 18.6.9
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
   - name: common
