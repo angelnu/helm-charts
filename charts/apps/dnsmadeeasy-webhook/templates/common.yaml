@@ -65,23 +65,22 @@ service:
 
 rawResources:
   api:
+      forceRename: v1alpha1.{{ .Values.groupName }}
     manifest:
       apiVersion: apiregistration.k8s.io/v1
       kind: APIService
       metadata:
-        name: v1alpha1.{{ .Values.groupName }}
         annotations:
           certmanager.k8s.io/inject-ca-from: "{{ .Release.Namespace }}/{{ include "dnsmadeeasy-webhook.servingcertificate" . }}"
-      spec:
-        group: {{ .Values.groupName }}
-        groupPriorityMinimum: 1000
-        versionPriority: 15
-        #TBD : avoid insecureSkipTLSVerify
-        insecureSkipTLSVerify: true
-        service:
-          name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}
-          namespace: {{ .Release.Namespace }}
-        version: v1alpha1
+      group: {{ .Values.groupName }}
+      groupPriorityMinimum: 1000
+      versionPriority: 15
+      #TBD : avoid insecureSkipTLSVerify
+      insecureSkipTLSVerify: true
+      service:
+        name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}
+        namespace: {{ .Release.Namespace }}
+      version: v1alpha1
   {{- if .Values.generateCerts }}
   selfsignedissuer:
     # Create a selfsigned Issuer, in order to create a root CA certificate for

@@ -3,7 +3,7 @@ apiVersion: v2
 appVersion: v1.9.0 # renovate: depName=ghcr.io/angelnu/dnsmadeeasy-webhook datasource=docker
 description: Cert-Manager Webhook for DNSMadeEasy
 name: dnsmadeeasy-webhook
-version: 6.0.2
+version: 6.0.3
 keywords:
   - cert-manager
   - dnsmadeeasy
