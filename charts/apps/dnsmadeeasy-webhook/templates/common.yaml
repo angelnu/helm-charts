@@ -21,6 +21,8 @@ controllers:
   main:
     serviceAccount:
       identifier: default
+    pod:
+      automountServiceAccountToken: true
     containers:
       main:
         # -- Configure persistence settings for the chart under this key.
