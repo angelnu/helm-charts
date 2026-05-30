@@ -72,15 +72,16 @@ rawResources:
       metadata:
         annotations:
           certmanager.k8s.io/inject-ca-from: "{{ .Release.Namespace }}/{{ include "dnsmadeeasy-webhook.servingcertificate" . }}"
-      group: {{ .Values.groupName }}
-      groupPriorityMinimum: 1000
-      versionPriority: 15
-      #TBD : avoid insecureSkipTLSVerify
-      insecureSkipTLSVerify: true
-      service:
-        name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}
-        namespace: {{ .Release.Namespace }}
-      version: v1alpha1
+      spec:
+        group: {{ .Values.groupName }}
+        groupPriorityMinimum: 1000
+        versionPriority: 15
+        #TBD : avoid insecureSkipTLSVerify
+        insecureSkipTLSVerify: true
+        service:
+          name: {{ include "bjw-s.common.lib.chart.names.fullname" . }}
+          namespace: {{ .Release.Namespace }}
+        version: v1alpha1
   {{- if .Values.generateCerts }}
   selfsignedissuer:
     # Create a selfsigned Issuer, in order to create a root CA certificate for
