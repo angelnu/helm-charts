@@ -25,8 +25,8 @@ controllers:
       main:
         # -- Configure persistence settings for the chart under this key.
         args:
-        - --tls-cert-file=/certs/tls.crt
-        - --tls-private-key-file=/certs/tls.key
+        - --tls-cert-file=/tls/tls.crt
+        - --tls-private-key-file=/tls/tls.key
         - --secure-port=4443
 
         env:
@@ -47,13 +47,9 @@ controllers:
             path: /healthz
 
 persistence:
-  certs:
-    type: custom
-    mountPath: /tls
-    readOnly: true
-    volumeSpec:
-      secret:
-        secretName: {{ include "dnsmadeeasy-webhook.servingcertificate" . }}
+  tls:
+    type: secret
+    name: {{ include "dnsmadeeasy-webhook.servingcertificate" . }}
 
 service:
   main:
